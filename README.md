@@ -1,6 +1,8 @@
 # Blog
 Blog pour Openclassroom
 
+Branch post : For take some modif.
+
 Contributing.
 Fork it.
 Create your feature branch (git checkout -b my-new-feature).
