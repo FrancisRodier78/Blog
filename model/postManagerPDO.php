@@ -20,11 +20,11 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::addPost()
    */
   protected function addPost(Post $post) {
-    $requete = $this->db->prepare('INSERT INTO post(titre, dateModif, chapo, contenu) VALUES(:titre, NOW(), :chapo, :contenu)');
+    $requete = $this->db->prepare('INSERT INTO post(titre, dateCreation, dateModif, chapo, content) VALUES(:titre, NOW(), NOW(), :chapo, :contenu)');
     
     $requete->bindValue(':titre', $post->getTitre());
     $requete->bindValue(':chapo', $post->getChapo());
-    $requete->bindValue(':contenu', $post->getContenu());
+    $requete->bindValue(':content', $post->getContent());
     
     $requete->execute();
   }
@@ -47,7 +47,7 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::getListPost()
    */
   public function getListPosts($debut = -1, $limite = -1) {
-    $sql = 'SELECT id, titre, dateModif, chapo, contenu FROM post ORDER BY id DESC';
+    $sql = 'SELECT id, titre, dateCreation, dateModif, chapo, content FROM post ORDER BY id DESC';
     
     // On vérifie l'intégrité des paramètres fournis.
     if ($debut != -1 || $limite != -1) {
@@ -61,6 +61,7 @@ class PostManagerPDO extends PostManager {
 
     // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates de modification.
     foreach ($listePost as $post) {
+      $post->setDateCreation(new DateTime($post->getDateCreation()));
       $post->setDateModif(new DateTime($post->getDateModif()));
     }
     
@@ -73,7 +74,7 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::getUniquePost()
    */
   public function getUniquePost($id) {
-    $requete = $this->db->prepare('SELECT id, titre, dateModif, chapo, contenu FROM post WHERE id = :id');
+    $requete = $this->db->prepare('SELECT id, titre, dateCreation, dateModif, chapo, content FROM post WHERE id = :id');
     $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
     $requete->execute();
     
@@ -90,11 +91,12 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::updatePost()
    */
   protected function updatePost(Post $post) {
-    $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateModif= NOW(), chapo = :chapo, contenu = :contenu WHERE id = :id');
+    $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateCreation = :dateCreation, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
     
     $requete->bindValue(':titre', $post->titre());
+    $requete->bindValue(':dateCreation', $post->getDateCreation());
     $requete->bindValue(':chapo', $post->auteur());
-    $requete->bindValue(':contenu', $post->contenu());
+    $requete->bindValue(':content', $post->content());
     $requete->bindValue(':id', $post->id(), PDO::PARAM_INT);
     
     $requete->execute();

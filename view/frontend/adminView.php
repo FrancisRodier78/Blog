@@ -57,11 +57,11 @@ if(isset($post) && !$post->isNew()) {
     <p style="text-align: center">Il y a actuellement <?= $manager->countPost() ?> posts. En voici la liste :</p>
     
     <table>
-      <tr><th>Titre</th><th>Date de modification</th><th>Action</th></tr>
+      <tr><th>Titre</th><th>Date de création</th><th>Date de modification</th><th>Action</th></tr>
 <?php
 
 foreach ($manager->getListPosts() as $posts) {
-echo '<tr><td>', $posts->getTitre(), '</td><td>', $posts->getDateModif()->format('d/m/Y à H\hi'), '</td><td><a href="?modifier=', $posts->getId(), '">Modifier</a> | <a href="?supprimer=', $posts->getId(), '">Supprimer</a></td></tr>', "\n";}
+echo '<tr><td>', $posts->getTitre(), '</td><td>', $posts->getDateCreation()->format('d/m/Y à H\hi'), '</td><td>', $posts->getDateModif()->format('d/m/Y à H\hi'), '</td><td><a href="?modifier=', $posts->getId(), '">Modifier</a> | <a href="?supprimer=', $posts->getId(), '">Supprimer</a></td></tr>', "\n";}
 ?>
     </table>
   </body>

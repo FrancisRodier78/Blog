@@ -17,7 +17,7 @@ $manager = new PostManagerPDO($db);
 if (isset($_GET['id'])) {
   $post = $manager->getUniquePost((int) $_GET['id']);
   
-  echo '<p>Par <em>', $post->auteur(), '</em>, le ', $post->dateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
+  echo '<p>Par <em>', $post->auteur(), '</em>, créer le ', $post->dateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->dateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
        '<h2>', $post->titre(), '</h2>', "\n",
        '<p>', nl2br($post->getContenu()), '</p>', "\n";
   
@@ -29,17 +29,17 @@ if (isset($_GET['id'])) {
   echo '<h2 style="text-align:center">Liste des 5 dernièrs post</h2>';
   
   foreach ($manager->getListPosts(0, 5) as $post) {
-    if (strlen($post->getContenu()) <= 200) {
-      $contenu = $post->getContenu();
+    if (strlen($post->getContent()) <= 200) {
+      $content = $post->getContent();
     } else {
-      $debut = substr($post->getContenu(), 0, 200);
+      $debut = substr($post->getContent(), 0, 200);
       $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
       
-      $contenu = $debut;
+      $content = $debut;
     }
     
     echo '<h4><a href="?id=', $post->getId(), '">', $post->getTitre(), '</a></h4>', "\n",
-         '<p>', nl2br($contenu), '</p>';
+         '<p>', nl2br($content), '</p>';
   }
 }
 ?>

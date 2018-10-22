@@ -8,9 +8,10 @@ class Post {
   protected $erreurs = [],
             $id,
             $titre,
-            $date,
+            $dateCreation,
+            $dateModif,
             $chapo,
-            $contenu;
+            $content;
   
   /**
    * Constantes relatives aux erreurs possibles rencontrées lors de l'exécution de la méthode.
@@ -75,6 +76,10 @@ class Post {
     }
   }
   
+  public function setDateCreation(DateTime $dateCreation) {
+    $this->dateCreation = $dateCreation;
+  }
+  
   public function setDateModif(DateTime $dateModif) {
     $this->dateModif = $dateModif;
   }
@@ -87,11 +92,11 @@ class Post {
     }
   }
   
-  public function setContenu($contenu) {
-    if (!is_string($contenu) || empty($contenu)) {
+  public function setContent($content) {
+    if (!is_string($content) || empty($content)) {
       $this->erreurs[] = self::CONTENU_INVALIDE;
     } else {
-      $this->contenu = $contenu;
+      $this->content = $content;
     }
   }
   
@@ -108,15 +113,19 @@ class Post {
     return $this->titre;
   }
   
+  public function getDateCreation() {
+    return $this->dateCreation;
+  }
+  
   public function getDateModif() {
     return $this->dateModif;
   }
   
   public function getChapo() {
-    return $this->contenu;
+    return $this->chapo;
   }
   
-  public function getContenu() {
-    return $this->contenu;
+  public function getContent() {
+    return $this->content;
   }
 }
