@@ -5,7 +5,7 @@ abstract class PostManager {
    * @param $post Post Le post à ajouter
    * @return void
    */
-  abstract protected function addPost(Post $post);
+  abstract protected function addPost(string $titre, string $chapo, string $content);
   
   /**
    * Méthode renvoyant le nombre de posts total.
@@ -42,9 +42,9 @@ abstract class PostManager {
    * @see self::modify()
    * @return void
    */
-  public function savePost(Post $post) {
+  public function savePost(string $titre, string $chapo, string $content) {
     if ($post->isValid()) {
-      $post->isNew() ? $this->addPost($post) : $this->updatePost($post);
+      $post->isNew() ? $this->addPost($titre, $chapo, $content) : $this->updatePost($titre, $chapo, $content);
     } else {
       throw new RuntimeException('Le post doit être valide pour être enregistré');
     }
@@ -55,5 +55,13 @@ abstract class PostManager {
    * @param $post post le post à modifier
    * @return void
    */
-  abstract protected function updatePost(Post $post);
+  abstract protected function updatePost(string $titre, string $chapo, string $content);
+
+  /**
+   * Méthode permettant d'envoyer un email à chaque nouveau post.
+   * @return void
+   */
+  abstract protected function emailPost() {
+    // email pour prévenir
+  }
 }
