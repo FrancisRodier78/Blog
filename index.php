@@ -1,9 +1,7 @@
 <?php
-require 'model/autoload.php';
-
-$db = DBFactory::getMysqlConnexionWithPDO();
-$manager = new PostManagerPDO($db);
+require 'controller/controller.php';
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
