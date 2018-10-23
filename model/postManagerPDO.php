@@ -40,7 +40,7 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::deletePost()
    */
   public function deletePost($id) {
-//    $this->db->exec('DELETE FROM post WHERE id = '.(int) $id);
+    $this->db->exec('DELETE FROM post WHERE id = '.(int) $id);
   }
   
   /**
@@ -74,7 +74,7 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::getUniquePost()
    */
   public function getUniquePost($id) {
-    $requete = $this->db->prepare('SELECT id, titre, dateCreation, dateModif, chapo, content FROM post WHERE id = :id');
+    $requete = $this->db->prepare('SELECT P.id, P.user_id, U.name, U.firstname, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id WHERE P.id = :id');  
     $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
     $requete->execute();
     
@@ -82,6 +82,7 @@ class PostManagerPDO extends PostManager {
 
     $post = $requete->fetch();
 
+    $post->setDateCreation(new DateTime($post->getDateCreation()));
     $post->setDateModif(new DateTime($post->getDateModif()));
     
     return $post;
@@ -93,11 +94,11 @@ class PostManagerPDO extends PostManager {
   protected function updatePost(Post $post) {
     $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateCreation = :dateCreation, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
     
-    $requete->bindValue(':titre', $post->titre());
+    $requete->bindValue(':titre', $post->getTitre());
     $requete->bindValue(':dateCreation', $post->getDateCreation());
-    $requete->bindValue(':chapo', $post->auteur());
-    $requete->bindValue(':content', $post->content());
-    $requete->bindValue(':id', $post->id(), PDO::PARAM_INT);
+    $requete->bindValue(':chapo', $post->getChapo());
+    $requete->bindValue(':content', $post->getContent());
+    $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
     
     $requete->execute();
   }

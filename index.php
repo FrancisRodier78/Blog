@@ -17,9 +17,9 @@ $manager = new PostManagerPDO($db);
 if (isset($_GET['id'])) {
   $post = $manager->getUniquePost((int) $_GET['id']);
   
-  echo '<p>Par <em>', $post->auteur(), '</em>, créer le ', $post->dateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->dateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
-       '<h2>', $post->titre(), '</h2>', "\n",
-       '<p>', nl2br($post->getContenu()), '</p>', "\n";
+  echo '<p>Par <em>', $post->getId(), '</em>, créer le ', $post->getDateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->getDateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
+       '<h2>', $post->getTitre(), '</h2>', "\n",
+       '<p>', nl2br($post->getContent()), '</p>', "\n";
   
 /*  if ($post->dateModif() != $post->dateModif())
   {
