@@ -19,7 +19,7 @@ class PostManagerPDO extends PostManager {
   /**
    * @see PostManager::addPost()
    */
-  protected function addPost(string $titre, string $chapo, string $content) {
+  protected function addPost(Post $post) {
     $requete = $this->db->prepare('INSERT INTO post(titre, dateCreation, dateModif, chapo, content) VALUES(:titre, NOW(), NOW(), :chapo, :content)');
     
     $requete->bindValue(':titre', $post->getTitre());
@@ -96,11 +96,11 @@ class PostManagerPDO extends PostManager {
     
     // La date de création existe la rechercher.
 
+    $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
     $requete->bindValue(':titre', $post->getTitre());
     $requete->bindValue(':dateCreation', $post->getDateCreation());
     $requete->bindValue(':chapo', $post->getChapo());
     $requete->bindValue(':content', $post->getContent());
-    $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
     
     $requete->execute();
   }
@@ -108,7 +108,7 @@ class PostManagerPDO extends PostManager {
   /**
    * @see PostManager::emailPost
    */
-  protected function emailPost() {
+  protected function emailPost(string $msg) {
     // email pour prévenir
   }
 
