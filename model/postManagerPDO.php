@@ -20,8 +20,10 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::addPost()
    */
   protected function addPost(Post $post) {
-    $requete = $this->db->prepare('INSERT INTO post(titre, dateCreation, dateModif, chapo, content) VALUES(:titre, NOW(), NOW(), :chapo, :content)');
+    $requete = $this->db->prepare('INSERT INTO post(user_id, titre, dateCreation, dateModif, chapo, content) VALUES(:user, :titre, NOW(), NOW(), :chapo, :content)');
     
+    $user = 1;
+    $requete->bindValue(':user', $user);
     $requete->bindValue(':titre', $post->getTitre());
     $requete->bindValue(':chapo', $post->getChapo());
     $requete->bindValue(':content', $post->getContent());
@@ -44,7 +46,7 @@ class PostManagerPDO extends PostManager {
   }
   
   /**
-   * @see PostManager::getListPost()
+   * @see PostManager::getListPosts()
    */
   public function getListPosts($debut = -1, $limite = -1) {
     $sql = 'SELECT id, titre, dateCreation, dateModif, chapo, content FROM post ORDER BY id DESC';
@@ -55,11 +57,16 @@ class PostManagerPDO extends PostManager {
     }
     
     $requete = $this->db->query($sql);
+
+    // If you want to fetch your result into a class (by using PDO::FETCH_CLASS) 
+    // and want the constructor to be executed *before* PDO assings the object properties, 
+    // you need to use the PDO::FETCH_PROPS_LATE constant:
     $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
     
     $listePost = $requete->fetchAll();
 
-    // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates de modification.
+    // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates.
+    // On passe d'une date typé SQL à une date typé DateTime.
     foreach ($listePost as $post) {
       $post->setDateCreation(new DateTime($post->getDateCreation()));
       $post->setDateModif(new DateTime($post->getDateModif()));
@@ -92,13 +99,10 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::updatePost()
    */
   protected function updatePost(Post $post) {
-    $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateCreation = :dateCreation, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
+    $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
     
-    // La date de création existe la rechercher.
-
     $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
     $requete->bindValue(':titre', $post->getTitre());
-    $requete->bindValue(':dateCreation', $post->getDateCreation());
     $requete->bindValue(':chapo', $post->getChapo());
     $requete->bindValue(':content', $post->getContent());
     
@@ -107,9 +111,8 @@ class PostManagerPDO extends PostManager {
 
   /**
    * @see PostManager::emailPost
+   * email pour prévenir le super-administrateur
    */
   protected function emailPost(string $msg) {
-    // email pour prévenir
   }
-
 }

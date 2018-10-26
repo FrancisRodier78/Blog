@@ -26,7 +26,7 @@ class Post {
    * @param $valeurs array Les valeurs à assigner
    * @return void
    */
-  public function __construct($valeurs = []) {
+  public function __construct(array $valeurs = []) {
     if (!empty($valeurs)) { // Si on a spécifié des valeurs, alors on hydrate l'objet.
       $this->hydrate($valeurs);
     }
@@ -37,7 +37,7 @@ class Post {
    * @param $donnees array Les données à assigner
    * @return void
    */
-  public function hydrate($donnees) {
+  public function hydrate(array $donnees) {
     foreach ($donnees as $attribut => $valeur) {
       $methode = 'set'.ucfirst($attribut);
       
@@ -60,7 +60,7 @@ class Post {
    * @return bool
    */
   public function isValid() {
-    return !(empty($this->auteur) || empty($this->titre) || empty($this->contenu));
+    return !(empty($this->titre) || empty($this->chapo) || empty($this->content));
   }
   
 
@@ -68,6 +68,10 @@ class Post {
   // SETTERS //
   /////////////
   
+  public function setId($id) {
+    $this->id = (int) $id;
+  }
+
   public function setTitre($titre) {
     if (!is_string($titre) || empty($titre)) {
       $this->erreurs[] = self::TITRE_INVALIDE;
@@ -104,6 +108,10 @@ class Post {
   /////////////
   // GETTERS //
   /////////////
+
+  public function getErreurs() {
+    return $this->erreurs;
+  }
 
   public function getId() {
     return $this->id;

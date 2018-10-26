@@ -2,14 +2,15 @@
 require 'model/autoload.php';
 
 $db = DBFactory::getMysqlConnexionWithPDO();
-$manager = new PostManagerPDO($db);
+$managerPost = new PostManagerPDO($db);
 
 if (isset($_GET['modifier'])) {
-  $post = $manager->getUniquePost((int) $_GET['modifier']);
+  $post = $managerPost->getUniquePost((int) $_GET['modifier']);
+  $message = 'Le post a bien été modifié !';
 }
 
 if (isset($_GET['supprimer'])) {
-  $manager->deletePost((int) $_GET['supprimer']);
+  $managerPost->deletePost((int) $_GET['supprimer']);
   $message = 'Le post a bien été supprimé !';
 }
 
@@ -18,7 +19,7 @@ if (isset($_POST['titre'])) {
     [
       'titre' => $_POST['titre'],
       'chapo' => $_POST['chapo'],
-      'contenu' => $_POST['contenu']
+      'content' => $_POST['content']
     ]
   );
   
@@ -27,11 +28,13 @@ if (isset($_POST['titre'])) {
   }
   
   if ($post->isValid()) {
-    $manager->savePost($post);
+    $managerPost->savePost($post);
     
-    $message = $post->isNewPost() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
+    $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
   } else {
-    $erreurs = $post->erreurs();
+    $erreurs = $post->getErreurs();
+
+    $message = $post->isNew() ? 'Le post n\'a pas été ajouté !' : 'Le post n\'a pas été modifié !';
   }
 }
 

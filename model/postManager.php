@@ -59,8 +59,8 @@ abstract class PostManager {
 
   /**
    * Méthode permettant d'envoyer un email à chaque nouveau post.
+   * email pour prévenir le super-administrateur
    * @return void
    */
   abstract protected function emailPost(string $msg);
-    // email pour prévenir le super-administrateur
 }

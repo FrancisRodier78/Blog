@@ -13,7 +13,7 @@ require 'controller/controller.php';
     <p><a href="admin.php">Accéder à l'espace d'administration</a></p>
 <?php
 if (isset($_GET['id'])) {
-  $post = $manager->getUniquePost((int) $_GET['id']);
+  $post = $managerPost->getUniquePost((int) $_GET['id']);
   
   echo '<p>Par <em>', $post->getId(), '</em>, créer le ', $post->getDateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->getDateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
        '<h2>', $post->getTitre(), '</h2>', "\n",
@@ -24,9 +24,9 @@ if (isset($_GET['id'])) {
     echo '<p style="text-align: right;"><small><em>Modifiée le ', $post->dateModif()->format('d/m/Y à H\hi'), '</em></small></p>';
   }*/
 } else {
-  echo '<h2 style="text-align:center">Liste des 5 dernièrs post</h2>';
-  
-  foreach ($manager->getListPosts(0, 5) as $post) {
+  $num = $managerPost->countPost();
+  echo '<h2 style="text-align:center">Liste des '. $num . ' derniers post</h2>';
+  foreach ($managerPost->getListPosts(0, $num) as $post) {
     if (strlen($post->getContent()) <= 200) {
       $content = $post->getContent();
     } else {
