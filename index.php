@@ -18,11 +18,19 @@ if (isset($_GET['id'])) {
   echo '<p>Par <em>', $post->getId(), '</em>, créer le ', $post->getDateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->getDateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
        '<h2>', $post->getTitre(), '</h2>', "\n",
        '<p>', nl2br($post->getContent()), '</p>', "\n";
-  
-/*  if ($post->dateModif() != $post->dateModif())
-  {
-    echo '<p style="text-align: right;"><small><em>Modifiée le ', $post->dateModif()->format('d/m/Y à H\hi'), '</em></small></p>';
-  }*/
+
+  foreach ($managerComment->getListComments((int) $_GET['id']) as $comment) {
+    if (strlen($comment->getContent()) <= 200) {
+      $content = $comment->getContent();
+    } else {
+      $debut = substr($comment->getContent(), 0, 200);
+      $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+      
+      $content = $debut;
+    }
+    
+    echo '<p>', nl2br($content), '</p>';
+  } 
 } else {
   $num = $managerPost->countPost();
   echo '<h2 style="text-align:center">Liste des '. $num . ' derniers post</h2>';
