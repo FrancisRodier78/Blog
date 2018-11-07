@@ -1,4 +1,6 @@
 <?php
+require_once 'model/postManagerPDO.php';
+
 abstract class PostManager {
   /**
    * Méthode permettant d'ajouter un post.

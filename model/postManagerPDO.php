@@ -1,4 +1,7 @@
 <?php
+require_once 'model/DBFactory.php';
+
+$db = DBFactory::getMysqlConnexionWithPDO();
 
 class PostManagerPDO extends PostManager {
   /**

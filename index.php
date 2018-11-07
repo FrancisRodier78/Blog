@@ -1,11 +1,6 @@
 <?php
-require 'model/autoload.php';
-require 'controller/post.php';
-
-$db = DBFactory::getMysqlConnexionWithPDO();
-$managerPost = new PostManagerPDO($db);
+require 'controller/postController.php';
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -15,9 +10,8 @@ $managerPost = new PostManagerPDO($db);
   </head>
   
   <body>
-    <p><a href="admin.php">Accéder à l'espace d'administration</a></p>
+    <!-- <p><a href="admin.php">Accéder à l'espace d'administration</a></p> -->
 
-    <p><a href="addPost.php">Accéder à l'ajout d'un post</a></p>
 <?php
 if (isset($_GET['id'])) {
   // Lecture d'un post et de ses commentaires avec son post_id
