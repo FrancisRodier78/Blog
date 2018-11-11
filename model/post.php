@@ -9,6 +9,7 @@ require_once 'model/postManager.php';
 class Post {
   protected $erreurs = [],
             $id,
+            $userId,
             $titre,
             $dateCreation,
             $dateModif,
@@ -74,6 +75,10 @@ class Post {
     $this->id = (int) $id;
   }
 
+  public function setUser($userId) {
+    $this->user_id = (int) $userId;
+  }
+
   public function setTitre($titre) {
     if (!is_string($titre) || empty($titre)) {
       $this->erreurs[] = self::TITRE_INVALIDE;
@@ -117,6 +122,10 @@ class Post {
 
   public function getId() {
     return $this->id;
+  }
+  
+  public function getUserId() {
+    return $this->user_id;
   }
   
   public function getTitre() {

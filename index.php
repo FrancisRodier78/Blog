@@ -10,16 +10,41 @@ require 'controller/postController.php';
   </head>
   
   <body>
-    <!-- <p><a href="admin.php">Accéder à l'espace d'administration</a></p> -->
-
 <?php
-if (isset($_GET['id'])) {
-  // Lecture d'un post et de ses commentaires avec son post_id
-  readPostAndComments((int) $_GET['id'], $managerPost);
-} else {
-  // Lecture de l'ensemble des posts
-  readAllPosts($managerPost);
+if (isset($_POST['retour'])) {
+  // aucun traitement
 }
+
+if (isset($_POST['supprimer'])) {
+  deletePost($_POST['id'], $managerPost);
+}
+
+if (isset($_POST['modifier'])) {
+  var_dump($_POST['idPost']);
+  voirPost($_POST['idPost'], $managerPost);
+} else {
+  if (isset($_POST['envoyer'])) {
+    changePost($_POST['idPost'], $managerPost);
+  } else {
+    if (isset($_GET['saisir'])) {
+      // Ajout d'un nouveau post
+      enterNewPost();
+    } else {
+      if (isset($_POST['ajouter'])) {
+        addNewPost($managerPost);
+      } else {
+        if (isset($_GET['id'])) {
+          // Lecture d'un post et de ses commentaires avec son post_id
+          readPostAndComments((int) $_GET['id'], $managerPost);
+        } else {
+          // Lecture de l'ensemble des posts
+          readAllPosts($managerPost);
+        }
+      }
+    }
+  }
+}
+
 ?>
   </body>
 </html>
