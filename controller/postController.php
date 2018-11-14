@@ -1,7 +1,4 @@
 <?php
-require 'model/post.php';
-
-$managerPost = new PostManagerPDO($db);
 
 function readPostAndComments($id, $managerPost) {
   // Lecture d'un post et de ses commentaires avec son post_id
@@ -11,24 +8,11 @@ function readPostAndComments($id, $managerPost) {
 }
 
 function readAllPosts($managerPost) {
-  require 'view/readAllPostsButtonView.php';    
-
   // Lecture de l'ensemble des posts
   $num = $managerPost->countPost();
-  require 'view/readAllPostsLabelView.php';    
+  $arrayPost = $managerPost->getListPosts(0, $num);
 
-  foreach ($managerPost->getListPosts(0, $num) as $post) {
-    if (strlen($post->getContent()) <= 200) {
-      $content = $post->getContent();
-    } else {
-      $debut = substr($post->getContent(), 0, 200);
-      $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-      
-      $content = $debut;
-    }
-
-    require 'view/readAllPostsView.php';    
-  }
+  require 'view/readAllPostsView.php';    
 }
 
 function enterNewPost() {
@@ -61,15 +45,10 @@ function deletePost($id, $managerPost) {
   $managerPost->deletePost($id);
 }
 
-function viewPost($id, $post) {
-  // Vue d'un post
-  require 'view/viewPostView.php';    
-}
-
-function voirPost($id, $managerPost) {
+function viewPost($id, $managerPost) {
   $post = $managerPost->getUniquePost($id);
 
-  viewPost($id, $post);
+  require 'view/viewPostView.php';    
 }
 
 function changePost($id, $managerPost) {

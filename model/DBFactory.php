@@ -14,3 +14,4 @@ class DBFactory {
     return new MySQLi('localhost', 'root', '', 'post');
   }
 }
+

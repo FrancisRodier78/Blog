@@ -1,5 +1,4 @@
 <?php
-require_once 'model/postManagerPDO.php';
 
 abstract class PostManager {
   /**
