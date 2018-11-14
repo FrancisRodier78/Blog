@@ -6,16 +6,6 @@
   <p><?= nl2br($post->getContent())?></p>
 
   <form action="." method="post">
-    <input type="hidden" name="idPost" value=<?= $post->getId()?> />
-    <input type="submit" value="Modifier le post" name="modifier"/>
-  </form>
-
-  <form action="." method="post">
-    <input type="hidden" name="id" value=<?= $id?> />
-    <input type="submit" value="Supprimer le post" name="supprimer"/>
-  </form>
-
-  <form action="." method="post">
     <input type="submit" value="Retourner à la liste" name="retour"/>
   </form>
 <?php $content = ob_get_clean(); ?>

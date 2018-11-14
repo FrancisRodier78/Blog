@@ -1,6 +1,10 @@
 <?php $title = 'Liste des derniers post'; ?>
 
 <?php ob_start(); ?>
+
+<p><a href="?administration">Accéder à l'espace d'administration</a></p>
+<!-- <a href="?modifier=', $post->getId(), '">Modifier</a> -->
+
 <form action="." method="get">
   <input type="submit" value="Saisir un nouveau post" name="saisir"/>
 </form>

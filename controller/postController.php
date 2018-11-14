@@ -1,5 +1,13 @@
 <?php
 
+function adminPosts($managerPost) {
+  // Lecture de l'ensemble des posts
+  $num = $managerPost->countPost();
+  $arrayPost = $managerPost->getListPosts(0, $num);
+
+  require 'view/adminPostsView.php';    
+}
+
 function readPostAndComments($id, $managerPost) {
   // Lecture d'un post et de ses commentaires avec son post_id
   $post = $managerPost->getUniquePost($id);
@@ -52,7 +60,7 @@ function viewPost($id, $managerPost) {
 }
 
 function changePost($id, $managerPost) {
-  // Ajout d'un nouveau post
+  // Modification d'un post
   $post = $managerPost->getUniquePost($id);
 
   if (isset($_POST['titre']) && isset($_POST['chapo']) && isset($_POST['content'])) { 
