@@ -12,7 +12,7 @@
 <h2 style="text-align:center">Liste des <?= $num ?> derniers post</h2>
 
 <?php
-foreach ($managerPost->getListPosts(0, $num) as $post) {
+foreach ($this->managerPost->getListPosts(0, $num) as $post) {
   if (strlen($post->getContent()) <= 200) {
     $elementContent = $post->getContent();
   } else {

@@ -49,7 +49,7 @@ class PostManagerPDO extends PostManager {
    * @see PostManager::getListPosts()
    */
   public function getListPosts($debut = -1, $limite = -1) {
-    $sql = 'SELECT id, titre, dateCreation, dateModif, chapo, content FROM post ORDER BY id DESC';
+    $sql = 'SELECT P.id, U.loggin AS auteur, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id ORDER BY P.id DESC';
     
     // On vérifie l'intégrité des paramètres fournis.
     if ($debut != -1 || $limite != -1) {
@@ -61,11 +61,16 @@ class PostManagerPDO extends PostManager {
     // If you want to fetch your result into a class (by using PDO::FETCH_CLASS) 
     // and want the constructor to be executed *before* PDO assings the object properties, 
     // you need to use the PDO::FETCH_PROPS_LATE constant:
+    // Si vous souhaitez extraire votre résultat dans une classe (à l'aide de PDO :: FETCH_CLASS) 
+    // et que le constructeur soit exécuté * avant * PDO en évaluant les propriétés de l'objet, 
+    // vous devez utiliser la constante PDO :: FETCH_PROPS_LATE:
     $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
     
     $listePost = $requete->fetchAll();
 
+    // We browse through our post list so we can place DateTime instances as dates.
     // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates.
+    // We go from a date typed SQL to a date typed DateTime.
     // On passe d'une date typé SQL à une date typé DateTime.
     foreach ($listePost as $post) {
       $post->setDateCreation(new DateTime($post->getDateCreation()));

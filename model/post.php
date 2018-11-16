@@ -1,5 +1,5 @@
 <?php
-require_once 'model/postManager.php';
+//require_once 'model/postManager.php';
 
 /**
  * Classe représentant un post, créée à l'occasion d'un TP du tutoriel « La programmation orientée objet en PHP » disponible sur http://www.openclassrooms.com/
@@ -10,6 +10,7 @@ class Post {
   protected $erreurs = [],
             $id,
             $userId,
+            $auteur,
             $titre,
             $dateCreation,
             $dateModif,
@@ -126,6 +127,10 @@ class Post {
   
   public function getUserId() {
     return $this->user_id;
+  }
+  
+  public function getAuteur() {
+    return $this->auteur;
   }
   
   public function getTitre() {

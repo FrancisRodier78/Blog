@@ -4,38 +4,39 @@ require 'controller/postController.php';
 
 $db = DBFactory::getMysqlConnexionWithPDO();
 $managerPost = new PostManagerPDO($db);
+$postManager = new PostController($managerPost);
 
 try {
   if (isset($_GET['administration'])) {
-    adminPosts($managerPost);
+    $postManager->adminPosts();
   } else {
     if (isset($_POST['retour'])) {
       // aucun traitement
     }
 
     if (isset($_GET['supprimer'])) {
-      deletePost($_GET['supprimer'], $managerPost);
+      $postManager->deletePost($_GET['supprimer']);
     }
 
     if (isset($_GET['modifier'])) {
-      viewPost($_GET['modifier'], $managerPost);
+      $postManager->viewPost($_GET['modifier']);
     } else {
       if (isset($_POST['envoyer'])) {
-        changePost($_POST['idPost'], $managerPost);
+        $postManager->changePost($_POST['idPost']);
       } else {
         if (isset($_GET['saisir'])) {
           // Ajout d'un nouveau post
-          enterNewPost();
+          $postManager->enterNewPost();
         } else {
           if (isset($_POST['ajouter'])) {
-            addNewPost($managerPost);
+            $postManager->addNewPost();
           } else {
             if (isset($_GET['id'])) {
               // Lecture d'un post et de ses commentaires avec son post_id
-              readPostAndComments((int) $_GET['id'], $managerPost);
+              $postManager->readPostAndComments((int) $_GET['id']);
             } else {
               // Lecture de l'ensemble des posts
-              readAllPosts($managerPost);
+              $postManager->readAllPosts();
             }
           }
         }

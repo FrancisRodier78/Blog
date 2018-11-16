@@ -1,81 +1,120 @@
 <?php
 
-function adminPosts($managerPost) {
-  // Lecture de l'ensemble des posts
-  $num = $managerPost->countPost();
-  $arrayPost = $managerPost->getListPosts(0, $num);
-
-  require 'view/adminPostsView.php';    
-}
-
-function readPostAndComments($id, $managerPost) {
-  // Lecture d'un post et de ses commentaires avec son post_id
-  $post = $managerPost->getUniquePost($id);
-
-  require 'view/readPostAndCommentsView.php';
-}
-
-function readAllPosts($managerPost) {
-  // Lecture de l'ensemble des posts
-  $num = $managerPost->countPost();
-  $arrayPost = $managerPost->getListPosts(0, $num);
-
-  require 'view/readAllPostsView.php';    
-}
-
-function enterNewPost() {
-  // Saisie d'un nouveau post
-  require 'view/enterNewPostView.php';    
-}
-
-function addNewPost($managerPost) {
-  // Ajout d'un nouveau post
-  if (isset($_POST['titre']) && isset($_POST['chapo']) && isset($_POST['content'])) { 
-    $post = new Post([
-      'titre' => $_POST['titre'],
-      'chapo' => $_POST['chapo'],
-      'content' => $_POST['content']
-    ]);
+class PostController {
+  /**
+   * Attribut contenant l'instance représentant le controlles.
+   */
+  protected $managerPost;
   
-    if ($post->isValid()) {
-      $managerPost->savePost($post);
-    
-      $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
+  /**
+   * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
+   * @return void
+   */
+  public function __construct( PostManagerPDO $managerPost) {
+    $this->managerPost = $managerPost;
+  }
+  
+  /**
+   * @see PostManager::adminPost()
+   */
+  public function adminPosts() {
+    // Lecture de l'ensemble des posts
+    $num = $this->managerPost->countPost();
+    $arrayPost = $this->managerPost->getListPosts(0, $num);
 
-      header('Location: http://localhost/blog');
-    } else {
-      $erreurs = $post->erreurs();
+    require 'view/adminPostsView.php';    
+  }
+
+  /**
+   * @see PostManager::readPostAndComments($id)
+   */
+  public function readPostAndComments($id) {
+    // Lecture d'un post et de ses commentaires avec son post_id
+    $post = $this->managerPost->getUniquePost($id);
+
+    require 'view/readPostAndCommentsView.php';
+  }
+
+  /**
+   * @see PostManager::readAllPosts()
+   */
+  public function readAllPosts() {
+    // Lecture de l'ensemble des posts
+    $num = $this->managerPost->countPost();
+    $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+    require 'view/readAllPostsView.php';    
+  }
+
+  /**
+   * @see PostManager::enterNewPost()
+   */
+  public function enterNewPost() {
+    // Saisie d'un nouveau post
+    require 'view/enterNewPostView.php';    
+  }
+
+  /**
+   * @see PostManager::addNewPost()
+   */
+  public function addNewPost() {
+    // Ajout d'un nouveau post
+    if (isset($_POST['titre']) && isset($_POST['chapo']) && isset($_POST['content'])) { 
+      $post = new Post([
+        'titre' => $_POST['titre'],
+        'chapo' => $_POST['chapo'],
+        'content' => $_POST['content']
+      ]);
+  
+      if ($post->isValid()) {
+        $this->managerPost->savePost($post);
+    
+        $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
+
+        header('Location: http://localhost/blog');
+      } else {
+        $erreurs = $post->erreurs();
+      }
     }
   }
-}
 
-function deletePost($id, $managerPost) {
-  $managerPost->deletePost($id);
-}
+  /**
+   * @see PostManager::deleteNewPost()
+   */
+  public function deletePost($id) {
+    $this->managerPost->deletePost($id);
+  }
 
-function viewPost($id, $managerPost) {
-  $post = $managerPost->getUniquePost($id);
+  /**
+   * @see PostManager::viewNewPost()
+   */
+  public function viewPost($id) {
+    $post = $this->managerPost->getUniquePost($id);
 
-  require 'view/viewPostView.php';    
-}
+    require 'view/viewPostView.php';    
+  }
 
-function changePost($id, $managerPost) {
-  // Modification d'un post
-  $post = $managerPost->getUniquePost($id);
+  /**
+   * @see PostManager::changePost()
+   */
+  public function changePost($id) {
+    // Modification d'un post
+    $post = $this->managerPost->getUniquePost($id);
 
-  if (isset($_POST['titre']) && isset($_POST['chapo']) && isset($_POST['content'])) { 
-    $post->setTitre($_POST['titre']);
-    $post->setChapo($_POST['chapo']);
-    $post->setContent($_POST['content']);
+    if (isset($_POST['titre']) && isset($_POST['chapo']) && isset($_POST['content'])) { 
+      $post->setTitre($_POST['titre']);
+      $post->setChapo($_POST['chapo']);
+      $post->setContent($_POST['content']);
 
-    if ($post->isValid()) {
-      $managerPost->savePost($post);
+      if ($post->isValid()) {
+        $this->managerPost->savePost($post);
     
-      $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
+        $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
 
-      header('Location: http://localhost/blog');
-    } else {
-      $erreurs = $post->erreurs();
+        header('Location: http://localhost/blog');
+      } else {
+        $erreurs = $post->erreurs();
+      }
     }
   }
 }
