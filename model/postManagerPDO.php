@@ -58,19 +58,13 @@ class PostManagerPDO extends PostManager {
     
     $requete = $this->db->query($sql);
 
-    // If you want to fetch your result into a class (by using PDO::FETCH_CLASS) 
-    // and want the constructor to be executed *before* PDO assings the object properties, 
-    // you need to use the PDO::FETCH_PROPS_LATE constant:
-    // Si vous souhaitez extraire votre résultat dans une classe (à l'aide de PDO :: FETCH_CLASS) 
-    // et que le constructeur soit exécuté * avant * PDO en évaluant les propriétés de l'objet, 
-    // vous devez utiliser la constante PDO :: FETCH_PROPS_LATE:
+    // Par FETCH_CLASS on récupère un tableau d'objet et non un tableau de table.
+    // Par FETCH_PROPS_LATE on force l'exécution du constructeur avant celui du contrôleur.
     $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
     
     $listePost = $requete->fetchAll();
 
-    // We browse through our post list so we can place DateTime instances as dates.
     // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates.
-    // We go from a date typed SQL to a date typed DateTime.
     // On passe d'une date typé SQL à une date typé DateTime.
     foreach ($listePost as $post) {
       $post->setDateCreation(new DateTime($post->getDateCreation()));
@@ -100,6 +94,22 @@ class PostManagerPDO extends PostManager {
     return $post;
   }
   
+  /**
+   * @see PostManager::getListComments()
+   */
+  public function getListComments($id) {
+    $requete = $this->db->prepare('SELECT C.user_id, C.content FROM comment AS C INNER JOIN post AS P ON P.id = C.post_id WHERE C.post_id = :id');  
+    $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+    $requete->execute();
+    
+    $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comments');
+
+    $listComments = $requete->fetchAll();
+    
+    return $listComments;
+  }
+
+
   /**
    * @see PostManager::updatePost()
    */

@@ -10,25 +10,27 @@ try {
   if (isset($_GET['administration'])) {
     $postManager->adminPosts();
   } else {
-    if (isset($_POST['retour'])) {
+    if (isset($_POST['retour_liste_posts'])) {
       // aucun traitement
     }
 
-    if (isset($_GET['supprimer'])) {
-      $postManager->deletePost($_GET['supprimer']);
+    if (isset($_GET['supprimer_post'])) {
+      $postManager->deletePost($_GET['supprimer_post']);
     }
 
-    if (isset($_GET['modifier'])) {
-      $postManager->viewPost($_GET['modifier']);
+    if (isset($_GET['modifier_post'])) {
+      $postManager->viewPost($_GET['modifier_post']);
     } else {
-      if (isset($_POST['envoyer'])) {
+      if (isset($_POST['envoyer_post'])) {
+        // Ici on connait l'administrateur
         $postManager->changePost($_POST['idPost']);
       } else {
-        if (isset($_GET['saisir'])) {
+        if (isset($_GET['saisir_post'])) {
           // Ajout d'un nouveau post
           $postManager->enterNewPost();
         } else {
-          if (isset($_POST['ajouter'])) {
+          if (isset($_POST['ajouter_post'])) {
+            // Ici on connait l'administrateur
             $postManager->addNewPost();
           } else {
             if (isset($_GET['id'])) {
@@ -47,5 +49,3 @@ try {
 catch(Exception $e) {
     $errorMessage = $e->getMessage();
 }
-
-?>

@@ -1,15 +1,14 @@
-<?php $title = 'Liste des derniers post'; ?>
+<?php $title = 'Liste des derniers posts'; ?>
 
 <?php ob_start(); ?>
 
 <p><a href="?administration">Accéder à l'espace d'administration</a></p>
-<!-- <a href="?modifier=', $post->getId(), '">Modifier</a> -->
 
 <form action="." method="get">
-  <input type="submit" value="Saisir un nouveau post" name="saisir"/>
+  <input type="submit" value="Saisir un nouveau post" name="saisir post"/>
 </form>
 
-<h2 style="text-align:center">Liste des <?= $num ?> derniers post</h2>
+<h2 style="text-align:center">Liste des <?= $num ?> derniers posts</h2>
 
 <?php
 foreach ($this->managerPost->getListPosts(0, $num) as $post) {

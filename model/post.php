@@ -76,7 +76,7 @@ class Post {
     $this->id = (int) $id;
   }
 
-  public function setUser($userId) {
+  public function setUserId($userId) {
     $this->user_id = (int) $userId;
   }
 
