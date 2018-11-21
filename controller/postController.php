@@ -28,10 +28,10 @@ class PostController {
   /**
    * @see PostManager::readPostAndComments($id)
    */
-  public function readPostAndComments($id) {
+  public function readPostAndComments($id, $commentManager) {
     // Lecture d'un post et de ses commentaires avec son post_id
     $post = $this->managerPost->getUniquePost($id);
-    $listComments = $this->managerPost->getListComments($id);
+    $listComments = $commentManager->managerComment->getListComments($id);
 
     require 'view/readPostAndCommentsView.php';
   }
@@ -72,22 +72,22 @@ class PostController {
     
         $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
 
-        header('Location: http://localhost/blog');
+        header('Location: http://localhost/blog/?id= 1');
       } else {
-        $erreurs = $post->erreurs();
+        $erreurs = $post->getErreurs();
       }
     }
   }
 
   /**
-   * @see PostManager::deleteNewPost()
+   * @see PostManager::deletePost()
    */
   public function deletePost($id) {
     $this->managerPost->deletePost($id);
   }
 
   /**
-   * @see PostManager::viewNewPost()
+   * @see PostManager::viewPost()
    */
   public function viewPost($id) {
     $post = $this->managerPost->getUniquePost($id);
@@ -119,4 +119,3 @@ class PostController {
     }
   }
 }
-

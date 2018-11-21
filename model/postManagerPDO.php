@@ -95,22 +95,6 @@ class PostManagerPDO extends PostManager {
   }
   
   /**
-   * @see PostManager::getListComments()
-   */
-  public function getListComments($id) {
-    $requete = $this->db->prepare('SELECT C.user_id, C.content FROM comment AS C INNER JOIN post AS P ON P.id = C.post_id WHERE C.post_id = :id');  
-    $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
-    $requete->execute();
-    
-    $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comments');
-
-    $listComments = $requete->fetchAll();
-    
-    return $listComments;
-  }
-
-
-  /**
    * @see PostManager::updatePost()
    */
   protected function updatePost(Post $post) {

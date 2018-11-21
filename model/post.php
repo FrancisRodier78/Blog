@@ -1,5 +1,4 @@
 <?php
-//require_once 'model/postManager.php';
 
 /**
  * Classe représentant un post, créée à l'occasion d'un TP du tutoriel « La programmation orientée objet en PHP » disponible sur http://www.openclassrooms.com/
