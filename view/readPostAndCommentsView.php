@@ -6,10 +6,7 @@
   <h2><?= $post->getTitre()?></h2>
   <p><?= nl2br($post->getContent())?></p>
 
-  <form action="." method="post">
-    <input type="hidden" name="idPost" value="<?= $post->getId() ?>" />
-    <input type="submit" value="Saisir un commentaire" name="saisir_comment"/>
-  </form>
+  <p><a href="?enter_comment&idPost= <?= $post->getId() ?>">Saisir un commentaire</a></p>
 
 <?php
 foreach ($listComments as $comment) {
@@ -20,9 +17,7 @@ foreach ($listComments as $comment) {
 }
 ?>
 
-  <form action="." method="post">
-    <input type="submit" value="Retourner à la liste" name="retour liste posts"/>
-  </form>
+  <p><a href="?come_back_list_posts">Retourner à la liste</a></p>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

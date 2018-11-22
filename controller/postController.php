@@ -72,7 +72,8 @@ class PostController {
     
         $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
 
-        header('Location: http://localhost/blog/?id= 1');
+        // header('Location: http://localhost/blog/?id= 1');
+        header('Location: http://localhost/blog');
       } else {
         $erreurs = $post->getErreurs();
       }

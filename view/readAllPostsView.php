@@ -4,9 +4,7 @@
 
 <p><a href="?administration">Accéder à l'espace d'administration</a></p>
 
-<form action="." method="get">
-  <input type="submit" value="Saisir un nouveau post" name="saisir post"/>
-</form>
+<p><a href="?enter_post">Saisir un nouveau post</a></p>
 
 <h2 style="text-align:center">Liste des <?= $num ?> derniers posts</h2>
 

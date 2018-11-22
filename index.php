@@ -13,53 +13,65 @@ try {
   if (isset($_GET['administration'])) {
     $postManager->adminPosts();
   } else {
-    if (isset($_POST['retour_liste_posts'])) {
+    $firstScreen = true;
+
+    if (isset($_GET['come_back_list_posts'])) {
       // aucun traitement
     }
 
-    if (isset($_GET['supprimer_post'])) {
-      $postManager->deletePost($_GET['supprimer_post']);
+    if (isset($_GET['delete_post'])) {
+      $postManager->deletePost($_GET['delete_post']);
     }
 
-    if (isset($_GET['modifier_post'])) {
-      $postManager->viewPost($_GET['modifier_post']);
-    } else {
-      if (isset($_POST['envoyer_post'])) {
-        // Ici on connait l'administrateur
-        $postManager->changePost($_POST['idPost']);
-      } else {
-        if (isset($_GET['saisir_post'])) {
-          // Ajout d'un nouveau post
-          $postManager->enterNewPost();
-        } else {
-          if (isset($_POST['saisir_comment'])) {
-            // Ajout d'un nouveau comment
-            $commentManager->enterNewComment($_POST['idPost']);
-          } else {
-            if (isset($_POST['ajouter_post'])) {
-              // Ici on connait l'administrateur
-              $postManager->addNewPost();
-            } else {
-              if (isset($_POST['ajouter_comment'])) {
-                $commentManager->addNewComment($_POST['idPost']);
-              } else {
-                if (isset($_GET['id'])) {
-                  // Lecture d'un post et de ses commentaires avec son post_id
-                  $postManager->readPostAndComments((int) $_GET['id'], $commentManager);
-                } else {
-                  if (isset($_POST['idPost']) && isset($_POST['retour_liste_comment'])) {
-                    $postManager->readPostAndComments((int) $_POST['idPost'], $commentManager);
-                  } else {
-                    // Lecture de l'ensemble des posts
-                    $postManager->readAllPosts();
-                  } 
-                }
-              }
-            }
-          }
-        }
-      }
+    if (isset($_GET['edit_post'])) {
+      $firstScreen = false;
+      $postManager->viewPost($_GET['edit_post']);
     }
+    
+    if (isset($_POST['send_post'])) {
+      // Ici on connait l'administrateur
+      $firstScreen = false;
+      $postManager->changePost($_POST['idPost']);
+    }
+
+    if (isset($_GET['enter_post'])) {
+      // Ajout d'un nouveau post
+      $firstScreen = false;
+      $postManager->enterNewPost();
+    }
+    
+    if (isset($_GET['enter_comment'])) {
+      // Ajout d'un nouveau comment
+      $firstScreen = false;
+      $commentManager->enterNewComment($_GET['idPost']);
+    }
+    
+    if (isset($_POST['add_post'])) {
+      // Ici on connait l'administrateur
+      $firstScreen = false;
+      $postManager->addNewPost();
+    }
+    
+    if (isset($_POST['add_comment'])) {
+      $firstScreen = false;
+      $commentManager->addNewComment($_POST['idPost']);
+    }
+    
+    if (isset($_GET['id'])) {
+      // Lecture d'un post et de ses commentaires avec son post_id
+      $firstScreen = false;
+      $postManager->readPostAndComments((int) $_GET['id'], $commentManager);
+    }
+    
+    if (isset($_GET['idPost']) && isset($_GET['come_back_list_comment'])) {
+      $firstScreen = false;
+      $postManager->readPostAndComments((int) $_POST['idPost'], $commentManager);
+    }
+
+    if ($firstScreen) {
+      // Lecture de l'ensemble des posts
+      $postManager->readAllPosts();
+    } 
   }
 }
 catch(Exception $e) {

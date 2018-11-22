@@ -7,7 +7,7 @@
         Chapo : <input type="text" name="chapo" value="<?= $post->getChapo()?>" /><br />
         Contenu : <input type="textarea rows="8" cols="60" name="content" value="<?= $post->getContent()?>" /><br />
         <input type="hidden" name="idPost" value="<?= $id ?>" />
-        <input type="submit" value="Envoyer le post" name="envoyer post" />
+        <input type="submit" value="Envoyer le post" name="send post" />
       </p>
     </form>
 <?php $content = ob_get_clean(); ?>
