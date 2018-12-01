@@ -1,53 +1,92 @@
 <?php
-require 'controller/controller.php';
-?>
+require 'model/autoload.php';
+require 'vendor/autoload.php';
+require 'controller/postController.php';
+require 'controller/commentController.php';
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Accueil du site</title>
-    <meta charset="utf-8" />
-  </head>
-  
-  <body>
-    <p><a href="admin.php">Accéder à l'espace d'administration</a></p>
-<?php
-if (isset($_GET['id'])) {
-  $post = $managerPost->getUniquePost((int) $_GET['id']);
-  
-  echo '<p>Par <em>', $post->getId(), '</em>, créer le ', $post->getDateCreation()->format('d/m/Y à H\hi'), ', modifier le ', $post->getDateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
-       '<h2>', $post->getTitre(), '</h2>', "\n",
-       '<p>', nl2br($post->getContent()), '</p>', "\n";
+$db = DBFactory::getMysqlConnexionWithPDO();
+$managerPost = new PostManagerPDO($db);
+$postManager = new PostController($managerPost);
+$managerComment = new CommentManagerPDO($db);
+$commentManager = new CommentController($managerComment);
 
-  foreach ($managerComment->getListComments((int) $_GET['id']) as $comment) {
-    if (strlen($comment->getContent()) <= 200) {
-      $content = $comment->getContent();
-    } else {
-      $debut = substr($comment->getContent(), 0, 200);
-      $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+try {
+    $firstScreen = true;
+
+    if (isset($_GET['administration']) && isset($_GET['posts'])) {
+        $firstScreen = false;
+        $postManager->adminPosts();
+    }
       
-      $content = $debut;
+    if (isset($_GET['administration']) && isset($_GET['comments'])) {
+        $firstScreen = false;
+        $commentManager->readAllNewComments();
+    }
+      
+    if (isset($_GET['come_back_list_posts'])) {
+        // aucun traitement
+    }
+
+    if (isset($_GET['delete_post'])) {
+        $postManager->deletePost($_GET['delete_post']);
+    }
+
+    if (isset($_GET['edit_post'])) {
+        $firstScreen = false;
+        $postManager->viewPost($_GET['edit_post']);
     }
     
-    echo '<p>', nl2br($content), '</p>';
-  } 
-} else {
-  $num = $managerPost->countPost();
-  echo '<h2 style="text-align:center">Liste des '. $num . ' derniers post</h2>';
-  foreach ($managerPost->getListPosts(0, $num) as $post) {
-    if (strlen($post->getContent()) <= 200) {
-      $content = $post->getContent();
-    } else {
-      $debut = substr($post->getContent(), 0, 200);
-      $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-      
-      $content = $debut;
+    if (isset($_POST['send_post'])) {
+        // Ici on connait l'administrateur
+        $firstScreen = false;
+        $postManager->changePost($_POST['idPost']);
+    }
+
+    if (isset($_GET['send_comment'])) {
+        $firstScreen = false;
+        $commentManager->changeComment($_GET['send_comment']);
     }
     
-    echo '<h4><a href="?id=', $post->getId(), '">', $post->getTitre(), '</a></h4>', "\n",
-         '<p>', nl2br($content), '</p>';
-  }
+    if (isset($_GET['enter_post'])) {
+        // Ajout d'un nouveau post
+        $firstScreen = false;
+        $postManager->enterNewPost();
+        //$msg = 'Coucou';
+        //$postManager->sendEmailPost($msg);
+    }
+    
+    if (isset($_GET['enter_comment'])) {
+        // Ajout d'un nouveau comment
+        $firstScreen = false;
+        $commentManager->enterNewComment($_GET['idPost']);
+    }
+    
+    if (isset($_POST['add_post'])) {
+        // Ici on connait l'administrateur
+        $firstScreen = false;
+        $postManager->addNewPost();
+    }
+    
+    if (isset($_POST['add_comment'])) {
+        $firstScreen = false;
+        $commentManager->addNewComment($_POST['idPost']);
+    }
+
+    if (isset($_GET['id'])) {
+        // Lecture d'un post et de ses commentaires avec son post_id
+        $firstScreen = false;
+        $postManager->readPostAndComments((int) $_GET['id'], $commentManager);
+    }
+    
+    if (isset($_GET['idPost']) && isset($_GET['come_back_list_comment'])) {
+        $firstScreen = false;
+        $postManager->readPostAndComments((int) $_POST['idPost'], $commentManager);
+    }
+
+    if ($firstScreen) {
+        // Lecture de l'ensemble des posts
+        $postManager->readAllPosts();
+    }
+} catch(Exception $e) {
+    echo 'Erreur : ' . $e->getMessage();
 }
-?>
-  </body>
-</html>

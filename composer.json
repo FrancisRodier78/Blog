@@ -1,0 +1,9 @@
+{
+  "autoload": {
+      "psr-4": { "": "C:/wamp64/www/Blog/model" }
+  },
+  "require": {
+      "twig/extensions": "~1.0",
+       "symfony/swiftmailer-bundle": "^2.3"
+  }
+}
