@@ -83,7 +83,7 @@ class CommentManagerPDO extends CommentManager
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
         
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'comment');
+        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
         $comment = $requete->fetch();
 
