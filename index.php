@@ -1,47 +1,65 @@
 <?php
 require 'model/autoload.php';
+require 'controller/postController.php';
 
 $db = DBFactory::getMysqlConnexionWithPDO();
-$manager = new PostManagerPDO($db);
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Accueil du site</title>
-    <meta charset="utf-8" />
-  </head>
-  
-  <body>
-    <p><a href="admin.php">Accéder à l'espace d'administration</a></p>
-<?php
-if (isset($_GET['id'])) {
-  $post = $manager->getUniquePost((int) $_GET['id']);
-  
-  echo '<p>Par <em>', $post->auteur(), '</em>, le ', $post->dateModif()->format('d/m/Y à H\hi'), '</p>', "\n",
-       '<h2>', $post->titre(), '</h2>', "\n",
-       '<p>', nl2br($post->getContenu()), '</p>', "\n";
-  
-/*  if ($post->dateModif() != $post->dateModif())
-  {
-    echo '<p style="text-align: right;"><small><em>Modifiée le ', $post->dateModif()->format('d/m/Y à H\hi'), '</em></small></p>';
-  }*/
-} else {
-  echo '<h2 style="text-align:center">Liste des 5 dernièrs post</h2>';
-  
-  foreach ($manager->getListPosts(0, 5) as $post) {
-    if (strlen($post->getContenu()) <= 200) {
-      $contenu = $post->getContenu();
-    } else {
-      $debut = substr($post->getContenu(), 0, 200);
-      $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-      
-      $contenu = $debut;
+$managerPost = new PostManagerPDO($db);
+$postManager = new PostController($managerPost);
+
+try {
+  if (isset($_GET['administration'])) {
+    $postManager->adminPosts();
+  } else {
+    $firstScreen = true;
+
+    if (isset($_GET['come_back_list_posts'])) {
+      // aucun traitement
+    }
+
+    if (isset($_GET['delete_post'])) {
+      $postManager->deletePost($_GET['delete_post']);
+    }
+
+    if (isset($_GET['edit_post'])) {
+      $firstScreen = false;
+      $postManager->viewPost($_GET['edit_post']);
     }
     
-    echo '<h4><a href="?id=', $post->getId(), '">', $post->getTitre(), '</a></h4>', "\n",
-         '<p>', nl2br($contenu), '</p>';
+    if (isset($_POST['send_post'])) {
+      // Ici on connait l'administrateur
+      $firstScreen = false;
+      $postManager->changePost($_POST['idPost']);
+    }
+
+    if (isset($_GET['enter_post'])) {
+      // Ajout d'un nouveau post
+      $firstScreen = false;
+      $postManager->enterNewPost();
+    }
+    
+    if (isset($_POST['add_post'])) {
+      // Ici on connait l'administrateur
+      $firstScreen = false;
+      $postManager->addNewPost();
+    }
+    
+    if (isset($_GET['id'])) {
+      // Lecture d'un post et de ses commentaires avec son post_id
+      $firstScreen = false;
+      $postManager->readPostAndComments((int) $_GET['id']);
+    }
+    
+    if (isset($_GET['idPost']) && isset($_GET['come_back_list_comment'])) {
+      $firstScreen = false;
+      $postManager->readPostAndComments((int) $_POST['idPost'], $commentManager);
+    }
+
+    if ($firstScreen) {
+      // Lecture de l'ensemble des posts
+      $postManager->readAllPosts();
+    } 
   }
 }
-?>
-  </body>
-</html>
+catch(Exception $e) {
+    $errorMessage = $e->getMessage();
+}

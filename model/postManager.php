@@ -1,4 +1,5 @@
 <?php
+
 abstract class PostManager {
   /**
    * Méthode permettant d'ajouter un post.
@@ -56,4 +57,11 @@ abstract class PostManager {
    * @return void
    */
   abstract protected function updatePost(Post $post);
+
+  /**
+   * Méthode permettant d'envoyer un email à chaque nouveau post.
+   * email pour prévenir le super-administrateur
+   * @return void
+   */
+  abstract protected function emailPost(string $msg);
 }

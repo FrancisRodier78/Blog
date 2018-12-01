@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe représentant un post, créée à l'occasion d'un TP du tutoriel « La programmation orientée objet en PHP » disponible sur http://www.openclassrooms.com/
  * @author Francis Rodier.
@@ -7,10 +8,13 @@
 class Post {
   protected $erreurs = [],
             $id,
+            $userId,
+            $auteur,
             $titre,
-            $date,
+            $dateCreation,
+            $dateModif,
             $chapo,
-            $contenu;
+            $content;
   
   /**
    * Constantes relatives aux erreurs possibles rencontrées lors de l'exécution de la méthode.
@@ -25,7 +29,7 @@ class Post {
    * @param $valeurs array Les valeurs à assigner
    * @return void
    */
-  public function __construct($valeurs = []) {
+  public function __construct(array $valeurs = []) {
     if (!empty($valeurs)) { // Si on a spécifié des valeurs, alors on hydrate l'objet.
       $this->hydrate($valeurs);
     }
@@ -36,7 +40,7 @@ class Post {
    * @param $donnees array Les données à assigner
    * @return void
    */
-  public function hydrate($donnees) {
+  public function hydrate(array $donnees) {
     foreach ($donnees as $attribut => $valeur) {
       $methode = 'set'.ucfirst($attribut);
       
@@ -59,7 +63,7 @@ class Post {
    * @return bool
    */
   public function isValid() {
-    return !(empty($this->auteur) || empty($this->titre) || empty($this->contenu));
+    return !(empty($this->titre) || empty($this->chapo) || empty($this->content));
   }
   
 
@@ -67,12 +71,24 @@ class Post {
   // SETTERS //
   /////////////
   
+  public function setId($id) {
+    $this->id = (int) $id;
+  }
+
+  public function setUserId($userId) {
+    $this->user_id = (int) $userId;
+  }
+
   public function setTitre($titre) {
     if (!is_string($titre) || empty($titre)) {
       $this->erreurs[] = self::TITRE_INVALIDE;
     } else {
       $this->titre = $titre;
     }
+  }
+  
+  public function setDateCreation(DateTime $dateCreation) {
+    $this->dateCreation = $dateCreation;
   }
   
   public function setDateModif(DateTime $dateModif) {
@@ -87,11 +103,11 @@ class Post {
     }
   }
   
-  public function setContenu($contenu) {
-    if (!is_string($contenu) || empty($contenu)) {
+  public function setContent($content) {
+    if (!is_string($content) || empty($content)) {
       $this->erreurs[] = self::CONTENU_INVALIDE;
     } else {
-      $this->contenu = $contenu;
+      $this->content = $content;
     }
   }
   
@@ -100,12 +116,28 @@ class Post {
   // GETTERS //
   /////////////
 
+  public function getErreurs() {
+    return $this->erreurs;
+  }
+
   public function getId() {
     return $this->id;
   }
   
+  public function getUserId() {
+    return $this->user_id;
+  }
+  
+  public function getAuteur() {
+    return $this->auteur;
+  }
+  
   public function getTitre() {
     return $this->titre;
+  }
+  
+  public function getDateCreation() {
+    return $this->dateCreation;
   }
   
   public function getDateModif() {
@@ -113,10 +145,10 @@ class Post {
   }
   
   public function getChapo() {
-    return $this->contenu;
+    return $this->chapo;
   }
   
-  public function getContenu() {
-    return $this->contenu;
+  public function getContent() {
+    return $this->content;
   }
 }
