@@ -28,11 +28,10 @@ class PostController {
   /**
    * @see PostManager::readPostAndComments($id)
    */
-  public function readPostAndComments($id, $commentManager) {
+  public function readPostAndComments($id) {
     // Lecture d'un post et de ses commentaires avec son post_id
     $post = $this->managerPost->getUniquePost($id);
-    $listComments = $commentManager->managerComment->getListComments($id);
-
+    
     require 'view/readPostAndCommentsView.php';
   }
 

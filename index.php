@@ -1,13 +1,10 @@
 <?php
 require 'model/autoload.php';
 require 'controller/postController.php';
-require 'controller/commentController.php';
 
 $db = DBFactory::getMysqlConnexionWithPDO();
 $managerPost = new PostManagerPDO($db);
 $postManager = new PostController($managerPost);
-$managerComment = new CommentManagerPDO($db);
-$commentManager = new CommentController($managerComment);
 
 try {
   if (isset($_GET['administration'])) {
@@ -40,27 +37,16 @@ try {
       $postManager->enterNewPost();
     }
     
-    if (isset($_GET['enter_comment'])) {
-      // Ajout d'un nouveau comment
-      $firstScreen = false;
-      $commentManager->enterNewComment($_GET['idPost']);
-    }
-    
     if (isset($_POST['add_post'])) {
       // Ici on connait l'administrateur
       $firstScreen = false;
       $postManager->addNewPost();
     }
     
-    if (isset($_POST['add_comment'])) {
-      $firstScreen = false;
-      $commentManager->addNewComment($_POST['idPost']);
-    }
-    
     if (isset($_GET['id'])) {
       // Lecture d'un post et de ses commentaires avec son post_id
       $firstScreen = false;
-      $postManager->readPostAndComments((int) $_GET['id'], $commentManager);
+      $postManager->readPostAndComments((int) $_GET['id']);
     }
     
     if (isset($_GET['idPost']) && isset($_GET['come_back_list_comment'])) {

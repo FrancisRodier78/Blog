@@ -8,14 +8,13 @@
 
   <p><a href="?enter_comment&idPost= <?= $post->getId() ?>">Saisir un commentaire</a></p>
 
-<?php
+<!-- ?php
 foreach ($listComments as $comment) {
 ?>
-  <!-- Affichage des commentaires du post -->
+  Affichage des commentaires du post
   <p><?= nl2br($comment['content'])?></p>
-<?php
 }
-?>
+? -->
 
   <p><a href="?come_back_list_posts">Retourner à la liste</a></p>
 <?php $content = ob_get_clean(); ?>
