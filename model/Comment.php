@@ -95,9 +95,9 @@ class Comment
         }
     }
 
-    public function setEtat($Int) 
+    public function setEtat($Char) 
     {
-        $this->etat = (int) $Int;
+        $this->etat = $Char;
     }
 
     /////////////

@@ -29,7 +29,7 @@ class CommentManagerPDO extends CommentManager
         $requete->bindValue(':user', $user);
         $requete->bindValue(':postId', $comment->getPostId());
         $requete->bindValue(':content', $comment->getContent());
-        $etat = 1;
+        $etat = 'En attente';
         $requete->bindValue(':etat', $etat);
 
         if (!$requete) {
@@ -95,7 +95,7 @@ class CommentManagerPDO extends CommentManager
      */
     public function getListNewComments() 
     {
-        $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.etat FROM comment AS C INNER JOIN user AS U ON U.id = C.user_id WHERE C.etat <> 3 ORDER BY C.id DESC'); 
+        $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.etat FROM comment AS C INNER JOIN user AS U ON U.id = C.user_id WHERE C.etat <> "Valider" ORDER BY C.id DESC'); 
      
         $requete->execute();
         
