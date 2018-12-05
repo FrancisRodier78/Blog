@@ -23,7 +23,7 @@ class CommentManagerPDO extends CommentManager
      */
     protected function addComment(Comment $comment) 
     {
-        $requete = $this->db->prepare('INSERT INTO comment(user_id, post_id, content, etat) VALUES(:user, :postId, :content, :etat)');
+        $requete = $this->db->prepare('INSERT INTO comment(user_id, post_id, content, etat, dateComment) VALUES(:user, :postId, :content, :etat, NOW())');
         
         $user = 1;
         $requete->bindValue(':user', $user);
@@ -63,7 +63,7 @@ class CommentManagerPDO extends CommentManager
      */
     public function getListComments($id) 
     {
-        $requete = $this->db->prepare('SELECT C.id, C.user_id, C.content FROM comment AS C INNER JOIN post AS P ON P.id = C.post_id WHERE C.post_id = :id ORDER BY C.id DESC');  
+        $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.dateComment FROM comment AS C INNER JOIN post AS P ON P.id = C.post_id INNER JOIN user AS U ON U.id = C.user_id WHERE C.post_id = :id AND C.etat = "Valider" ORDER BY C.id DESC');  
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
         
@@ -79,7 +79,7 @@ class CommentManagerPDO extends CommentManager
      */
     public function getUniqueComment($id) 
     {
-        $requete = $this->db->prepare('SELECT C.id, C.user_id, C.content FROM comment AS C WHERE C.id = :id');  
+        $requete = $this->db->prepare('SELECT C.id, C.user_id, C.content, C.dateComment FROM comment AS C WHERE C.id = :id');  
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
         
@@ -95,7 +95,7 @@ class CommentManagerPDO extends CommentManager
      */
     public function getListNewComments() 
     {
-        $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.etat FROM comment AS C INNER JOIN user AS U ON U.id = C.user_id WHERE C.etat <> "Valider" ORDER BY C.id DESC'); 
+        $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.etat, C.dateComment FROM comment AS C INNER JOIN user AS U ON U.id = C.user_id WHERE C.etat <> "Valider" ORDER BY C.id DESC'); 
      
         $requete->execute();
         
@@ -115,7 +115,7 @@ class CommentManagerPDO extends CommentManager
      */
     protected function updateComment(Comment $comment) 
     {
-        $requete = $this->db->prepare('UPDATE comment SET content = :content, etat = :etat WHERE id = :id');
+        $requete = $this->db->prepare('UPDATE comment SET content = :content, etat = :etat, dateComment = NOW() WHERE id = :id');
         
         $requete->bindValue(':id', $comment->getid(), PDO::PARAM_INT);
         $requete->bindValue(':content', $comment->getContent());

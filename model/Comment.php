@@ -12,7 +12,8 @@ class Comment
               $userId,
               $postId,
               $content,
-              $etat;
+              $etat,
+              $dateComment;
     
     /**
      * Constantes relatives aux erreurs possibles rencontrées lors de l'exécution de la méthode.
@@ -100,6 +101,11 @@ class Comment
         $this->etat = $Char;
     }
 
+    public function setdateComment($dateComment) 
+    {
+        $this->etat = $dateComment;
+    }
+
     /////////////
     // GETTERS //
     /////////////
@@ -137,5 +143,10 @@ class Comment
     public function getEtat() 
     {
         return $this->etat;
+    }
+
+    public function getdateComment() 
+    {
+        return $this->dateComment;
     }
 }

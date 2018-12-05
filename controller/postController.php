@@ -17,6 +17,15 @@ class PostController
     }
   
     /**
+    * @see PostManager::adminScreen()
+    */
+    public function adminScreen() 
+    {
+        // Lecture de l'ensemble des posts
+        require 'view/adminScreenView.php';    
+    }
+
+    /**
     * @see PostManager::adminPost()
     */
     public function adminPosts() 

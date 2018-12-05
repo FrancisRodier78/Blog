@@ -28,15 +28,6 @@ class CommentController
     }
 
     /**
-     * @see CommentManager::enterNewComment()
-     */
-    public function enterNewComment($idPost) 
-    {
-        // Saisie d'un nouveau comment
-        require 'view/enterNewCommentView.php';    
-    }
-
-    /**
      * @see CommentManager::addNewComment()
      */
     public function addNewComment($postId) 

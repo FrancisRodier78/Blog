@@ -13,12 +13,17 @@ $commentManager = new CommentController($managerComment);
 try {
     $firstScreen = true;
 
-    if (isset($_GET['administration']) && isset($_GET['posts'])) {
+    if (isset($_GET['administration'])) {
+        $firstScreen = false;
+        $postManager->adminScreen();
+    }
+      
+    if (isset($_GET['posts'])) {
         $firstScreen = false;
         $postManager->adminPosts();
     }
       
-    if (isset($_GET['administration']) && isset($_GET['comments'])) {
+    if (isset($_GET['comments'])) {
         $firstScreen = false;
         $commentManager->readAllNewComments();
     }
@@ -55,12 +60,6 @@ try {
         //$postManager->sendEmailPost($msg);
     }
     
-    if (isset($_GET['enter_comment'])) {
-        // Ajout d'un nouveau comment
-        $firstScreen = false;
-        $commentManager->enterNewComment($_GET['idPost']);
-    }
-    
     if (isset($_POST['add_post'])) {
         // Ici on connait l'administrateur
         $firstScreen = false;
@@ -78,11 +77,6 @@ try {
         $postManager->readPostAndComments((int) $_GET['id'], $commentManager);
     }
     
-    if (isset($_GET['idPost']) && isset($_GET['come_back_list_comment'])) {
-        $firstScreen = false;
-        $postManager->readPostAndComments((int) $_POST['idPost'], $commentManager);
-    }
-
     if ($firstScreen) {
         // Lecture de l'ensemble des posts
         $postManager->readAllPosts();
