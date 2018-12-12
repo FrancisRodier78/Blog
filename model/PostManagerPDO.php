@@ -1,73 +1,77 @@
 <?php
 
-class PostManagerPDO extends PostManager 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace Blog\model;
+
+class PostManagerPDO extends PostManager
 {
     /**
      * Attribut contenant l'instance représentant la BDD.
-     * @type PDO
+     *
+     * @var PDO
      */
     protected $db;
-    
+
     /**
      * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
+     *
      * @param $db PDO Le DAO
+     *
      * @return void
      */
-    public function __construct(PDO $db) 
+    public function __construct(PDO $db)
     {
         $this->db = $db;
     }
-    
-    /**
-     * @see PostManager::addPost()
-     */
-    protected function addPost(Post $post) 
-    {
-        $requete = $this->db->prepare('INSERT INTO post(user_id, titre, dateCreation, dateModif, chapo, content) VALUES(:user, :titre, NOW(), NOW(), :chapo, :content)');
-        
-        $user = 1;
-        $requete->bindValue(':user', $user);
-        $requete->bindValue(':titre', $post->getTitre());
-        $requete->bindValue(':chapo', $post->getChapo());
-        $requete->bindValue(':content', $post->getContent());
-        
-        $requete->execute();
-    }
-    
+
     /**
      * @see PostManager::countPost()
      */
-    public function countPost() 
+    public function countPost()
     {
         return $this->db->query('SELECT COUNT(*) FROM post')->fetchColumn();
     }
-    
+
     /**
      * @see PostManager::deletePost()
+     *
+     * @param mixed $id
      */
-    public function deletePost($id) 
+    public function deletePost($id)
     {
         $this->db->exec('DELETE FROM post WHERE id = '.(int) $id);
     }
-    
+
     /**
      * @see PostManager::getListPosts()
+     *
+     * @param mixed $debut
+     * @param mixed $limite
      */
-    public function getListPosts($debut = -1, $limite = -1) 
+    public function getListPosts($debut = -1, $limite = -1)
     {
         $sql = 'SELECT P.id, U.loggin AS auteur, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id ORDER BY P.id DESC';
-        
+
         // On vérifie l'intégrité des paramètres fournis.
-        if ($debut != -1 || $limite != -1) {
+        if (-1 !== $debut || -1 !== $limite) {
             $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
         }
-        
+
         $requete = $this->db->query($sql);
 
         // Par FETCH_CLASS on récupère un tableau d'objet et non un tableau de table.
         // Par FETCH_PROPS_LATE on force l'exécution du constructeur avant celui du contrôleur.
         $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
-        
+
         $listePost = $requete->fetchAll();
 
         // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates.
@@ -75,73 +79,62 @@ class PostManagerPDO extends PostManager
         foreach ($listePost as $post) {
             $post->setDateCreation(new DateTime($post->getDateCreation()));
             $post->setDateModif(new DateTime($post->getDateModif()));
-      }
-      
-      $requete->closeCursor();
-      
-      return $listePost;
+        }
+
+        $requete->closeCursor();
+
+        return $listePost;
     }
-    
+
     /**
      * @see PostManager::getUniquePost()
+     *
+     * @param mixed $id
      */
-    public function getUniquePost($id) 
+    public function getUniquePost($id)
     {
-        $requete = $this->db->prepare('SELECT P.id, P.user_id, U.name, U.firstname, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id WHERE P.id = :id');  
+        $requete = $this->db->prepare('SELECT P.id, P.user_id, U.name, U.firstname, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id WHERE P.id = :id');
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
-        
+
         $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
 
         $post = $requete->fetch();
 
         $post->setDateCreation(new DateTime($post->getDateCreation()));
         $post->setDateModif(new DateTime($post->getDateModif()));
-        
+
         return $post;
     }
-    
+
     /**
-     * @see PostManager::updatePost()
+     * @see PostManager::addPost()
      */
-    protected function updatePost(Post $post) 
+    protected function addPost(Post $post)
     {
-        $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
-        
-        $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
+        $requete = $this->db->prepare('INSERT INTO post(user_id, titre, dateCreation, dateModif, chapo, content) VALUES(:user, :titre, NOW(), NOW(), :chapo, :content)');
+
+        $user = 1;
+        $requete->bindValue(':user', $user);
         $requete->bindValue(':titre', $post->getTitre());
         $requete->bindValue(':chapo', $post->getChapo());
         $requete->bindValue(':content', $post->getContent());
-        
+
         $requete->execute();
     }
 
     /**
-     * @see PostManager::emailPost
-     * email pour prévenir le super-administrateur
+     * @see PostManager::updatePost()
      */
-    public function emailPost(string $msg) 
+    protected function updatePost(Post $post)
     {
-        //require_once '/path/to/vendor/autoload.php';
+        $requete = $this->db->prepare('UPDATE post SET titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
 
-        // Create the Transport
-        $transport = (new Swift_SmtpTransport('mail.yahoo.com', 25))
-          ->setUsername('francisrodier78')
-          ->setPassword('Monde1418')
-        ;
+        $requete->bindValue(':id', $post->getid(), PDO::PARAM_INT);
+        $requete->bindValue(':titre', $post->getTitre());
+        $requete->bindValue(':chapo', $post->getChapo());
+        $requete->bindValue(':content', $post->getContent());
 
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
-
-        // Create a message
-        $message = (new Swift_Message('Wonderful Subject'))
-          ->setFrom(['francisrodier78@yahoo.fr'])
-          ->setSubject('Test avec swift mailer')
-          ->setTo(['francisrodier78@yahoo.fr'])
-          ->setBody('Here is the message itself')
-          ;
-
-        // Send the message
-        $result = $mailer->send($message);      
+        $requete->execute();
     }
 }

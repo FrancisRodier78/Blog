@@ -1,92 +1,102 @@
 <?php
 
-/**
- * Classe représentant un post, créée à l'occasion d'un TP du tutoriel « La programmation orientée objet en PHP » disponible sur http://www.openclassrooms.com/
- * @author Francis Rodier.
- * @version 1.0
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
-class Post 
+
+namespace Blog\model;
+
+class Post
 {
-    protected $erreurs = [],
-              $id,
-              $userId,
-              $auteur,
-              $titre,
-              $dateCreation,
-              $dateModif,
-              $chapo,
-              $content;
-    
     /**
      * Constantes relatives aux erreurs possibles rencontrées lors de l'exécution de la méthode.
      */
     const TITRE_INVALIDE = 1;
     const CHAPO_INVALIDE = 2;
     const CONTENU_INVALIDE = 3;
-    
-    
+    protected $erreurs = [];
+    protected $id;
+    protected $userId;
+    protected $auteur;
+    protected $titre;
+    protected $dateCreation;
+    protected $dateModif;
+    protected $chapo;
+    protected $content;
+
     /**
      * Constructeur de la classe qui assigne les données spécifiées en paramètre aux attributs correspondants.
+     *
      * @param $valeurs array Les valeurs à assigner
+     *
      * @return void
      */
-    public function __construct(array $valeurs = []) 
+    public function __construct(array $valeurs = [])
     {
         if (!empty($valeurs)) { // Si on a spécifié des valeurs, alors on hydrate l'objet.
             $this->hydrate($valeurs);
         }
     }
-    
+
     /**
      * Méthode assignant les valeurs spécifiées aux attributs correspondant.
+     *
      * @param $donnees array Les données à assigner
+     *
      * @return void
      */
-    public function hydrate(array $donnees) 
+    public function hydrate(array $donnees)
     {
         foreach ($donnees as $attribut => $valeur) {
             $methode = 'set'.ucfirst($attribut);
-            
+
             if (is_callable([$this, $methode])) {
-                $this->$methode($valeur);
+                $this->{$methode}($valeur);
             }
-          }
+        }
     }
-    
+
     /**
      * Méthode permettant de savoir si le post est nouveau.
+     *
      * @return bool
      */
-    public function isNew() 
+    public function isNew()
     {
         return empty($this->id);
     }
-    
+
     /**
      * Méthode permettant de savoir si le post est valide.
+     *
      * @return bool
      */
-    public function isValid() 
+    public function isValid()
     {
         return !(empty($this->titre) || empty($this->chapo) || empty($this->content));
     }
-    
 
     /////////////
     // SETTERS //
     /////////////
-    
-    public function setId($id) 
+
+    public function setId($id)
     {
         $this->id = (int) $id;
     }
 
-    public function setUserId($userId) 
+    public function setUserId($userId)
     {
         $this->user_id = (int) $userId;
     }
 
-    public function setTitre($titre) 
+    public function setTitre($titre)
     {
         if (!is_string($titre) || empty($titre)) {
             $this->erreurs[] = self::TITRE_INVALIDE;
@@ -94,18 +104,18 @@ class Post
             $this->titre = $titre;
         }
     }
-    
-    public function setDateCreation(DateTime $dateCreation) 
+
+    public function setDateCreation(DateTime $dateCreation)
     {
         $this->dateCreation = $dateCreation;
     }
-    
-    public function setDateModif(DateTime $dateModif) 
+
+    public function setDateModif(DateTime $dateModif)
     {
         $this->dateModif = $dateModif;
     }
-    
-    public function setChapo($chapo) 
+
+    public function setChapo($chapo)
     {
         if (!is_string($chapo) || empty($chapo)) {
             $this->erreurs[] = self::CHAPO_INVALIDE;
@@ -113,8 +123,8 @@ class Post
             $this->chapo = $chapo;
         }
     }
-    
-    public function setContent($content) 
+
+    public function setContent($content)
     {
         if (!is_string($content) || empty($content)) {
             $this->erreurs[] = self::CONTENU_INVALIDE;
@@ -122,53 +132,52 @@ class Post
             $this->content = $content;
         }
     }
-    
-    
+
     /////////////
     // GETTERS //
     /////////////
 
-    public function getErreurs() 
+    public function getErreurs()
     {
         return $this->erreurs;
     }
 
-    public function getId() 
+    public function getId()
     {
         return $this->id;
     }
-    
-    public function getUserId() 
+
+    public function getUserId()
     {
         return $this->user_id;
     }
-    
-    public function getAuteur() 
+
+    public function getAuteur()
     {
         return $this->auteur;
     }
-    
-    public function getTitre() 
+
+    public function getTitre()
     {
         return $this->titre;
     }
-    
-    public function getDateCreation() 
+
+    public function getDateCreation()
     {
         return $this->dateCreation;
     }
-    
-    public function getDateModif() 
+
+    public function getDateModif()
     {
         return $this->dateModif;
     }
-    
-    public function getChapo() 
+
+    public function getChapo()
     {
         return $this->chapo;
     }
-    
-    public function getContent() 
+
+    public function getContent()
     {
         return $this->content;
     }

@@ -7,7 +7,7 @@
     <meta name="description" content="Blog pour me présenter">
     <meta name="author" content="Francis Rodier">
 
-    <title><?= $title ?></title>
+    <title><?php echo $title; ?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <p>Ceci est un blog afin de présenter mes passe-temps préférés. Comme le chanbara et les jeux de rôles.</p>
-                    <?= $content ?>
+                    <?php echo $content; ?>
                 </div>
             </div>
         </div>

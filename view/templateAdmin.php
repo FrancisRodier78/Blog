@@ -7,7 +7,7 @@
     	<meta name="description" content="Administration de mon Blog">
     	<meta name="author" content="Francis Rodier">
 
-    	<title><?= $title ?></title>
+    	<title><?php echo $title; ?></title>
 
     	<!-- Bootstrap Core CSS -->
     	<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -29,6 +29,6 @@
     </head>
         
     <body class="administration" >
-        <?= $content ?>
+        <?php echo $content; ?>
     </body>
 </html>

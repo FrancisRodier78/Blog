@@ -7,5 +7,5 @@
     <p><a href="?comments">Accéder à l'espace d'administration comment</a></p>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('templateAdmin.php'); ?>
+<?php require 'templateAdmin.php'; ?>
 
