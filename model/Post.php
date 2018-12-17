@@ -11,6 +11,7 @@
  */
 
 namespace Blog\model;
+use \PDO;
 
 class Post
 {
@@ -105,12 +106,12 @@ class Post
         }
     }
 
-    public function setDateCreation(DateTime $dateCreation)
+    public function setDateCreation(\DateTime $dateCreation)
     {
         $this->dateCreation = $dateCreation;
     }
 
-    public function setDateModif(DateTime $dateModif)
+    public function setDateModif(\DateTime $dateModif)
     {
         $this->dateModif = $dateModif;
     }

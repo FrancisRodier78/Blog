@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
     <form action="." method="post">
-        <p style="text-align: center">
+        <p style="text-align: center" class="inputComment">
             Titre : <input type="text" name="titre" value="<?php echo $post->getTitre(); ?>" /><br />
             Chapo : <input type="text" name="chapo" value="<?php echo $post->getChapo(); ?>" /><br />
             Contenu : <input type="textarea rows="8" cols="60" name="content" value="<?php echo $post->getContent(); ?>" /><br />

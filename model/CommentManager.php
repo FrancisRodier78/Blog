@@ -11,6 +11,7 @@
  */
 
 namespace Blog\model;
+use \PDO;
 
 abstract class CommentManager
 {

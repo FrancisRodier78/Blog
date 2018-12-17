@@ -11,6 +11,7 @@
  */
 
 namespace Blog\model;
+use \PDO;
 
 class Comment
 {
@@ -155,7 +156,7 @@ class Comment
         return $this->etat;
     }
 
-    public function getdateComment()
+    public function getDateComment()
     {
         return $this->dateComment;
     }

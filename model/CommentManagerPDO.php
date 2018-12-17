@@ -11,6 +11,9 @@
  */
 
 namespace Blog\model;
+use \PDO;
+use \Blog\model\CommentManager;
+use \Blog\model\Comment;
 
 class CommentManagerPDO extends CommentManager
 {
@@ -64,7 +67,7 @@ class CommentManagerPDO extends CommentManager
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
 
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comments');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Comment');
 
         return $requete->fetchAll();
     }
@@ -80,7 +83,7 @@ class CommentManagerPDO extends CommentManager
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
 
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Comment');
 
         return $requete->fetch();
     }
@@ -96,7 +99,7 @@ class CommentManagerPDO extends CommentManager
 
         // Par FETCH_CLASS on récupère un tableau d'objet et non un tableau de table.
         // Par FETCH_PROPS_LATE on force l'exécution du constructeur avant celui du contrôleur.
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Comment');
 
         $listComments = $requete->fetchAll();
 

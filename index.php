@@ -13,8 +13,8 @@ use \Blog\model\Comment;
 
 $db = DBFactory::getMysqlConnexionWithPDO();
 $managerPost = new PostManagerPDO($db);
-$postController = new PostController($managerPost);
 $managerComment = new CommentManagerPDO($db);
+$postController = new PostController($managerPost,$managerComment);
 $commentController = new CommentController($managerComment);
 
 try {
@@ -81,7 +81,7 @@ try {
     if (isset($_GET['id'])) {
         // Lecture d'un post et de ses commentaires avec son post_id
         $firstScreen = false;
-        $postController->readPostAndComments((int) $_GET['id'], $commentManager);
+        $postController->readPostAndComments((int) $_GET['id'], $managerComment);
     }
     
     if ($firstScreen) {

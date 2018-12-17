@@ -20,8 +20,8 @@
     foreach ($listComments as $comment) {
         ?>
         <!-- Affichage des commentaires du post -->
-        <p><label>Auteur &nbsp;: &nbsp;</label><?php echo nl2br($comment['auteur']); ?><label>,&nbsp; Date du commentaire &nbsp;: &nbsp;</label><?php echo nl2br($comment['dateComment']); ?></p>
-        <p><?php echo nl2br($comment['content']); ?></p>
+        <p><label>Auteur &nbsp;: &nbsp;</label><?php echo nl2br($comment->getAuteur()); ?><label>,&nbsp; Date du commentaire &nbsp;: &nbsp;</label><?php echo nl2br($comment->getDateComment()); ?></p>
+        <p><?php echo nl2br($comment->getContent()); ?></p>
     <?php
     }
     ?>

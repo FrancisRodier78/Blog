@@ -11,6 +11,12 @@
  */
 
 namespace Blog\controller;
+use \PDO;
+use \Blog\model\PostManagerPDO;
+use \Blog\model\CommentManagerPDO;
+use \Blog\model\PostManager;
+use \Blog\model\CommentManager;
+use \Blog\model\Comment;
 
 class commentController
 {

@@ -11,6 +11,9 @@
  */
 
 namespace Blog\model;
+use \PDO;
+use \Blog\model\PostManager;
+use \Blog\model\Post;
 
 class PostManagerPDO extends PostManager
 {
@@ -70,15 +73,15 @@ class PostManagerPDO extends PostManager
 
         // Par FETCH_CLASS on récupère un tableau d'objet et non un tableau de table.
         // Par FETCH_PROPS_LATE on force l'exécution du constructeur avant celui du contrôleur.
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Post');
 
         $listePost = $requete->fetchAll();
 
         // On parcourt notre liste de post pour pouvoir placer des instances de DateTime en guise de dates.
         // On passe d'une date typé SQL à une date typé DateTime.
         foreach ($listePost as $post) {
-            $post->setDateCreation(new DateTime($post->getDateCreation()));
-            $post->setDateModif(new DateTime($post->getDateModif()));
+            $post->setDateCreation(new \DateTime($post->getDateCreation()));
+            $post->setDateModif(new \DateTime($post->getDateModif()));
         }
 
         $requete->closeCursor();
@@ -97,12 +100,12 @@ class PostManagerPDO extends PostManager
         $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $requete->execute();
 
-        $requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Post');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Post');
 
         $post = $requete->fetch();
 
-        $post->setDateCreation(new DateTime($post->getDateCreation()));
-        $post->setDateModif(new DateTime($post->getDateModif()));
+        $post->setDateCreation(new \DateTime($post->getDateCreation()));
+        $post->setDateModif(new \DateTime($post->getDateModif()));
 
         return $post;
     }
