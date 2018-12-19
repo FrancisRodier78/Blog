@@ -13,4 +13,4 @@
 	<p><a href="?come_back_list_posts">Retourner à l'accueil</a></p>
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'template.php'; ?>
+<?php require 'templateAdmin.php'; ?>

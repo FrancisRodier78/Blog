@@ -101,7 +101,7 @@ class postController
     public function addNewPost()
     {
         // Ajout d'un nouveau post
-        if (isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
+        if (strlen($_POST['titre']) <= 100 && strlen($_POST['chapo']) <= 100 && strlen($_POST['content']) <= 255 && isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
             $post = new Post([
                 'titre' => htmlspecialchars($_POST['titre']),
                 'chapo' => htmlspecialchars($_POST['chapo']),
@@ -113,11 +113,18 @@ class postController
 
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
 
-                // header('Location: http://localhost/blog/?id= 1');
-                header('Location: http://localhost/blog');
+                $num = $this->managerPost->countPost();
+                $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+                require 'view/adminPostsView.php';
             } else {
                 $erreurs = $post->getErreurs();
             }
+        } else {
+            $num = $this->managerPost->countPost();
+            $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+            require 'view/adminPostsView.php';
         }
     }
 
@@ -129,6 +136,10 @@ class postController
     public function deletePost($id)
     {
         $this->managerPost->deletePost($id);
+        $num = $this->managerPost->countPost();
+        $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+        require 'view/adminPostsView.php';
     }
 
     /**
@@ -153,7 +164,7 @@ class postController
         // Modification d'un post
         $post = $this->managerPost->getUniquePost($id);
 
-        if (isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
+        if (strlen($_POST['titre']) <= 100 && strlen($_POST['chapo']) <= 100 && strlen($_POST['content']) <= 255 && isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
             $post->setTitre(htmlspecialchars($_POST['titre']));
             $post->setChapo(htmlspecialchars($_POST['chapo']));
             $post->setContent(htmlspecialchars($_POST['content']));
@@ -163,10 +174,18 @@ class postController
 
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
 
-                header('Location: http://localhost/blog');
+                $num = $this->managerPost->countPost();
+                $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+                require 'view/adminPostsView.php';
             } else {
                 $erreurs = $post->erreurs();
             }
+        } else {
+            $num = $this->managerPost->countPost();
+            $arrayPost = $this->managerPost->getListPosts(0, $num);
+
+            require 'view/adminPostsView.php';
         }
     }
 

@@ -3,6 +3,8 @@
 <?php ob_start(); ?>
     <p class="administration"><a href="?administration">Accéder à l'espace administration</a></p>
 
+	<p><a href="?enter_post">Saisir un nouveau post</a></p>
+
 	<h2 style="text-align:center" class="administration">Liste des <?php echo $num; ?> derniers post</h2>
 
 	<table style="margin:auto" class="administration">
