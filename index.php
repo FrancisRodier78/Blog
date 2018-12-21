@@ -1,34 +1,18 @@
 <?php
-//session_start();
+session_start();
 
-//if(!isset($_COOKIE["ketto"])) {
-//    var_dump("ketto");
-//    $cookie_name = "ketto";
-    // On génère quelque chose d'aléatoire
-//    $ketto = session_id().microtime().rand(0,9999999999);
+$cookie_name = "ketto";
+// On génère quelque chose d'aléatoire
+$ketto = session_id().microtime().rand(0,9999999999);
 
-    // on hash pour avoir quelque chose de propre qui aura toujours la même forme
-//    $ketto = hash('sha512', $ketto);
+// on hash pour avoir quelque chose de propre qui aura toujours la même forme
+$ketto = hash('sha512', $ketto);
 
-    // On enregistre des deux cotés
-//    setcookie($cookie_name, $ketto, time() + (60 * 20)); // Expire au bout de 20 min
-//    var_dump($_COOKIE[$cookie_name]);
+// On enregistre des deux cotés
+setcookie($cookie_name, $ketto, time() + (60 * 20)); // Expire au bout de 20 min
+$_COOKIE['ketto'] = $ketto;
 
-//    $_SESSION['ketto'] = $ketto;
-//} else {
-//    if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
-        // C'est reparti pour un tour
-//        $ketto = session_id().microtime().rand(0,9999999999);
-//        $ketto = hash('sha512', $ketto);
-//        $_COOKIE['ketto'] = $ketto;
-//        $_SESSION['ketto'] = $ketto;
-//    } else {
-        // On détruit la session
-//        $_SESSION = array();
-//        session_destroy();
-//        header('location:index.php');
-//    }
-//}
+$_SESSION['ketto'] = $ketto;
 
 require 'vendor/autoload.php';
 
