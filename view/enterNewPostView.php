@@ -28,4 +28,8 @@ if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
 	<p><a href="?come_back_list_posts">Retourner à l'accueil</a></p>
 <?php $content = ob_get_clean(); ?>
 
+<<<<<<< HEAD
 <?php require 'templateAdmin.php'; ?>
+=======
+<?php require 'template.php'; ?>
+>>>>>>> decf2f6cb940de490a2cd4fb45622dea4612d5b7
