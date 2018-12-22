@@ -73,22 +73,22 @@ class commentController
     /**
      * @see CommentManager::deleteComment()
      *
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function deleteComment($id)
+    public function deleteComment($idComment)
     {
-        $this->managerComment->deleteComment($id);
+        $this->managerComment->deleteComment($idComment);
     }
 
     /**
      * @see CommentManager::changeComment()
      *
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function changeComment($id)
+    public function changeComment($idComment)
     {
         // Modification d'un comment
-        $comment = $this->managerComment->getUniqueComment($id);
+        $comment = $this->managerComment->getUniqueComment($idComment);
 
         if (isset($_GET['etat'])) {
             $comment->setEtat(htmlspecialchars($_GET['etat']));

@@ -215,7 +215,7 @@ if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
                             <br>France</p>
                     </div>
                     <div class="footer-col col-md-3">
-                        <h3>Around the Web</h3>
+                        <h3>Autour du Web</h3>
                         <ul class="list-inline">
                             <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>

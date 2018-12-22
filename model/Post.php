@@ -22,7 +22,7 @@ class Post
     const CHAPO_INVALIDE = 2;
     const CONTENU_INVALIDE = 3;
     protected $erreurs = [];
-    protected $id;
+    protected $idPost;
     protected $userId;
     protected $auteur;
     protected $titre;
@@ -87,9 +87,9 @@ class Post
     // SETTERS //
     /////////////
 
-    public function setId($id)
+    public function setId($idPost)
     {
-        $this->id = (int) $id;
+        $this->id = (int) $idPost;
     }
 
     public function setUserId($userId)

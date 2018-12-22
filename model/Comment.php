@@ -20,7 +20,7 @@ class Comment
      */
     const CONTENU_COMMENT_INVALIDE = 4;
     protected $erreurs = [];
-    protected $id;
+    protected $idComment;
     protected $userId;
     protected $postId;
     protected $content;
@@ -83,14 +83,14 @@ class Comment
     // SETTERS //
     /////////////
 
-    public function setId($id)
+    public function setId($idComment)
     {
-        $this->id = (int) $id;
+        $this->id = (int) $idComment;
     }
 
-    public function setUserId($id)
+    public function setUserId($idComment)
     {
-        $this->id = (int) $id;
+        $this->id = (int) $idComment;
     }
 
     public function setPostId($postId)

@@ -47,11 +47,11 @@ class PostManagerPDO extends PostManager
     /**
      * @see PostManager::deletePost()
      *
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function deletePost($id)
+    public function deletePost($idPost)
     {
-        $this->db->exec('DELETE FROM post WHERE id = '.(int) $id);
+        $this->db->exec('DELETE FROM post WHERE id = '.(int) $idPost);
     }
 
     /**
@@ -92,12 +92,12 @@ class PostManagerPDO extends PostManager
     /**
      * @see PostManager::getUniquePost()
      *
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function getUniquePost($id)
+    public function getUniquePost($idPost)
     {
         $requete = $this->db->prepare('SELECT P.id, P.user_id, U.name, U.firstname, P.titre, P.dateCreation, P.dateModif, P.chapo, P.content FROM post AS P INNER JOIN user AS U ON U.id = P.user_id WHERE P.id = :id');
-        $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idPost, PDO::PARAM_INT);
         $requete->execute();
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Post');

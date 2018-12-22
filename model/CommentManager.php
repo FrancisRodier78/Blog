@@ -25,31 +25,31 @@ abstract class CommentManager
     /**
      * Méthode permettant de supprimer un comment.
      *
-     * @param $id int L'identifiant du comment à supprimer
+     * @param $idComment int L'identifiant du comment à supprimer
      *
      * @return void
      */
-    abstract public function deleteComment($id);
+    abstract public function deleteComment($idComment);
 
     /**
      * Méthode retournant une liste de comments demandés.
      *
      * @param $debut int Le premier comment à sélectionner
      * @param $limite int Le nombre de comment à sélectionner
-     * @param mixed $id
+     * @param mixed $idComment
      *
      * @return array La liste des comments. Chaque entrée est une instance de Comment.
      */
-    abstract public function getListComments($id);
+    abstract public function getListComments($idComment);
 
     /**
      * Méthode retournant un comment précis.
      *
-     * @param $id int L'identifiant du comment à récupérer
+     * @param $idComment int L'identifiant du comment à récupérer
      *
      * @return Comment Le comment demandé
      */
-    abstract public function getUniqueComment($id);
+    abstract public function getUniqueComment($idComment);
 
     /**
      * Méthode permettant d'enregistrer un comment.

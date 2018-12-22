@@ -25,11 +25,11 @@ abstract class PostManager
     /**
      * Méthode permettant de supprimer un post.
      *
-     * @param $id int L'identifiant du post à supprimer
+     * @param $idPost int L'identifiant du post à supprimer
      *
      * @return void
      */
-    abstract public function deletePost($id);
+    abstract public function deletePost($idPost);
 
     /**
      * Méthode retournant une liste de posts demandés.
@@ -44,11 +44,11 @@ abstract class PostManager
     /**
      * Méthode retournant un post précis.
      *
-     * @param $id int L'identifiant du post à récupérer
+     * @param $idPost int L'identifiant du post à récupérer
      *
      * @return Post Le post demandé
      */
-    abstract public function getUniquePost($id);
+    abstract public function getUniquePost($idPost);
 
     /**
      * Méthode permettant d'enregistrer un post.

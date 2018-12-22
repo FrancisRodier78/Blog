@@ -53,16 +53,16 @@ class PostController
         require 'view/adminPostsView.php';
     }
     /**
-     * @see PostManager::readPostAndComments($id)
+     * @see PostManager::readPostAndComments($idPost)
      *
-     * @param mixed $id
+     * @param mixed $idPost
      * @param mixed $commentManager
      */
-    public function readPostAndComments($id)
+    public function readPostAndComments($idPost)
     {
         // Lecture d'un post et de ses commentaires avec son post_id
-        $post = $this->managerPost->getUniquePost($id);
-        $listComments = $this->managerComment->getListComments($id);
+        $post = $this->managerPost->getUniquePost($idPost);
+        $listComments = $this->managerComment->getListComments($idPost);
         require 'view/readPostAndCommentsView.php';
     }
     /**
@@ -109,11 +109,11 @@ class PostController
     /**
      * @see PostManager::deletePost()
      *
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function deletePost($id)
+    public function deletePost($idPost)
     {
-        $this->managerPost->deletePost($id);
+        $this->managerPost->deletePost($idPost);
 
         $num = $this->managerPost->countPost();
         $arrayPost = $this->managerPost->getListPosts(0, $num);
@@ -122,22 +122,22 @@ class PostController
     /**
      * @see PostManager::viewPost()
      *
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function viewPost($id)
+    public function viewPost($idPost)
     {
-        $post = $this->managerPost->getUniquePost($id);
+        $post = $this->managerPost->getUniquePost($idPost);
         require 'view/viewPostView.php';
     }
     /**
      * @see PostManager::changePost()
      *
-     * @param mixed $id
+     * @param mixed $idPost
      */
-    public function changePost($id)
+    public function changePost($idPost)
     {
         // Modification d'un post
-        $post = $this->managerPost->getUniquePost($id);
+        $post = $this->managerPost->getUniquePost($idPost);
         if (isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
             $post->setTitre(htmlspecialchars($_POST['titre']));
             $post->setChapo(htmlspecialchars($_POST['chapo']));
@@ -152,14 +152,5 @@ class PostController
                 $erreurs = $post->erreurs();
             }
         }
-    }
-    /**
-     * @see PostManager::sendEmailPost()
-     *
-     * @param mixed $msg
-     */
-    public function sendEmailPost($msg)
-    {
-        $this->managerPost->EmailPost($msg);
     }
 }

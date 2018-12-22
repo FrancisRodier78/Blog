@@ -49,22 +49,22 @@ class CommentManagerPDO extends CommentManager
     /**
      * @see CommentManager::deleteComment()
      *
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function deleteComment($id)
+    public function deleteComment($idComment)
     {
-        $this->db->exec('DELETE FROM comment WHERE id = '.(int) $id);
+        $this->db->exec('DELETE FROM comment WHERE id = '.(int) $idComment);
     }
 
     /**
      * @see CommentManager::getListComments()
      *
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function getListComments($id)
+    public function getListComments($idComment)
     {
         $requete = $this->db->prepare('SELECT C.id, U.loggin AS auteur, C.content, C.dateComment FROM comment AS C INNER JOIN post AS P ON P.id = C.post_id INNER JOIN user AS U ON U.id = C.user_id WHERE C.post_id = :id AND C.etat = "Valider" ORDER BY C.id DESC');
-        $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idComment, PDO::PARAM_INT);
         $requete->execute();
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Comment');
@@ -75,12 +75,12 @@ class CommentManagerPDO extends CommentManager
     /**
      * @see CommentManager::getUniqueComment()
      *
-     * @param mixed $id
+     * @param mixed $idComment
      */
-    public function getUniqueComment($id)
+    public function getUniqueComment($idComment)
     {
         $requete = $this->db->prepare('SELECT C.id, C.user_id, C.content, C.dateComment FROM comment AS C WHERE C.id = :id');
-        $requete->bindValue(':id', (int) $id, PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idComment, PDO::PARAM_INT);
         $requete->execute();
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Comment');
