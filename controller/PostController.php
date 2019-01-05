@@ -24,6 +24,7 @@ class PostController
      */
     protected $managerPost;
     protected $managerComment;
+
     /**
      * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
      *
@@ -34,6 +35,11 @@ class PostController
         $this->managerPost = $managerPost;
         $this->managerComment = $managerComment;
     }
+
+    private function render($screen, $post, $listComments){
+        require $screen;
+    }
+
     /**
      * @see PostManager::adminScreen()
      */
@@ -63,7 +69,8 @@ class PostController
         // Lecture d'un post et de ses commentaires avec son post_id
         $post = $this->managerPost->getUniquePost($idPost);
         $listComments = $this->managerComment->getListComments($idPost);
-        require 'view/readPostAndCommentsView.php';
+        $screen = 'view/readPostAndCommentsView.php';
+        $this->render($screen, $post, $listComments);
     }
     /**
      * @see PostManager::readAllPosts()
