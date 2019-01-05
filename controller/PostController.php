@@ -36,7 +36,7 @@ class PostController
         $this->managerComment = $managerComment;
     }
 
-    private function render($screen, $post, $listComments){
+    private function render($screen, $varA = 0, $listA = []) {
         require $screen;
     }
 
@@ -46,7 +46,8 @@ class PostController
     public function adminScreen()
     {
         // Lecture de l'ensemble des posts
-        require 'view/adminScreenView.php';
+        $screen = 'view/adminScreenView.php';
+        $this->render($screen);
     }
     /**
      * @see PostManager::adminPost()
@@ -56,7 +57,8 @@ class PostController
         // Lecture de l'ensemble des posts
         $num = $this->managerPost->countPost();
         $arrayPost = $this->managerPost->getListPosts(0, $num);
-        require 'view/adminPostsView.php';
+        $screen = 'view/adminPostsView.php';
+        $this->render($screen, $num, $arrayPost);
     }
     /**
      * @see PostManager::readPostAndComments($idPost)
@@ -80,7 +82,8 @@ class PostController
         // Lecture de l'ensemble des posts
         $num = $this->managerPost->countPost();
         $arrayPost = $this->managerPost->getListPosts(0, $num);
-        require 'view/readAllPostsView.php';
+        $screen = 'view/readAllPostsView.php';
+        $this->render($screen, $num, $arrayPost);
     }
     /**
      * @see PostManager::enterNewPost()
@@ -88,7 +91,8 @@ class PostController
     public function enterNewPost()
     {
         // Saisie d'un nouveau post
-        require 'view/enterNewPostView.php';
+        $screen = 'view/enterNewPostView.php';
+        $this->render($screen);
     }
     /**
      * @see PostManager::addNewPost()
@@ -107,7 +111,8 @@ class PostController
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
                 $num = $this->managerPost->countPost();
                 $arrayPost = $this->managerPost->getListPosts(0, $num);
-                require 'view/adminPostsView.php';
+                $screen = 'view/adminPostsView.php';
+                $this->render($screen, $num, $arrayPost);
             } else {
                 $erreurs = $post->getErreurs();
             }
@@ -124,7 +129,8 @@ class PostController
 
         $num = $this->managerPost->countPost();
         $arrayPost = $this->managerPost->getListPosts(0, $num);
-        require 'view/adminPostsView.php';
+        $screen = 'view/adminPostsView.php';
+        $this->render($screen, $num, $arrayPost);
     }
     /**
      * @see PostManager::viewPost()
@@ -134,7 +140,8 @@ class PostController
     public function viewPost($idPost)
     {
         $post = $this->managerPost->getUniquePost($idPost);
-        require 'view/viewPostView.php';
+        $screen = 'view/viewPostView.php';
+        $this->render($screen, $post);
     }
     /**
      * @see PostManager::changePost()
@@ -154,7 +161,8 @@ class PostController
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
                 $num = $this->managerPost->countPost();
                 $arrayPost = $this->managerPost->getListPosts(0, $num);
-                require 'view/adminPostsView.php';
+                $screen = 'view/adminPostsView.php';
+                $this->render($screen, $num, $arrayPost);
             } else {
                 $erreurs = $post->erreurs();
             }

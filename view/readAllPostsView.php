@@ -18,11 +18,11 @@ if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
 <?php ob_start(); ?>
 	<p><a href="?enter_post">Saisir un nouveau post</a></p>
 
-	<h2 style="text-align:center">Liste des <?php echo $num; ?> derniers posts</h2>
+	<h2 style="text-align:center">Liste des <?php echo $varA; ?> derniers posts</h2>
 
     <div class="post">
 	<?php
-    foreach ($this->managerPost->getListPosts(0, $num) as $post) {
+    foreach ($listA as $post) {
         if (strlen($post->getContent()) <= 200) {
             $elementContent = $post->getContent();
         } else {
