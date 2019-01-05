@@ -151,7 +151,8 @@ class PostController
     public function changePost($idPost)
     {
         // Modification d'un post
-        $post = $this->managerPost->getUniquePost($idPost);
+        $idPostcontrolled = htmlspecialchars($idPost));
+        $post = $this->managerPost->getUniquePost($idPostcontrolled);
         if (isset($_POST['titre'], $_POST['chapo'], $_POST['content'])) {
             $post->setTitre(htmlspecialchars($_POST['titre']));
             $post->setChapo(htmlspecialchars($_POST['chapo']));

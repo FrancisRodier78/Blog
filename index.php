@@ -1,22 +1,8 @@
 <?php
-session_start();
-
-$cookie_name = "ketto";
-// On génère quelque chose d'aléatoire
-$ketto = session_id().microtime().rand(0,9999999999);
-
-// on hash pour avoir quelque chose de propre qui aura toujours la même forme
-$ketto = hash('sha512', $ketto);
-
-// On enregistre des deux cotés
-setcookie($cookie_name, $ketto, time() + (60 * 20)); // Expire au bout de 20 min
-$_COOKIE['ketto'] = $ketto;
-
-$_SESSION['ketto'] = $ketto;
-
 require 'vendor/autoload.php';
 
 use \Blog\model\DBFactory;
+use \Blog\model\SessionCookie;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;
 use \Blog\model\CommentManagerPDO;
@@ -26,6 +12,8 @@ use \Blog\model\CommentManager;
 use \Blog\model\Post;
 use \Blog\model\Comment;
 
+$controlqqq = new Control($cookie_name, $ketto);
+$controlqqq->initSession();
 $db = DBFactory::getMysqlConnexionWithPDO();
 $managerPost = new PostManagerPDO($db);
 $managerComment = new CommentManagerPDO($db);
@@ -101,6 +89,7 @@ try {
     }
     
     if ($firstScreen) {
+        // Ecran par défaut
         // Lecture de l'ensemble des posts
         $postController->readAllPosts();
     }

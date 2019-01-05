@@ -88,7 +88,8 @@ class commentController
     public function changeComment($idComment)
     {
         // Modification d'un comment
-        $comment = $this->managerComment->getUniqueComment($idComment);
+        $idCommentControlled = htmlspecialchars($idComment);
+        $comment = $this->managerComment->getUniqueComment($idCommentControlled);
 
         if (isset($_GET['etat'])) {
             $comment->setEtat(htmlspecialchars($_GET['etat']));
