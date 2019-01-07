@@ -12,8 +12,8 @@ use \Blog\model\CommentManager;
 use \Blog\model\Post;
 use \Blog\model\Comment;
 
-$controlqqq = new Control($cookie_name, $ketto);
-$controlqqq->initSession();
+$control = new Control($cookie_name, $ketto);
+$control->initSession();
 $db = DBFactory::getMysqlConnexionWithPDO();
 $managerPost = new PostManagerPDO($db);
 $managerComment = new CommentManagerPDO($db);
