@@ -1,16 +1,7 @@
 <?php 
-if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
-    // C'est reparti pour un tour
-    $ketto = session_id().microtime().rand(0,9999999999);
-    $ketto = hash('sha512', $ketto);
-    $_COOKIE['ketto'] = $ketto;
-    $_SESSION['ketto'] = $ketto;
-} else {
-    // On détruit la session
-    $_SESSION = array();
-    session_destroy();
-    header('location:index.php');
-}
+use \Blog\App;
+
+App::newTurn();
 ?>
 
 <?php $title = 'Administration'; ?>

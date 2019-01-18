@@ -2,7 +2,8 @@
 require 'vendor/autoload.php';
 
 use \Blog\model\DBFactory;
-use \Blog\model\SessionCookie;
+use \Blog\App;
+use \Blog\controller\CommonController;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;
 use \Blog\model\CommentManagerPDO;
@@ -12,13 +13,16 @@ use \Blog\model\CommentManager;
 use \Blog\model\Post;
 use \Blog\model\Comment;
 
-$control = new Control($cookie_name, $ketto);
-$control->initSession();
+App::load();
+
 $db = DBFactory::getMysqlConnexionWithPDO();
+$screen = '';
+$tab = [];
+$common = new CommonController($screen,$tab);
 $managerPost = new PostManagerPDO($db);
 $managerComment = new CommentManagerPDO($db);
-$postController = new PostController($managerPost,$managerComment);
-$commentController = new CommentController($managerComment);
+$postController = new PostController($managerPost,$managerComment,$common);
+$commentController = new CommentController($managerComment,$common);
 
 try {
     $firstScreen = true;

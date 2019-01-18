@@ -1,16 +1,7 @@
 <?php 
-if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
-    // C'est reparti pour un tour
-    $ketto = session_id().microtime().rand(0,9999999999);
-    $ketto = hash('sha512', $ketto);
-    $_COOKIE['ketto'] = $ketto;
-    $_SESSION['ketto'] = $ketto;
-} else {
-    // On détruit la session
-    $_SESSION = array();
-    session_destroy();
-    header('location:index.php');
-}
+use \Blog\App;
+
+App::newTurn();
 ?>
 
 <?php $title = 'Liste des derniers posts'; ?>
@@ -18,11 +9,11 @@ if ($_COOKIE['ketto'] == $_SESSION['ketto']) {
 <?php ob_start(); ?>
 	<p><a href="?enter_post">Saisir un nouveau post</a></p>
 
-	<h2 style="text-align:center">Liste des <?php echo $varA; ?> derniers posts</h2>
+	<h2 style="text-align:center">Liste des <?php echo $num; ?> derniers posts</h2>
 
     <div class="post">
 	<?php
-    foreach ($listA as $post) {
+    foreach ($arrayPost as $post) {
         if (strlen($post->getContent()) <= 200) {
             $elementContent = $post->getContent();
         } else {
