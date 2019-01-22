@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 use \Blog\model\DBFactory;
 use \Blog\App;
 use \Blog\controller\CommonController;
+use \Blog\controller\Config;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;
 use \Blog\model\CommentManagerPDO;
@@ -15,10 +16,14 @@ use \Blog\model\Comment;
 
 App::load();
 
-$db = DBFactory::getMysqlConnexionWithPDO();
+$setting = '..\Blog\model\config.php';
+$mon_instance = new Config($setting);
+$db = DBFactory::getMysqlConnexionWithPDO($mon_instance);
+
 $screen = '';
 $tab = [];
 $common = new CommonController($screen,$tab);
+
 $managerPost = new PostManagerPDO($db);
 $managerComment = new CommentManagerPDO($db);
 $postController = new PostController($managerPost,$managerComment,$common);

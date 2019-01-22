@@ -20,7 +20,8 @@ class CommonController
         $this->tab = $tab;
     }
 
-    public function render($screen, $tab = []) {
+    public function render($screen, $tab = []) 
+    {
         extract($tab);
         require $screen;
     }
