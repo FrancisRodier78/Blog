@@ -16,7 +16,7 @@ App::newTurn();
 		</p>
 	</form>
 
-	<p><a href="?come_back_list_posts">Retourner à l'accueil</a></p>
+	<p><a href="new-post.html">Retourner à l'accueil</a></p>
 <?php $content = ob_get_clean(); ?>
 
 <?php require 'templateAdmin.php'; ?>

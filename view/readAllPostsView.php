@@ -7,7 +7,7 @@ App::newTurn();
 <?php $title = 'Liste des derniers posts'; ?>
 
 <?php ob_start(); ?>
-	<p><a href="?enter_post">Saisir un nouveau post</a></p>
+	<p><a href="article-entre-article.html">Saisir un nouveau post</a></p>
 
 	<h2 style="text-align:center">Liste des <?php echo $num; ?> derniers posts</h2>
 
@@ -24,7 +24,7 @@ App::newTurn();
         } ?>
 		
 		<div>
-    		<h4><a href="?id= <?php echo $post->getId(); ?> "> <?php echo $post->getTitre(); ?> </a></h4>
+    		<h4><a href="post-<?php echo $post->getId(); ?>.html"> <?php echo $post->getTitre(); ?> </a></h4>
 	    	<p> <?php echo nl2br($elementContent); ?> </p>
 		</div>
 		<?php

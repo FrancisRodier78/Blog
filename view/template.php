@@ -222,7 +222,7 @@ App::newTurn();
                     </div>
                     <div class="footer-col col-md-3">
                         <h3>Administration</h3>
-                        <p><a href="?administration">Accéder à l'espace d'administration</a></p>
+                        <p><a href="article-administration.html">Accéder à l'espace d'administration</a></p>
                     </div>
                 </div>
             </div>

@@ -67,7 +67,7 @@ class commentController
 
                 $message = $comment->isNew() ? 'Le comment a bien été ajouté !' : 'Le comment a bien été modifié !';
 
-                header('Location: http://localhost/blog/?id='.$postId);
+                header('Location: http://localhost/blog/article-'.$postId.'.html');
             } else {
                 $erreurs = $comment->getErreurs();
             }
@@ -102,7 +102,8 @@ class commentController
 
                 $message = $comment->isNew() ? 'Le comment a bien été ajouté !' : 'Le comment a bien été modifié !';
 
-                header('Location: http://localhost/blog/?administration&comments');
+                header('Location: http://localhost/blog/article-adm-com.html');
+
             } else {
                 $erreurs = $comment->erreurs();
             }

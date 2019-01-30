@@ -1,10 +1,8 @@
 <?php
 require 'vendor/autoload.php';
 
-use \Blog\model\DBFactory;
 use \Blog\App;
 use \Blog\controller\CommonController;
-use \Blog\controller\Config;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;
 use \Blog\model\CommentManagerPDO;
@@ -15,10 +13,7 @@ use \Blog\model\Post;
 use \Blog\model\Comment;
 
 App::load();
-
-$setting = '..\Blog\model\config.php';
-$mon_instance = new Config($setting);
-$db = DBFactory::getMysqlConnexionWithPDO($mon_instance);
+$db = App::getDbInstance();
 
 $screen = '';
 $tab = [];

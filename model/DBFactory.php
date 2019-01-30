@@ -16,27 +16,21 @@ use \PDO;
 class DBFactory
 {
     /**
-     * Attribut contenant l'instance représentant le controlles.
-     */
-    protected $mon_instance;
-
-
-    /**
      * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
      */
-    public function __construct($mon_instance)
+    public function __construct()
     {
-        $this->mon_instance = $mon_instance;
     }
 
-    public static function getMysqlConnexionWithPDO()
+    public static function getMysqlConnexionWithPDO($db_host,$db_name,$db_user,$db_pass)
     {
-//        $db = new \PDO('mysql:host='$mon_instance->get(db_host)';dbname='$mon_instance->get(db_name), $mon_instance->get(db_user), $mon_instance->get(db_pass));
-        $db = new \PDO('mysql:host=localhost;dbname=blog', 'root', '');
+        if (!isset($db)) {
+            $db = new \PDO('mysql:host='.$db_host.';dbname='.$db_name, $db_user, $db_pass);
 
-        // PDO::ATTR_ERRMODE : rapport d'erreurs.
-        // PDO::ERRMODE_EXCEPTION : émet une exception.
-        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            // PDO::ATTR_ERRMODE : rapport d'erreurs.
+            // PDO::ERRMODE_EXCEPTION : émet une exception.
+            $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
 
         return $db;
     }
