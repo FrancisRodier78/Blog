@@ -1,5 +1,5 @@
 <?php 
-use \Blog\App;
+use \Blog\public\App;
 
 App::newTurn();
 ?>

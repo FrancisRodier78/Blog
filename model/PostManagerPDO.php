@@ -13,7 +13,7 @@
 namespace Blog\model;
 use \PDO;
 use \Blog\model\PostManager;
-use \Blog\model\Post;
+use \Blog\model\Entity\Post;
 
 class PostManagerPDO extends PostManager
 {

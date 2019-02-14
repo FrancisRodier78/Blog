@@ -10,33 +10,33 @@
  */
 namespace Blog\controller;
 use \PDO;
-use \Blog\controller\CommonController;
 use \Blog\model\PostManagerPDO;
 use \Blog\model\CommentManagerPDO;
 use \Blog\model\PostManager;
 use \Blog\model\CommentManager;
-use \Blog\model\Post;
-use \Blog\model\Comment;
+use \Blog\model\Entity\Post;
+use \Blog\model\Entity\Comment;
+use \Blog\model\CommonController;
 
-class PostController
+class PostController extends CommonController
 {
     /**
      * Attribut contenant l'instance représentant le controlles.
      */
     protected $managerPost;
     protected $managerComment;
-    protected $common;
 
     /**
      * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
      *
+     * @param $managerPost, $managerComment
+     *
      * @return void
      */
-    public function __construct(PostManagerPDO $managerPost, CommentManagerPDO $managerComment, CommonController $common)
+    public function __construct(PostManagerPDO $managerPost, CommentManagerPDO $managerComment)
     {
         $this->managerPost = $managerPost;
         $this->managerComment = $managerComment;
-        $this->common = $common;
     }
 
     /**
@@ -46,7 +46,7 @@ class PostController
     {
         // Lecture de l'ensemble des posts
         $screen = 'view/adminScreenView.php';
-        $this->common->render($screen);
+        $this->render($screen);
     }
     /**
      * @see PostManager::adminPost()
@@ -57,13 +57,12 @@ class PostController
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
         $screen = 'view/adminPostsView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
     /**
      * @see PostManager::readPostAndComments($idPost)
      *
      * @param mixed $idPost
-     * @param mixed $commentManager
      */
     public function readPostAndComments($idPost)
     {
@@ -71,7 +70,7 @@ class PostController
         $tab['post'] = $this->managerPost->getUniquePost($idPost);
         $tab['listComments'] = $this->managerComment->getListComments($idPost);
         $screen = 'view/readPostAndCommentsView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
     /**
      * @see PostManager::readAllPosts()
@@ -82,7 +81,7 @@ class PostController
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
         $screen = 'view/readAllPostsView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
     /**
      * @see PostManager::enterNewPost()
@@ -91,7 +90,7 @@ class PostController
     {
         // Saisie d'un nouveau post
         $screen = 'view/enterNewPostView.php';
-        $this->common->render($screen);
+        $this->render($screen);
     }
     /**
      * @see PostManager::addNewPost()
@@ -111,7 +110,7 @@ class PostController
                 $tab['num'] = $this->managerPost->countPost();
                 $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
                 $screen = 'view/adminPostsView.php';
-                $this->common->render($screen, $tab);
+                $this->render($screen, $tab);
             } else {
                 $erreurs = $post->getErreurs();
             }
@@ -129,7 +128,7 @@ class PostController
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
         $screen = 'view/adminPostsView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
     /**
      * @see PostManager::viewPost()
@@ -140,7 +139,7 @@ class PostController
     {
         $tab['post'] = $this->managerPost->getUniquePost($idPost);
         $screen = 'view/viewPostView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
     /**
      * @see PostManager::changePost()
@@ -162,7 +161,7 @@ class PostController
                 $tab['num'] = $this->managerPost->countPost();
                 $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
                 $screen = 'view/adminPostsView.php';
-                $this->common->render($screen, $tab);
+                $this->render($screen, $tab);
             } else {
                 $erreurs = $post->erreurs();
             }

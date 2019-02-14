@@ -1,7 +1,7 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-use \Blog\App;
+use \Blog\public\App;
 use \Blog\controller\CommonController;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;

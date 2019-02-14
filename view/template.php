@@ -1,5 +1,5 @@
 <?php 
-use \Blog\App;
+use \Blog\public\App;
 
 App::newTurn();
 ?>
@@ -101,7 +101,7 @@ App::newTurn();
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="public/images/RODIER.jpg" class="img-responsive1" alt="Portrait de Francis Rodier.">
+                        <img src="Blog/public/images/RODIER.jpg" class="img-responsive1" alt="Portrait de Francis Rodier.">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">

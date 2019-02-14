@@ -1,5 +1,5 @@
 <?php
-namespace Blog\controller;
+namespace Blog\Core;
 
 class Config
 {

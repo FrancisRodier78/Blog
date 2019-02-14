@@ -10,7 +10,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Blog\model;
+namespace Blog\model\Entity;
 use \PDO;
 
 class Comment

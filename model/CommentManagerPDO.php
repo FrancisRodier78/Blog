@@ -13,7 +13,7 @@
 namespace Blog\model;
 use \PDO;
 use \Blog\model\CommentManager;
-use \Blog\model\Comment;
+use \Blog\model\Entity\Comment;
 
 class CommentManagerPDO extends CommentManager
 {

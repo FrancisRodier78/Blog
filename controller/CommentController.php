@@ -17,9 +17,10 @@ use \Blog\model\PostManagerPDO;
 use \Blog\model\CommentManagerPDO;
 use \Blog\model\PostManager;
 use \Blog\model\CommentManager;
-use \Blog\model\Comment;
+use \Blog\model\Entity\Comment;
+use \Blog\model\CommonController;
 
-class commentController
+class commentController extends CommonController
 {
     /**
      * Attribut contenant l'instance représentant le controlles.
@@ -30,8 +31,10 @@ class commentController
 
     /**
      * Constructeur étant chargé d'enregistrer l'instance de PDO dans l'attribut $db.
+     *
+     * @param $managerComment
      */
-    public function __construct(CommentManagerPDO $managerComment, CommonController $common)
+    public function __construct(CommentManagerPDO $managerComment)
     {
         $this->managerComment = $managerComment;
         $this->common = $common;
@@ -45,7 +48,7 @@ class commentController
         // Lecture de l'ensemble des nouveau comments
         $tab['arrayNewComment'] = $this->managerComment->getListNewComments();
         $screen = 'view/readAllNewCommentsView.php';
-        $this->common->render($screen, $tab);
+        $this->render($screen, $tab);
     }
 
     /**
