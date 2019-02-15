@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
+require '../app/App.php';
 
-use \Blog\public\App;
 use \Blog\controller\CommonController;
 use \Blog\model\PostManagerPDO;
 use \Blog\controller\PostController;
@@ -17,12 +17,12 @@ $db = App::getDbInstance();
 
 $screen = '';
 $tab = [];
-$common = new CommonController($screen,$tab);
+//$common = new CommonController($screen,$tab);
 
 $managerPost = new PostManagerPDO($db);
 $managerComment = new CommentManagerPDO($db);
-$postController = new PostController($managerPost,$managerComment,$common);
-$commentController = new CommentController($managerComment,$common);
+$postController = new PostController($managerPost,$managerComment);
+$commentController = new CommentController($managerComment);
 
 try {
     $firstScreen = true;
@@ -77,6 +77,8 @@ try {
     
     if (isset($_POST['add_post'])) {
         // Ici on connait l'administrateur
+        echo "add post";
+        die();
         $firstScreen = false;
         $postController->addNewPost();
     }

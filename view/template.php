@@ -1,7 +1,7 @@
 <?php 
-use \Blog\public\App;
+use \Blog\controller\CommonController;
 
-App::newTurn();
+CommonController::newTurn();
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +16,13 @@ App::newTurn();
     <title><?php echo $title; ?></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="public/css/blog.css" rel="stylesheet">
+    <link href="../public/css/blog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -73,7 +73,7 @@ App::newTurn();
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive-header" src="public/images/RODIER.jpg" alt="">
+                    <img class="img-responsive-header" src="../public/images/RODIER.jpg" alt="">
                     <div class="intro-text">
                         <span class="name">Francis Rodier</span>
                         <hr class="star-light">
@@ -101,7 +101,7 @@ App::newTurn();
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="Blog/public/images/RODIER.jpg" class="img-responsive1" alt="Portrait de Francis Rodier.">
+                        <img src="../public/images/RODIER.jpg" class="img-responsive1" alt="Portrait de Francis Rodier.">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -111,7 +111,7 @@ App::newTurn();
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="public/images/Haute montagne.jpg" class="img-responsive2" alt="Photo de montagne.">
+                        <img src="../public/images/Haute montagne.jpg" class="img-responsive2" alt="Photo de montagne.">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -121,7 +121,7 @@ App::newTurn();
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="public/images/foule.jpg" class="img-responsive3" alt="Photo d'une foule de spectateurs.">
+                        <img src="../public/images/foule.jpg" class="img-responsive3" alt="Photo d'une foule de spectateurs.">
                     </a>
                 </div>
             </div>
@@ -260,7 +260,7 @@ App::newTurn();
                         <div class="modal-body">
                             <h2>Curriculum Vitae</h2>
                             <hr class="star-primary">
-                            <img src="public/images/RODIER.jpg" class="img-responsive1 img-centered" alt="">
+                            <img src="../public/images/RODIER.jpg" class="img-responsive1 img-centered" alt="">
                             <p>CV</p>
                             <a href="http://localhost/cv/cv.php" title="Mon CV" target="_blank">CV WEB</a>
                         </div>
@@ -283,7 +283,7 @@ App::newTurn();
                         <div class="modal-body">
                             <h2>Wordpress</h2>
                             <hr class="star-primary">
-                            <img src="public/images/Haute montagne.jpg" class="img-responsive img-centered" alt="">
+                            <img src="../public/images/Haute montagne.jpg" class="img-responsive img-centered" alt="">
                             <p>Agence de chalet de luxe.</p>
                             <a href="http://chaletsetcaviar-rodier.fr/"  title="Mon Wordpress" target="_blank">Chalets et Caviar.</a>
                         </div>
@@ -306,7 +306,7 @@ App::newTurn();
                         <div class="modal-body">
                             <h2>HTML5 et CSS3</h2>
                             <hr class="star-primary">
-                            <img src="public/images/foule.jpg" class="img-responsive img-centered" alt="">
+                            <img src="../public/images/foule.jpg" class="img-responsive img-centered" alt="">
                             <p>Les films de plein air.</p>
                             <a href="http://filmpleinair-rodier.club//" title="Mes réalisation en HTML5 et CSS3" target="_blank">Parc Monceau</a>
                         </div>
@@ -317,19 +317,19 @@ App::newTurn();
     </div>
 
     <!-- jQuery -->
-    <script src="vendor/jquery/jquery.js"></script>
+    <script src="../vendor/jquery/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="public/js/jqBootstrapValidation.js"></script>
-    <script src="public/js/contact_me.js"></script>
+    <script src="../public/js/jqBootstrapValidation.js"></script>
+    <script src="../public/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="public/js/blog.js"></script>
+    <script src="../public/js/blog.js"></script>
 </body>
 </html>

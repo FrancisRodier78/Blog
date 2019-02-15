@@ -1,5 +1,5 @@
 <?php
-namespace Blog\model;
+namespace Blog\controller;
 
 class CommonController
 {
@@ -8,6 +8,8 @@ class CommonController
      */
     protected $screen;
     protected $tab;
+    private static $cookie_name;
+    private static $ketto;
 
     public function render($screen, $tab = []) 
     {

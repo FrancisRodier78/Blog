@@ -1,7 +1,7 @@
 <?php 
-use \Blog\public\App;
+use \Blog\controller\CommonController;
 
-App::newTurn();
+CommonController::newTurn();
 ?>
 
 <?php $title = 'Lecture d\'un post et de ses commentaires'; ?>
@@ -36,4 +36,4 @@ App::newTurn();
     <p><a href="new-post.html">Retourner à l'accueil</a></p>
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'template.php'; ?>
+<?php require '../view/template.php'; ?>

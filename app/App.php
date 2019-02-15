@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\public;
+//namespace Blog;
 
-use \Blog\controller\Config;
+use \Blog\Core\Config;
 use \Blog\model\DBFactory;
 
 class App
@@ -31,7 +31,7 @@ class App
     public static function getDbInstance()
     {
         if (!isset($db_instance)) {
-            $setting = '..\Blog\model\config.php';
+            $setting = '..\config\config.php';
             $mon_instance = new Config($setting);
             $db_instance = DBFactory::getMysqlConnexionWithPDO($mon_instance->get('db_host'),$mon_instance->get('db_name'),$mon_instance->get('db_user'),$mon_instance->get('db_pass'));
         }

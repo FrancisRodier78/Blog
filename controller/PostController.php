@@ -16,7 +16,7 @@ use \Blog\model\PostManager;
 use \Blog\model\CommentManager;
 use \Blog\model\Entity\Post;
 use \Blog\model\Entity\Comment;
-use \Blog\model\CommonController;
+use \Blog\controller\CommonController;
 
 class PostController extends CommonController
 {
@@ -45,7 +45,7 @@ class PostController extends CommonController
     public function adminScreen()
     {
         // Lecture de l'ensemble des posts
-        $screen = 'view/adminScreenView.php';
+        $screen = '../view/Admin/adminScreenView.php';
         $this->render($screen);
     }
     /**
@@ -56,7 +56,7 @@ class PostController extends CommonController
         // Lecture de l'ensemble des posts
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
-        $screen = 'view/adminPostsView.php';
+        $screen = '../view/Admin/adminPostsView.php';
         $this->render($screen, $tab);
     }
     /**
@@ -69,7 +69,7 @@ class PostController extends CommonController
         // Lecture d'un post et de ses commentaires avec son post_id
         $tab['post'] = $this->managerPost->getUniquePost($idPost);
         $tab['listComments'] = $this->managerComment->getListComments($idPost);
-        $screen = 'view/readPostAndCommentsView.php';
+        $screen = '../view/Post/readPostAndCommentsView.php';
         $this->render($screen, $tab);
     }
     /**
@@ -80,7 +80,7 @@ class PostController extends CommonController
         // Lecture de l'ensemble des posts
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
-        $screen = 'view/readAllPostsView.php';
+        $screen = '../view/Post/readAllPostsView.php';
         $this->render($screen, $tab);
     }
     /**
@@ -89,7 +89,7 @@ class PostController extends CommonController
     public function enterNewPost()
     {
         // Saisie d'un nouveau post
-        $screen = 'view/enterNewPostView.php';
+        $screen = '../view/Post/enterNewPostView.php';
         $this->render($screen);
     }
     /**
@@ -109,7 +109,7 @@ class PostController extends CommonController
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
                 $tab['num'] = $this->managerPost->countPost();
                 $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
-                $screen = 'view/adminPostsView.php';
+                $screen = '../view/Admin/adminPostsView.php';
                 $this->render($screen, $tab);
             } else {
                 $erreurs = $post->getErreurs();
@@ -127,7 +127,7 @@ class PostController extends CommonController
 
         $tab['num'] = $this->managerPost->countPost();
         $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
-        $screen = 'view/adminPostsView.php';
+        $screen = '../view/Admin/adminPostsView.php';
         $this->render($screen, $tab);
     }
     /**
@@ -138,7 +138,7 @@ class PostController extends CommonController
     public function viewPost($idPost)
     {
         $tab['post'] = $this->managerPost->getUniquePost($idPost);
-        $screen = 'view/viewPostView.php';
+        $screen = '../view/Post/viewPostView.php';
         $this->render($screen, $tab);
     }
     /**
@@ -160,7 +160,7 @@ class PostController extends CommonController
                 $message = $post->isNew() ? 'Le post a bien été ajouté !' : 'Le post a bien été modifié !';
                 $tab['num'] = $this->managerPost->countPost();
                 $tab['arrayPost'] = $this->managerPost->getListPosts(0, $tab['num']);
-                $screen = 'view/adminPostsView.php';
+                $screen = '../view/Admin/adminPostsView.php';
                 $this->render($screen, $tab);
             } else {
                 $erreurs = $post->erreurs();

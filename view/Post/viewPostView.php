@@ -1,7 +1,7 @@
 <?php 
-use \Blog\public\App;
+use \Blog\controller\CommonController;
 
-App::newTurn();
+CommonController::newTurn();
 ?>
 
 <?php $title = 'Vue d\'un post'; ?>
@@ -18,4 +18,4 @@ App::newTurn();
     </form>
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'templateAdmin.php'; ?>
+<?php require '../view/Admin/templateAdmin.php'; ?>

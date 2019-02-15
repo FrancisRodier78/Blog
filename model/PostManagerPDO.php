@@ -15,7 +15,7 @@ use \PDO;
 use \Blog\model\PostManager;
 use \Blog\model\Entity\Post;
 
-class PostManagerPDO extends PostManager
+class PostManagerPDO
 {
     /**
      * Attribut contenant l'instance représentant la BDD.
@@ -73,7 +73,7 @@ class PostManagerPDO extends PostManager
 
         // Par FETCH_CLASS on récupère un tableau d'objet et non un tableau de table.
         // Par FETCH_PROPS_LATE on force l'exécution du constructeur avant celui du contrôleur.
-        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Post');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'Blog\model\Entity\Post');
 
         $listePost = $requete->fetchAll();
 

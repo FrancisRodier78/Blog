@@ -12,13 +12,12 @@
 
 namespace Blog\controller;
 use \PDO;
-use \Blog\controller\CommonController;
 use \Blog\model\PostManagerPDO;
 use \Blog\model\CommentManagerPDO;
 use \Blog\model\PostManager;
 use \Blog\model\CommentManager;
 use \Blog\model\Entity\Comment;
-use \Blog\model\CommonController;
+use \Blog\controller\CommonController;
 
 class commentController extends CommonController
 {
@@ -26,7 +25,6 @@ class commentController extends CommonController
      * Attribut contenant l'instance représentant le controlles.
      */
     protected $managerComment;
-    protected $common;
 
 
     /**
@@ -37,7 +35,6 @@ class commentController extends CommonController
     public function __construct(CommentManagerPDO $managerComment)
     {
         $this->managerComment = $managerComment;
-        $this->common = $common;
     }
 
     /**
@@ -47,7 +44,7 @@ class commentController extends CommonController
     {
         // Lecture de l'ensemble des nouveau comments
         $tab['arrayNewComment'] = $this->managerComment->getListNewComments();
-        $screen = 'view/readAllNewCommentsView.php';
+        $screen = '../view/readAllNewCommentsView.php';
         $this->render($screen, $tab);
     }
 
@@ -70,7 +67,7 @@ class commentController extends CommonController
 
                 $message = $comment->isNew() ? 'Le comment a bien été ajouté !' : 'Le comment a bien été modifié !';
 
-                header('Location: http://localhost/blog/article-'.$postId.'.html');
+                header('Location: http://localhost/blog/public/article-'.$postId.'.html');
             } else {
                 $erreurs = $comment->getErreurs();
             }
@@ -105,7 +102,7 @@ class commentController extends CommonController
 
                 $message = $comment->isNew() ? 'Le comment a bien été ajouté !' : 'Le comment a bien été modifié !';
 
-                header('Location: http://localhost/blog/article-adm-com.html');
+                header('Location: http://localhost/public/blog/article-adm-com.html');
 
             } else {
                 $erreurs = $comment->erreurs();

@@ -1,7 +1,7 @@
 <?php 
-use \Blog\public\App;
+use \Blog\controller\CommonController;
 
-App::newTurn();
+CommonController::newTurn();
 ?>
 
 <?php $title = 'Liste des derniers posts'; ?>
@@ -33,4 +33,4 @@ App::newTurn();
 	</div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'template.php'; ?>
+<?php require '../view/template.php'; ?>

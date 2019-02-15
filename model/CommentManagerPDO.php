@@ -15,7 +15,7 @@ use \PDO;
 use \Blog\model\CommentManager;
 use \Blog\model\Entity\Comment;
 
-class CommentManagerPDO extends CommentManager
+class CommentManagerPDO
 {
     /**
      * Attribut contenant l'instance représentant la BDD.

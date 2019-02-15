@@ -1,7 +1,7 @@
 <?php 
-use \Blog\public\App;
+use \Blog\controller\CommonController;
 
-App::newTurn();
+CommonController::newTurn();
 ?>
 
 <?php $title = 'Entrée d\'un nouveau post'; ?>
@@ -19,4 +19,4 @@ App::newTurn();
 	<p><a href="new-post.html">Retourner à l'accueil</a></p>
 <?php $content = ob_get_clean(); ?>
 
-<?php require 'templateAdmin.php'; ?>
+<?php require '../view/Admin/templateAdmin.php'; ?>
