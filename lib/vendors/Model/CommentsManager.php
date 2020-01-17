@@ -1,4 +1,6 @@
 <?php
+// CommentsManager.php
+
 namespace Model;
  
 use \OCFram\Manager;
@@ -34,12 +36,9 @@ abstract class CommentsManager extends Manager
    */
   public function save(Comment $comment)
   {
-    if ($comment->isValid())
-    {
+    if ($comment->isValid()) {
       $comment->isNew() ? $this->add($comment) : $this->modify($comment);
-    }
-    else
-    {
+    } else {
       throw new \RuntimeException('Le commentaire doit être validé pour être enregistré');
     }
   }

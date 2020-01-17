@@ -1,4 +1,6 @@
 <?php
+// NewsFormBuilder.php
+
 namespace FormBuilder;
  
 use \OCFram\FormBuilder;

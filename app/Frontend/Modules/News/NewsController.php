@@ -1,4 +1,6 @@
 <?php
+// NewsController.php
+
 namespace App\Frontend\Modules\News;
  
 use \OCFram\BackController;
@@ -24,8 +26,7 @@ class NewsController extends BackController
  
     foreach ($listeNews as $news)
     {
-      if (strlen($news->contenu()) > $nombreCaracteres)
-      {
+      if (strlen($news->contenu()) > $nombreCaracteres) {
         $debut = substr($news->contenu(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
  
@@ -41,8 +42,7 @@ class NewsController extends BackController
   {
     $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
  
-    if (empty($news))
-    {
+    if (empty($news)) {
       $this->app->httpResponse()->redirect404();
     }
  
@@ -54,16 +54,13 @@ class NewsController extends BackController
   public function executeInsertComment(HTTPRequest $request)
   {
     // Si le formulaire a été envoyé.
-    if ($request->method() == 'POST')
-    {
+    if ($request->method() == 'POST') {
       $comment = new Comment([
         'news' => $request->getData('news'),
         'auteur' => $request->postData('auteur'),
         'contenu' => $request->postData('contenu')
       ]);
-    }
-    else
-    {
+    } else {
       $comment = new Comment;
     }
  
@@ -74,8 +71,7 @@ class NewsController extends BackController
  
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
  
-    if ($formHandler->process())
-    {
+    if ($formHandler->process()) {
       $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
  
       $this->app->httpResponse()->redirect('news-'.$request->getData('news').'.html');

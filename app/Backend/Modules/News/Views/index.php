@@ -1,3 +1,5 @@
+<!-- index.php -->
+
 <p style="text-align: center">Il y a actuellement <?= $nombreNews ?> news. En voici la liste :</p>
  
 <table>

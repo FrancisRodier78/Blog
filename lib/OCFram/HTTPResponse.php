@@ -1,4 +1,6 @@
 <?php
+// HTTPResponse.php
+
 namespace OCFram;
  
 class HTTPResponse extends ApplicationComponent

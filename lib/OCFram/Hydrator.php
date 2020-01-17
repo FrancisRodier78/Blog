@@ -1,4 +1,6 @@
 <?php
+// Hydrator.php
+
 namespace OCFram;
  
 trait Hydrator
@@ -9,8 +11,7 @@ trait Hydrator
     {
       $method = 'set'.ucfirst($key);
  
-      if (is_callable([$this, $method]))
-      {
+      if (is_callable([$this, $method])) {
         $this->$method($value);
       }
     }

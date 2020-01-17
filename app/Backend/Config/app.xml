@@ -1,3 +1,5 @@
+<!-- app.xml -->
+
 <?xml version="1.0" encoding="utf-8" ?>
 <definitions>
   <define var="login" value="admin" />

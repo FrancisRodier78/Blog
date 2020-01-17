@@ -1,4 +1,6 @@
 <?php
+//FrontendApplication.php
+
 namespace App\Frontend;
  
 use \OCFram\Application;

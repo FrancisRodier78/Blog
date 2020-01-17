@@ -1,4 +1,6 @@
 <?php
+// Comment.php
+
 namespace Entity;
  
 use \OCFram\Entity;
@@ -25,8 +27,7 @@ class Comment extends Entity
  
   public function setAuteur($auteur)
   {
-    if (!is_string($auteur) || empty($auteur))
-    {
+    if (!is_string($auteur) || empty($auteur)) {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
  
@@ -35,8 +36,7 @@ class Comment extends Entity
  
   public function setContenu($contenu)
   {
-    if (!is_string($contenu) || empty($contenu))
-    {
+    if (!is_string($contenu) || empty($contenu)) {
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
  

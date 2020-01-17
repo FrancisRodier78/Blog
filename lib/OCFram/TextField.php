@@ -1,4 +1,6 @@
 <?php
+// TextField.php
+
 namespace OCFram;
  
 class TextField extends Field
@@ -10,27 +12,23 @@ class TextField extends Field
   {
     $widget = '';
  
-    if (!empty($this->errorMessage))
-    {
+    if (!empty($this->errorMessage)) {
       $widget .= $this->errorMessage.'<br />';
     }
  
     $widget .= '<label>'.$this->label.'</label><textarea name="'.$this->name.'"';
  
-    if (!empty($this->cols))
-    {
+    if (!empty($this->cols)) {
       $widget .= ' cols="'.$this->cols.'"';
     }
  
-    if (!empty($this->rows))
-    {
+    if (!empty($this->rows)) {
       $widget .= ' rows="'.$this->rows.'"';
     }
  
     $widget .= '>';
  
-    if (!empty($this->value))
-    {
+    if (!empty($this->value)) {
       $widget .= htmlspecialchars($this->value);
     }
  
@@ -41,8 +39,7 @@ class TextField extends Field
   {
     $cols = (int) $cols;
  
-    if ($cols > 0)
-    {
+    if ($cols > 0) {
       $this->cols = $cols;
     }
   }
@@ -51,8 +48,7 @@ class TextField extends Field
   {
     $rows = (int) $rows;
  
-    if ($rows > 0)
-    {
+    if ($rows > 0) {
       $this->rows = $rows;
     }
   }

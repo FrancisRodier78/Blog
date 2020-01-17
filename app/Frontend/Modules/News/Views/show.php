@@ -1,3 +1,5 @@
+<!-- show.php -->
+
 <p>Par <em><?= $news['auteur'] ?></em>, le <?= $news['dateAjout']->format('d/m/Y à H\hi') ?></p>
 <h2><?= $news['titre'] ?></h2>
 <p><?= nl2br($news['contenu']) ?></p>
@@ -9,8 +11,7 @@
 <p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
  
 <?php
-if (empty($comments))
-{
+if (empty($comments)) {
 ?>
 <p>Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
 <?php

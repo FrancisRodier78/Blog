@@ -1,4 +1,6 @@
 <?php
+// ConnexionController.php
+
 namespace App\Backend\Modules\Connexion;
  
 use \OCFram\BackController;
@@ -10,18 +12,14 @@ class ConnexionController extends BackController
   {
     $this->page->addVar('title', 'Connexion');
  
-    if ($request->postExists('login'))
-    {
+    if ($request->postExists('login')) {
       $login = $request->postData('login');
       $password = $request->postData('password');
  
-      if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
-      {
+      if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass')) {
         $this->app->user()->setAuthenticated(true);
         $this->app->httpResponse()->redirect('.');
-      }
-      else
-      {
+      } else {
         $this->app->user()->setFlash('Le pseudo ou le mot de passe est incorrect.');
       }
     }

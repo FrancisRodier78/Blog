@@ -1,4 +1,6 @@
 <?php
+// StringField.php
+
 namespace OCFram;
  
 class StringField extends Field
@@ -9,20 +11,17 @@ class StringField extends Field
   {
     $widget = '';
  
-    if (!empty($this->errorMessage))
-    {
+    if (!empty($this->errorMessage)) {
       $widget .= $this->errorMessage.'<br />';
     }
  
     $widget .= '<label>'.$this->label.'</label><input type="text" name="'.$this->name.'"';
  
-    if (!empty($this->value))
-    {
+    if (!empty($this->value)) {
       $widget .= ' value="'.htmlspecialchars($this->value).'"';
     }
  
-    if (!empty($this->maxLength))
-    {
+    if (!empty($this->maxLength)) {
       $widget .= ' maxlength="'.$this->maxLength.'"';
     }
  
@@ -33,12 +32,9 @@ class StringField extends Field
   {
     $maxLength = (int) $maxLength;
  
-    if ($maxLength > 0)
-    {
+    if ($maxLength > 0) {
       $this->maxLength = $maxLength;
-    }
-    else
-    {
+    } else {
       throw new \RuntimeException('La longueur maximale doit être un nombre supérieur à 0');
     }
   }

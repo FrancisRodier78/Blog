@@ -1,4 +1,6 @@
 <?php
+// BackController.php
+
 namespace OCFram;
  
 abstract class BackController extends ApplicationComponent
@@ -25,8 +27,7 @@ abstract class BackController extends ApplicationComponent
   {
     $method = 'execute'.ucfirst($this->action);
  
-    if (!is_callable([$this, $method]))
-    {
+    if (!is_callable([$this, $method])) {
       throw new \RuntimeException('L\'action "'.$this->action.'" n\'est pas définie sur ce module');
     }
  
@@ -40,8 +41,7 @@ abstract class BackController extends ApplicationComponent
  
   public function setModule($module)
   {
-    if (!is_string($module) || empty($module))
-    {
+    if (!is_string($module) || empty($module)) {
       throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
     }
  
@@ -50,8 +50,7 @@ abstract class BackController extends ApplicationComponent
  
   public function setAction($action)
   {
-    if (!is_string($action) || empty($action))
-    {
+    if (!is_string($action) || empty($action)) {
       throw new \InvalidArgumentException('L\'action doit être une chaine de caractères valide');
     }
  
@@ -60,8 +59,7 @@ abstract class BackController extends ApplicationComponent
  
   public function setView($view)
   {
-    if (!is_string($view) || empty($view))
-    {
+    if (!is_string($view) || empty($view)) {
       throw new \InvalidArgumentException('La vue doit être une chaine de caractères valide');
     }
  

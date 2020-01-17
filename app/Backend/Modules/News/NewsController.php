@@ -1,4 +1,6 @@
 <?php
+// NewsController.php
+
 namespace App\Backend\Modules\News;
  
 use \OCFram\BackController;
@@ -60,16 +62,13 @@ class NewsController extends BackController
   {
     $this->page->addVar('title', 'Modification d\'un commentaire');
  
-    if ($request->method() == 'POST')
-    {
+    if ($request->method() == 'POST') {
       $comment = new Comment([
         'id' => $request->getData('id'),
         'auteur' => $request->postData('auteur'),
         'contenu' => $request->postData('contenu')
       ]);
-    }
-    else
-    {
+    } else {
       $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
     }
  
@@ -80,8 +79,7 @@ class NewsController extends BackController
  
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
  
-    if ($formHandler->process())
-    {
+    if ($formHandler->process()) {
       $this->app->user()->setFlash('Le commentaire a bien été modifié');
  
       $this->app->httpResponse()->redirect('/admin/');
@@ -92,28 +90,21 @@ class NewsController extends BackController
  
   public function processForm(HTTPRequest $request)
   {
-    if ($request->method() == 'POST')
-    {
+    if ($request->method() == 'POST') {
       $news = new News([
         'auteur' => $request->postData('auteur'),
         'titre' => $request->postData('titre'),
         'contenu' => $request->postData('contenu')
       ]);
  
-      if ($request->getExists('id'))
-      {
+      if ($request->getExists('id')) {
         $news->setId($request->getData('id'));
       }
-    }
-    else
-    {
+    } else {
       // L'identifiant de la news est transmis si on veut la modifier
-      if ($request->getExists('id'))
-      {
+      if ($request->getExists('id')) {
         $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
-      }
-      else
-      {
+      } else {
         $news = new News;
       }
     }
@@ -125,8 +116,7 @@ class NewsController extends BackController
  
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('News'), $request);
  
-    if ($formHandler->process())
-    {
+    if ($formHandler->process()) {
       $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
  
       $this->app->httpResponse()->redirect('/admin/');

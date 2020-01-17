@@ -1,4 +1,6 @@
 <?php
+// NewsManagerPDO.php
+
 namespace Model;
  
 use \Entity\News;
@@ -30,8 +32,7 @@ class NewsManagerPDO extends NewsManager
   {
     $sql = 'SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news ORDER BY id DESC';
  
-    if ($debut != -1 || $limite != -1)
-    {
+    if ($debut != -1 || $limite != -1) {
       $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
     }
  
@@ -59,8 +60,7 @@ class NewsManagerPDO extends NewsManager
  
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
  
-    if ($news = $requete->fetch())
-    {
+    if ($news = $requete->fetch()) {
       $news->setDateAjout(new \DateTime($news->dateAjout()));
       $news->setDateModif(new \DateTime($news->dateModif()));
  

@@ -1,4 +1,6 @@
 <?php
+// MaxLengthValidator.php
+
 namespace OCFram;
  
 class MaxLengthValidator extends Validator
@@ -21,12 +23,9 @@ class MaxLengthValidator extends Validator
   {
     $maxLength = (int) $maxLength;
  
-    if ($maxLength > 0)
-    {
+    if ($maxLength > 0) {
       $this->maxLength = $maxLength;
-    }
-    else
-    {
+    } else {
       throw new \RuntimeException('La longueur maximale doit être un nombre supérieur à 0');
     }
   }

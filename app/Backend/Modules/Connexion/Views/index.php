@@ -1,3 +1,5 @@
+<!-- index.php -->
+
 <h2>Connexion</h2>
  
 <form action="" method="post">

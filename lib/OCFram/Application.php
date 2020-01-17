@@ -1,4 +1,6 @@
 <?php
+//Application.php
+
 namespace OCFram;
  
 abstract class Application
@@ -34,8 +36,7 @@ abstract class Application
       $vars = [];
  
       // On regarde si des variables sont présentes dans l'URL.
-      if ($route->hasAttribute('vars'))
-      {
+      if ($route->hasAttribute('vars')) {
         $vars = explode(',', $route->getAttribute('vars'));
       }
  
@@ -50,8 +51,7 @@ abstract class Application
     }
     catch (\RuntimeException $e)
     {
-      if ($e->getCode() == Router::NO_ROUTE)
-      {
+      if ($e->getCode() == Router::NO_ROUTE) {
         // Si aucune route ne correspond, c'est que la page demandée n'existe pas.
         $this->httpResponse->redirect404();
       }

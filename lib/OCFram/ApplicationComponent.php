@@ -1,4 +1,6 @@
 <?php
+// ApplicationComponent.php
+
 namespace OCFram;
  
 abstract class ApplicationComponent

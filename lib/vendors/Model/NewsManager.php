@@ -1,4 +1,6 @@
 <?php
+// NewsManager.php
+
 namespace Model;
  
 use \OCFram\Manager;
@@ -22,12 +24,9 @@ abstract class NewsManager extends Manager
    */
   public function save(News $news)
   {
-    if ($news->isValid())
-    {
+    if ($news->isValid()) {
       $news->isNew() ? $this->add($news) : $this->modify($news);
-    }
-    else
-    {
+    } else {
       throw new \RuntimeException('La news doit être validée pour être enregistrée');
     }
   }

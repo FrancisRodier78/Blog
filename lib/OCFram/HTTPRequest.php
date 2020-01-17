@@ -1,4 +1,6 @@
 <?php
+// HTTPRequest.php
+
 namespace OCFram;
  
 class HTTPRequest extends ApplicationComponent

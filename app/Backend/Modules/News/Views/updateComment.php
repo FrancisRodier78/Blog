@@ -1,3 +1,5 @@
+<!-- updateComment.php -->
+
 <h2>Modifier un commentaire</h2>
 <form action="" method="post">
   <p>

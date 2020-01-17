@@ -1,4 +1,6 @@
-?php
+<?php
+// Field.php
+
 namespace OCFram;
  
 abstract class Field
@@ -13,8 +15,7 @@ abstract class Field
  
   public function __construct(array $options = [])
   {
-    if (!empty($options))
-    {
+    if (!empty($options)) {
       $this->hydrate($options);
     }
   }
@@ -25,8 +26,7 @@ abstract class Field
   {
     foreach ($this->validators as $validator)
     {
-      if (!$validator->isValid($this->value))
-      {
+      if (!$validator->isValid($this->value)) {
         $this->errorMessage = $validator->errorMessage();
         return false;
       }
@@ -62,8 +62,7 @@ abstract class Field
  
   public function setLabel($label)
   {
-    if (is_string($label))
-    {
+    if (is_string($label)) {
       $this->label = $label;
     }
   }
@@ -72,16 +71,14 @@ abstract class Field
   {
     $length = (int) $length;
  
-    if ($length > 0)
-    {
+    if ($length > 0) {
       $this->length = $length;
     }
   }
  
   public function setName($name)
   {
-    if (is_string($name))
-    {
+    if (is_string($name)) {
       $this->name = $name;
     }
   }
@@ -90,8 +87,7 @@ abstract class Field
   {
     foreach ($validators as $validator)
     {
-      if ($validator instanceof Validator && !in_array($validator, $this->validators))
-      {
+      if ($validator instanceof Validator && !in_array($validator, $this->validators)) {
         $this->validators[] = $validator;
       }
     }
@@ -99,8 +95,7 @@ abstract class Field
  
   public function setValue($value)
   {
-    if (is_string($value))
-    {
+    if (is_string($value)) {
       $this->value = $value;
     }
   }

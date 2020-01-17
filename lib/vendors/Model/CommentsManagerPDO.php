@@ -1,4 +1,6 @@
 <?php
+// CommentsManagerPDO.php
+
 namespace Model;
  
 use \Entity\Comment;
@@ -30,8 +32,7 @@ class CommentsManagerPDO extends CommentsManager
  
   public function getListOf($news)
   {
-    if (!ctype_digit($news))
-    {
+    if (!ctype_digit($news)) {
       throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
     }
  

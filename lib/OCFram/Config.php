@@ -1,4 +1,6 @@
 <?php
+// Config.php
+
 namespace OCFram;
  
 class Config extends ApplicationComponent
@@ -7,8 +9,7 @@ class Config extends ApplicationComponent
  
   public function get($var)
   {
-    if (!$this->vars)
-    {
+    if (!$this->vars) {
       $xml = new \DOMDocument;
       $xml->load(__DIR__.'/../../App/'.$this->app->name().'/Config/app.xml');
  
@@ -20,8 +21,7 @@ class Config extends ApplicationComponent
       }
     }
  
-    if (isset($this->vars[$var]))
-    {
+    if (isset($this->vars[$var])) {
       return $this->vars[$var];
     }
  

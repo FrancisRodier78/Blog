@@ -1,4 +1,6 @@
 <?php
+// Manager.php
+
 namespace OCFram;
  
 abstract class Manager

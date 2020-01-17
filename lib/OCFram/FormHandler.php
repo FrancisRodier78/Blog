@@ -1,4 +1,6 @@
 <?php
+// FormHandler.php
+
 namespace OCFram;
  
 class FormHandler
@@ -16,8 +18,7 @@ class FormHandler
  
   public function process()
   {
-    if($this->request->method() == 'POST' && $this->form->isValid())
-    {
+    if($this->request->method() == 'POST' && $this->form->isValid()) {
       $this->manager->save($this->form->entity());
  
       return true;
