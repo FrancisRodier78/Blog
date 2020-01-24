@@ -24,4 +24,10 @@ class ConnexionController extends BackController
       }
     }
   }
+
+  public function executeLogout(HTTPRequest $request)
+  {
+    $this->app->user()->setAuthenticated(false);
+    $this->app->httpResponse()->redirect('/');
+  }
 }

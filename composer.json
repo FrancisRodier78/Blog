@@ -1,11 +1,18 @@
 {
     "require-dev": {
     	"php": "^7.2.3",
-        "var_dumper": "4.4.3"
+        "twig/twig": "^1.27|^2.0",
+	    "symfony/var-dumper": "4.4.3"
     },
+	"authors": [
+        {
+            "name": "Rodier Francis",
+            "email": "francisrodier78@yahoo.fr"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "OCFrame\\": "lib"
+        	"OCFram\\": "lib/"
         }
     }
 }
