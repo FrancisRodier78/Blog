@@ -1,7 +1,11 @@
 {
-"autoload": {
-    "psr-4": {
-        "Blog\\" : "Blog"
+    "require-dev": {
+    	"php": "^7.2.3",
+        "var_dumper": "4.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "OCFrame\\": "lib"
+        }
     }
-}
 }
