@@ -397,7 +397,5 @@
 
     <!-- Theme JavaScript -->
     <script src="js/freelancer.min.js"></script>
-
 </body>
-
 </html>
