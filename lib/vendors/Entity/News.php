@@ -7,30 +7,32 @@ use \OCFram\Entity;
  
 class News extends Entity
 {
-  protected $auteur,
+  protected $user_id,
             $titre,
-            $contenu,
-            $dateAjout,
+            $chapo,
+            $content,
+            $dateCreation,
             $dateModif;
  
-  const AUTEUR_INVALIDE = 1;
+  const USER_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
-  const CONTENU_INVALIDE = 3;
+  const CONTENT_INVALIDE = 3;
+  const CHAPO_INVALIDE = 4;
  
   public function isValid()
   {
-    return !(empty($this->auteur) || empty($this->titre) || empty($this->contenu));
+    return !(empty($this->user_id) || empty($this->titre) || empty($this->content) || empty($this->chapo));
   }
  
  
   // SETTERS //
-  public function setAuteur($auteur)
+  public function setUserId($user_id)
   {
-    if (!is_string($auteur) || empty($auteur)) {
-      $this->erreurs[] = self::AUTEUR_INVALIDE;
+    if (!is_string($user_id) || empty($user_id)) {
+      $this->erreurs[] = self::USER_INVALIDE;
     }
  
-    $this->auteur = $auteur;
+    $this->user_id = $user_id;
   }
  
   public function setTitre($titre)
@@ -42,18 +44,27 @@ class News extends Entity
     $this->titre = $titre;
   }
  
-  public function setContenu($contenu)
+  public function setChapo($chapo)
   {
-    if (!is_string($contenu) || empty($contenu)) {
-      $this->erreurs[] = self::CONTENU_INVALIDE;
+    if (!is_string($chapo) || empty($chapo)) {
+      $this->erreurs[] = self::CHAPO_INVALIDE;
     }
  
-    $this->contenu = $contenu;
+    $this->chapo = $chapo;
+  }
+
+  public function setContent($content)
+  {
+    if (!is_string($content) || empty($content)) {
+      $this->erreurs[] = self::CONTENT_INVALIDE;
+    }
+ 
+    $this->content = $content;
   }
  
-  public function setDateAjout(\DateTime $dateAjout)
+  public function setDateCreation(\DateTime $dateCreation)
   {
-    $this->dateAjout = $dateAjout;
+    $this->dateCreation = $dateCreation;
   }
  
   public function setDateModif(\DateTime $dateModif)
@@ -62,9 +73,9 @@ class News extends Entity
   }
  
   // GETTERS //
-  public function auteur()
+  public function userId()
   {
-    return $this->auteur;
+    return $this->user_id;
   }
  
   public function titre()
@@ -72,14 +83,19 @@ class News extends Entity
     return $this->titre;
   }
  
-  public function contenu()
+  public function chapo()
   {
-    return $this->contenu;
+    return $this->chapo;
   }
  
-  public function dateAjout()
+  public function content()
   {
-    return $this->dateAjout;
+    return $this->content;
+  }
+ 
+  public function dateCreation()
+  {
+    return $this->dateCreation;
   }
  
   public function dateModif()

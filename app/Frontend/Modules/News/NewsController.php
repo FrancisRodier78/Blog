@@ -26,11 +26,11 @@ class NewsController extends BackController
  
     foreach ($listeNews as $news)
     {
-      if (strlen($news->contenu()) > $nombreCaracteres) {
-        $debut = substr($news->contenu(), 0, $nombreCaracteres);
+      if (strlen($news->content()) > $nombreCaracteres) {
+        $debut = substr($news->content(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
  
-        $news->setContenu($debut);
+        $news->setContent($debut);
       }
     }
  
@@ -57,8 +57,8 @@ class NewsController extends BackController
     if ($request->method() == 'POST') {
       $comment = new Comment([
         'news' => $request->getData('news'),
-        'auteur' => $request->postData('auteur'),
-        'contenu' => $request->postData('contenu')
+        'userId' => $request->postData('userId'),
+        'content' => $request->postData('content')
       ]);
     } else {
       $comment = new Comment;

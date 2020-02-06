@@ -7,64 +7,80 @@ use \OCFram\Entity;
  
 class Comment extends Entity
 {
-  protected $news,
-            $auteur,
-            $contenu,
-            $date;
+  protected $new_id,
+            $user_id,
+            $content,
+            $etat,
+            $dateCreation;
  
-  const AUTEUR_INVALIDE = 1;
-  const CONTENU_INVALIDE = 2;
+  const USER_INVALIDE = 1;
+  const CONTENT_INVALIDE = 2;
+  const ETAT_INVALIDE = 3;
  
   public function isValid()
   {
-    return !(empty($this->auteur) || empty($this->contenu));
+    return !(empty($this->user_id) || empty($this->content));
   }
  
-  public function setNews($news)
+  public function setNewId($new_id)
   {
-    $this->news = (int) $news;
+    $this->new_id = (int) $new_id;
   }
  
-  public function setAuteur($auteur)
+  public function setUserId($user_id)
   {
-    if (!is_string($auteur) || empty($auteur)) {
-      $this->erreurs[] = self::AUTEUR_INVALIDE;
+    if (!is_string($user_id) || empty($user_id)) {
+      $this->erreurs[] = self::USER_INVALIDE;
     }
  
-    $this->auteur = $auteur;
+    $this->user_id = $user_id;
   }
  
-  public function setContenu($contenu)
+  public function setContent($content)
   {
-    if (!is_string($contenu) || empty($contenu)) {
-      $this->erreurs[] = self::CONTENU_INVALIDE;
+    if (!is_string($content) || empty($content)) {
+      $this->erreurs[] = self::CONTENT_INVALIDE;
     }
  
-    $this->contenu = $contenu;
+    $this->content = $content;
   }
  
-  public function setDate(\DateTime $date)
+  public function setEtat($etat)
   {
-    $this->date = $date;
+    if (!is_string($etat) || empty($etat)) {
+      $this->erreurs[] = self::ETAT_INVALIDE;
+    }
+ 
+    $this->etat = $etat;
   }
  
-  public function news()
+  public function setDateCreation(\DateTime $date)
   {
-    return $this->news;
+    $this->dateCreation = $date;
   }
  
-  public function auteur()
+  public function newId()
   {
-    return $this->auteur;
+    return $this->new_id;
   }
  
-  public function contenu()
+  public function userId()
   {
-    return $this->contenu;
+    return $this->user_id;
   }
  
-  public function date()
+  public function content()
   {
-    return $this->date;
+    return $this->content;
+  }
+ 
+  public function etat()
+  {
+    return $this->etat;
+  }
+ 
+  public function dateCreation()
+  {
+    return $this->dateCreation;
   }
 }

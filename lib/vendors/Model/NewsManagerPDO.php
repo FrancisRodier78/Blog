@@ -9,11 +9,12 @@ class NewsManagerPDO extends NewsManager
 {
   protected function add(News $news)
   {
-    $requete = $this->dao->prepare('INSERT INTO news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateAjout = NOW(), dateModif = NOW()');
- 
+    $requete = $this->dao->prepare('INSERT INTO news SET user_id = :user_id, titre = :titre, dateCreation = NOW(), dateModif = NOW(), chapo = :chapo, content = :content');
+
+    $requete->bindValue(':user_id', $news->user_id());
     $requete->bindValue(':titre', $news->titre());
-    $requete->bindValue(':auteur', $news->auteur());
-    $requete->bindValue(':contenu', $news->contenu());
+    $requete->bindValue(':chapo', $news->chapo());
+    $requete->bindValue(':content', $news->content());
  
     $requete->execute();
   }
@@ -30,8 +31,8 @@ class NewsManagerPDO extends NewsManager
  
   public function getList($debut = -1, $limite = -1)
   {
-    $sql = 'SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news ORDER BY id DESC';
- 
+    $sql = 'SELECT id, user_id, titre, dateCreation, dateModif, chapo, content FROM news ORDER BY id DESC';
+
     if ($debut != -1 || $limite != -1) {
       $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
     }
@@ -43,7 +44,7 @@ class NewsManagerPDO extends NewsManager
  
     foreach ($listeNews as $news)
     {
-      $news->setDateAjout(new \DateTime($news->dateAjout()));
+      $news->setDateCreation(new \DateTime($news->dateCreation()));
       $news->setDateModif(new \DateTime($news->dateModif()));
     }
  
@@ -54,14 +55,14 @@ class NewsManagerPDO extends NewsManager
  
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news WHERE id = :id');
+    $requete = $this->dao->prepare('SELECT id, user_id, titre, dateCreation, dateModif, chapo, content FROM news WHERE id = :id');
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
  
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
  
     if ($news = $requete->fetch()) {
-      $news->setDateAjout(new \DateTime($news->dateAjout()));
+      $news->setdateCreation(new \DateTime($news->dateCreation()));
       $news->setDateModif(new \DateTime($news->dateModif()));
  
       return $news;
@@ -72,11 +73,12 @@ class NewsManagerPDO extends NewsManager
  
   protected function modify(News $news)
   {
-    $requete = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE news SET user_id = :user_id, titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
  
     $requete->bindValue(':titre', $news->titre());
-    $requete->bindValue(':auteur', $news->auteur());
-    $requete->bindValue(':contenu', $news->contenu());
+    $requete->bindValue(':user_id', $news->userId());
+    $requete->bindValue(':chapo', $news->chapo());
+    $requete->bindValue(':content', $news->content());
     $requete->bindValue(':id', $news->id(), \PDO::PARAM_INT);
  
     $requete->execute();
