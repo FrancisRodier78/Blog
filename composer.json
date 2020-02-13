@@ -1,8 +1,7 @@
 {
     "require-dev": {
     	"php": "^7.2.3",
-        "twig/twig": "^1.27|^2.0",
-	    "symfony/var-dumper": "4.4.3"
+        "twig/twig": "^1.27|^2.0"
     },
 	"authors": [
         {

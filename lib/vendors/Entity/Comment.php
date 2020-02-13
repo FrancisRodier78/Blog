@@ -22,12 +22,12 @@ class Comment extends Entity
     return !(empty($this->user_id) || empty($this->content));
   }
  
-  public function setNewId($new_id)
+  public function setNew_id($new_id)
   {
     $this->new_id = (int) $new_id;
   }
  
-  public function setUserId($user_id)
+  public function setUser_id($user_id)
   {
     if (!is_string($user_id) || empty($user_id)) {
       $this->erreurs[] = self::USER_INVALIDE;
@@ -59,12 +59,12 @@ class Comment extends Entity
     $this->dateCreation = $date;
   }
  
-  public function newId()
+  public function new_id()
   {
     return $this->new_id;
   }
  
-  public function userId()
+  public function user_id()
   {
     return $this->user_id;
   }

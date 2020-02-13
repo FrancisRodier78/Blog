@@ -9,6 +9,9 @@ class NewsManagerPDO extends NewsManager
 {
   protected function add(News $news)
   {
+    var_dump($news);
+    die();
+
     $requete = $this->dao->prepare('INSERT INTO news SET user_id = :user_id, titre = :titre, dateCreation = NOW(), dateModif = NOW(), chapo = :chapo, content = :content');
 
     $requete->bindValue(':user_id', $news->user_id());
@@ -76,7 +79,7 @@ class NewsManagerPDO extends NewsManager
     $requete = $this->dao->prepare('UPDATE news SET user_id = :user_id, titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
  
     $requete->bindValue(':titre', $news->titre());
-    $requete->bindValue(':user_id', $news->userId());
+    $requete->bindValue(':user_id', $news->user_id());
     $requete->bindValue(':chapo', $news->chapo());
     $requete->bindValue(':content', $news->content());
     $requete->bindValue(':id', $news->id(), \PDO::PARAM_INT);

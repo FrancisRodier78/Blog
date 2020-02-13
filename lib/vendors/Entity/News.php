@@ -26,7 +26,7 @@ class News extends Entity
  
  
   // SETTERS //
-  public function setUserId($user_id)
+  public function setUser_id($user_id)
   {
     if (!is_string($user_id) || empty($user_id)) {
       $this->erreurs[] = self::USER_INVALIDE;
@@ -73,7 +73,7 @@ class News extends Entity
   }
  
   // GETTERS //
-  public function userId()
+  public function user_id()
   {
     return $this->user_id;
   }

@@ -14,15 +14,16 @@
     </title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- link href="css/bootstrap.min.css" rel="stylesheet" -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="css/freelancer.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="css/fontawesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,9 +76,9 @@
                 <div class="col-lg-12">
                     <img class="img-responsive" src="img/RODIER-03-mini.jpg" alt="">
                     <div class="intro-text">
-                        <span class="name">*** Start Bootstrap ***</span>
+                        <span class="name">Le développeur qu'il vous faut.</span>
                         <hr class="star-light">
-                        <span class="skills">*** Web Developer - Graphic Artist - User Experience Designer ***</span>
+                        <span class="skills">HTML5, CSS3, PHP 7</span>
                     </div>
                 </div>
             </div>
@@ -223,14 +224,14 @@
                 <div class="row">
                     <div class="footer-col col-md-6">
                         <h3>Adresse</h3>
-                        <p>113 ave de Poissy
+                        <p>113 avenue de Poissy
                             <br>78260 Achères</p>
                     </div>
                     <div class="footer-col col-md-6">
                         <h3>Around the Web</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                <a href="#" class="btn-social btn-outline"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
@@ -383,11 +384,11 @@
     </div>
 
     <!-- jQuery -->
-    <-- script src="vendor/js/jquery.min.js" --><-- /script -->
+    <!-- script src="vendor/js/jquery.min.js" --><!-- /script -->
     <script src="js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <-- script src="vendor/bootstrap/js/bootstrap.min.js" --><-- /script -->
+    <!-- script src="vendor/bootstrap/js/bootstrap.min.js" --><!-- /script -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
