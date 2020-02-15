@@ -2,5 +2,4 @@
 <definitions>
   <define var="login" value="admin" />
   <define var="pass" value="mdp" />
-  <define var="password" value="m-d-p" />
 </definitions>

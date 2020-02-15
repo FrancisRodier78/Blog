@@ -13,24 +13,13 @@
         <?= isset($title) ? $title : 'Mon super site' ?>
     </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <!-- link href="css/bootstrap.min.css" rel="stylesheet" -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Custom fonts for this theme Blog\app\Frontend\Templates -->
+  <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="css/fontawesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- Theme CSS -->
+  <link href="css/freelancer.css" rel="stylesheet">
 
 </head>
 
@@ -383,22 +372,18 @@
         </div>
     </div>
 
-    <!-- jQuery -->
-    <!-- script src="vendor/js/jquery.min.js" --><!-- /script -->
-    <script src="js/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <!-- script src="vendor/bootstrap/js/bootstrap.min.js" --><!-- /script -->
-    <script src="js/bootstrap.min.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <!-- Contact Form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
+  <!-- Custom scripts for this template -->
+  <script src="js/freelancer.js"></script>
 </body>
 </html>
