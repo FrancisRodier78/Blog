@@ -9847,3 +9847,11 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+
+
+.blog-a {
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+}
