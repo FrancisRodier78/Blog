@@ -25,6 +25,22 @@ class ComposerStaticInitcd690a763d0c767d5d630ba338c80ed2
         array (
             'OCFram\\' => 7,
         ),
+        'M' => 
+        array (
+            'Model\\' => 6,
+        ),
+        'F' => 
+        array (
+            'FormBuilder\\' => 12,
+        ),
+        'E' => 
+        array (
+            'Entity\\' => 7,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -42,7 +58,23 @@ class ComposerStaticInitcd690a763d0c767d5d630ba338c80ed2
         ),
         'OCFram\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/lib',
+            0 => __DIR__ . '/../..' . '/lib/OCFram',
+        ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib/vendors/Model',
+        ),
+        'FormBuilder\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib/vendors/FormBuilder',
+        ),
+        'Entity\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib/vendors/Entity',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

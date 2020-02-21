@@ -50,6 +50,9 @@
                 <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
        
                 <?= $content ?>
+                
+                {% block content %}{%endblock %}
+
               </section>
             </div>
        

@@ -9,7 +9,7 @@
   <p style="text-align: right;"><small><em>Modifiée le <?= $news['dateModif']->format('d/m/Y à H\hi') ?></em></small></p>
 <?php } ?>
  
-<p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
+<p><a class="blog-a" href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
  
 <?php
 if (empty($comments)) {
@@ -25,8 +25,8 @@ foreach ($comments as $comment)
   <legend>
     Posté par <strong><?= htmlspecialchars($comment['user_id']) ?></strong> le <?= $comment['dateCreation']->format('d/m/Y à H\hi') ?>
     <?php if ($user->isAuthenticated()) { ?> -
-      <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
-      <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
+      <a class="blog-a" href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
+      <a class="blog-a" href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
     <?php } ?>
   </legend>
   <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
@@ -35,4 +35,4 @@ foreach ($comments as $comment)
 }
 ?>
  
-<p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
+<p><a class="blog-a" href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>

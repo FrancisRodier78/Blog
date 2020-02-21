@@ -21,8 +21,21 @@ abstract class BackController extends ApplicationComponent
     $this->setModule($module);
     $this->setAction($action);
     $this->setView($action);
+
+    $loader = new \Twig\Loader\FilesystemLoader('../template');
+
+    $this->twig = new \Twig\Environment($loader, [
+            'cache' => false,
+    ]);
+
+    $this->twig->addGlobal('user', $app->user());
   }
  
+  public function render($template, $vars = []) {
+      return $this->twig->render($template, $vars);
+  }
+
+
   public function execute()
   {
     $method = 'execute'.ucfirst($this->action);
@@ -31,7 +44,7 @@ abstract class BackController extends ApplicationComponent
       throw new \RuntimeException('L\'action "'.$this->action.'" n\'est pas définie sur ce module');
     }
  
-    $this->$method($this->app->httpRequest());
+    return $this->$method($this->app->httpRequest());
   }
  
   public function page()

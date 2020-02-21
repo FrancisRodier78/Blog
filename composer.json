@@ -10,7 +10,11 @@
     ],
     "autoload": {
         "psr-4": {
-        	"OCFram\\": "lib/"
+        	"OCFram\\": "lib/OCFram",
+            "App\\": "app",
+            "Model\\": "lib/vendors/Model",
+            "Entity\\": "lib/vendors/Entity",
+            "FormBuilder\\": "lib/vendors/FormBuilder"
         }
     },
     "require": {
