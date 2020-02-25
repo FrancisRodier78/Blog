@@ -1,0 +1,9 @@
+{% extends 'FrontendNewsLayout.html' %}
+
+{% block content %}
+	<p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+	{% for new in listeNews %}
+	  <h2><a class="blog-a" href="news-{{ new.id }}.html">{{ new.titre }}</a></h2>
+	  <p>{{ new.chapo }}</p>  
+	{% endfor %}
+{% endblock %}

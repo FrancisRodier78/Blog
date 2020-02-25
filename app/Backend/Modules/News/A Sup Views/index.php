@@ -1,4 +1,5 @@
 <!-- index.php -->
+<!-- a supprimer -->
 
 <p style="text-align: center">Il y a actuellement <?= $nombreNews ?> news. En voici la liste :</p>
  
@@ -12,8 +13,8 @@ foreach ($listeNews as $news)
 ?>
 
 {% for new in listeNews %}
-        {{ new.user_id }}, {{ news.titre }}, {{ news.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }}, {{ news.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }}, 
-        <a href="news-update-', $news['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-', $news['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a></td>
+    {{ new.user_id }}, {{ news.titre }}, {{ news.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }}, {{ news.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }}, 
+    <a href="news-update-', $news['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-', $news['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a></td>
 {% endfor %}
 
 </table>

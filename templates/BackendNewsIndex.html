@@ -1,0 +1,13 @@
+{% extends 'BackendNewsLayout.html' %}
+
+{% block content %}
+	<p style="text-align: center">Il y a actuellement {{ nombreNews }} news. En voici la liste :</p>
+	 
+	<table>
+	  <tr><th>Auteur</th><th>Titre</th><th>Date de création</th><th>Dernière modification</th><th>Action</th></tr>
+
+      {% for new in listeNews %}
+ 	    <tr><td> {{ new.user_id }} </td><td> {{ new.titre }} </td><td> {{ new.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> {{ new.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> <a href="news-update-{{ new.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-{{ new.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td>
+      {% endfor %}
+	</table>
+{% endblock %}

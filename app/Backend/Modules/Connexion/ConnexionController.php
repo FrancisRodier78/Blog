@@ -10,7 +10,7 @@ class ConnexionController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Connexion');
+    //$this->page->addVar('title', 'Connexion');
  
     if ($request->postExists('login')) {
       $login = $request->postData('login');
@@ -23,6 +23,8 @@ class ConnexionController extends BackController
         $this->app->user()->setFlash('Le pseudo ou le mot de passe est incorrect.');
       }
     }
+
+    return $this->render('ConnexionIndex.html', ['title' => 'Connexion']);
   }
 
   public function executeLogout(HTTPRequest $request)

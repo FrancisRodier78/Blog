@@ -36,33 +36,100 @@ class NewsController extends BackController
  
   public function executeIndex(HTTPRequest $request)
   {
-    //$this->page->addVar('title', 'Gestion des news');
- 
     $manager = $this->managers->getManagerOf('News');
  
+    //$this->page->addVar('title', 'Gestion des news');
     //$this->page->addVar('listeNews', $manager->getList());
     //$this->page->addVar('nombreNews', $manager->count());
 
-    return $this->render('News.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count()]);
+    return $this->render('BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count()]);
   }
  
   public function executeInsert(HTTPRequest $request)
   {
-    $this->processForm($request);
+    if ($request->method() == 'POST') {
+      $news = new News([
+        'auteur' => $request->postData('auteur'),
+        'titre' => $request->postData('titre'),
+        'contenu' => $request->postData('contenu')
+      ]);
  
-    $this->page->addVar('title', 'Ajout d\'une news');
+      if ($request->getExists('id')) {
+        $news->setId($request->getData('id'));
+      }
+    } else {
+      // L'identifiant de la news est transmis si on veut la modifier
+      if ($request->getExists('id')) {
+        $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+      } else {
+        $news = new News;
+      }
+    }
+ 
+    //$formBuilder = new NewsFormBuilder($news);
+    //$formBuilder->build();
+ 
+    //$form = $formBuilder->form();
+ 
+    //$formHandler = new FormHandler($form, $this->managers->getManagerOf('News'), $request);
+ 
+    //if ($formHandler->process()) {
+    //  $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
+ 
+    //  $this->app->httpResponse()->redirect('/admin/');
+    //}
+
+    //$form = $this->processForm($request);
+  
+    //$this->page->addVar('title', 'Ajout d\'une news');
+
+    return $this->render('BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news]);
   }
  
   public function executeUpdate(HTTPRequest $request)
   {
-    $this->processForm($request);
+    if ($request->method() == 'POST') {
+      $news = new News([
+        'auteur' => $request->postData('auteur'),
+        'titre' => $request->postData('titre'),
+        'contenu' => $request->postData('contenu')
+      ]);
  
-    $this->page->addVar('title', 'Modification d\'une news');
+      if ($request->getExists('id')) {
+        $news->setId($request->getData('id'));
+      }
+    } else {
+      // L'identifiant de la news est transmis si on veut la modifier
+      if ($request->getExists('id')) {
+        $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+      } else {
+        $news = new News;
+      }
+    }
+ 
+    //$formBuilder = new NewsFormBuilder($news);
+    //$formBuilder->build();
+ 
+    //$form = $formBuilder->form();
+ 
+    //$formHandler = new FormHandler($form, $this->managers->getManagerOf('News'), $request);
+ 
+    //if ($formHandler->process()) {
+    //  $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
+ 
+    //  $this->app->httpResponse()->redirect('/admin/');
+    //}
+
+    //$form = $this->processForm($request);
+    //$this->page->addVar('form', $form->createView());
+    //$this->page->addVar('title', 'Modification d\'une news');
+ 
+    return $this->render('BackendNewsUpdate.html', ['title' => 'Modification d\'une news', 'News' => $news]);
   }
  
   public function executeUpdateComment(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Modification d\'un commentaire');
+    //$this->page->addVar('title', 'Modification d\'un commentaire');
  
     if ($request->method() == 'POST') {
       $comment = new Comment([
@@ -74,20 +141,22 @@ class NewsController extends BackController
       $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
     }
  
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
+    //$formBuilder = new CommentFormBuilder($comment);
+    //$formBuilder->build();
  
-    $form = $formBuilder->form();
+    //$form = $formBuilder->form();
  
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    //$formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
  
-    if ($formHandler->process()) {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+    //if ($formHandler->process()) {
+    //  $this->app->user()->setFlash('Le commentaire a bien été modifié');
  
-      $this->app->httpResponse()->redirect('/admin/');
-    }
+    //  $this->app->httpResponse()->redirect('/admin/');
+    //}
  
-    $this->page->addVar('form', $form->createView());
+    //$this->page->addVar('form', $form->createView());
+
+    return $this->render('BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'comment' => $comment]);
   }
  
   public function processForm(HTTPRequest $request)
@@ -123,7 +192,9 @@ class NewsController extends BackController
  
       $this->app->httpResponse()->redirect('/admin/');
     }
- 
-    $this->page->addVar('form', $form->createView());
+
+    return $form;
+
+    //$this->page->addVar('form', $form->createView());
   }
 }

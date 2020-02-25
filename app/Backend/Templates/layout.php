@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <!-- a supprimer -->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,10 +50,7 @@
               <section id="main">
                 <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
        
-                <?= $content ?>
-                
                 {% block content %}{%endblock %}
-
               </section>
             </div>
        

@@ -22,7 +22,7 @@ abstract class BackController extends ApplicationComponent
     $this->setAction($action);
     $this->setView($action);
 
-    $loader = new \Twig\Loader\FilesystemLoader('../template');
+    $loader = new \Twig\Loader\FilesystemLoader('../templates');
 
     $this->twig = new \Twig\Environment($loader, [
             'cache' => false,

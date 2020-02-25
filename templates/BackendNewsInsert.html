@@ -1,0 +1,22 @@
+{% extends 'BackendNewsLayout.html' %}
+
+{% block content %}
+	<h2>Insérer une news</h2>
+	<form action="" method="post">
+	  <p>
+	  	<label>Auteur</label>
+	  	<input type="text" name="user_id" value="{{ News.user_id }}" maxlength="11" /><br />
+
+	  	<label>Titre</label>
+	  	<input type="text" name="titre" value="{{ News.titre }}" maxlength="100" /><br />
+
+	  	<label>Chapo</label>
+	  	<textarea name="chapo" cols="60" rows="2">{{ News.chapo }}</textarea><br />
+
+	  	<label>Content</label>
+	  	<textarea name="content" cols="60" rows="8">{{ News.contenu }}</textarea><br />
+
+	    <input type="submit" value="Ajouter" />
+	  </p>
+	</form>
+{% endblock %}

@@ -1,4 +1,5 @@
 <!-- update.php -->
+<!-- a supprimer -->
 
 <h2>Modifier une news</h2>
 <form action="" method="post">
