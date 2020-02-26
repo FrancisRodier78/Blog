@@ -1,0 +1,16 @@
+{% extends 'FrontendNewsLayout.html' %}
+
+{% block content %}
+	<h2>Ajouter un commentaire</h2>
+	<form action="" method="post">
+	  <p>
+		<label>Auteur</label>
+		<input type="text" name="user_id" maxlength="50" /><br />
+
+		<label>Content</label>
+		<textarea name="content" cols="50" rows="7"></textarea><br />	 
+		
+	    <input type="submit" value="Commenter" />
+	  </p>
+	</form>
+{% endblock %}

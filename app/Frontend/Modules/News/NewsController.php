@@ -48,9 +48,11 @@ class NewsController extends BackController
       $this->app->httpResponse()->redirect404();
     }
  
-    $this->page->addVar('title', $news->titre());
-    $this->page->addVar('news', $news);
-    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
+    //$this->page->addVar('title', $news->titre());
+    //$this->page->addVar('news', $news);
+    //$this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
+
+    return $this->render('FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id())]);
   }
  
   public function executeInsertComment(HTTPRequest $request)
@@ -66,21 +68,24 @@ class NewsController extends BackController
       $comment = new Comment;
     }
  
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
+    //$formBuilder = new CommentFormBuilder($comment);
+    //$formBuilder->build();
  
-    $form = $formBuilder->form();
+    //$form = $formBuilder->form();
  
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    //$formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
  
-    if ($formHandler->process()) {
-      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
+    //if ($formHandler->process()) {
+      //$this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
  
-      $this->app->httpResponse()->redirect('news-'.$request->getData('news').'.html');
-    }
+      //$this->app->httpResponse()->redirect('news-'.$request->getData('news').'.html');
+    //}
  
-    $this->page->addVar('comment', $comment);
-    $this->page->addVar('form', $form->createView());
-    $this->page->addVar('title', 'Ajout d\'un commentaire');
+    //$this->page->addVar('comment', $comment);
+    //$this->page->addVar('form', $form->createView());
+    //$this->page->addVar('title', 'Ajout d\'un commentaire');
+
+    //return $this->render('FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'form' => $form->createView(), 'comment' => $comment]);
+    return $this->render('FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment]);
   }
 }

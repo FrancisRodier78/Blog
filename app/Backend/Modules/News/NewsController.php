@@ -156,7 +156,8 @@ class NewsController extends BackController
  
     //$this->page->addVar('form', $form->createView());
 
-    return $this->render('BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'comment' => $comment]);
+    //return $this->render('BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'form' => $form->createView(), 'comment' => $comment]);
+    return $this->render('BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'Comment' => $comment]);
   }
  
   public function processForm(HTTPRequest $request)

@@ -4,8 +4,12 @@
 	<h2>Modifier un commentaire</h2>
 	<form action="" method="post">
 	  <p>
-	    {{ Comment }}
-	 
+		<label>Auteur</label>
+		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" /><br />
+
+		<label>Content</label>
+		<textarea name="content" cols="50" rows="7">{{ Comment.content }}</textarea><br />	 
+
 	    <input type="submit" value="Modifier" />
 	  </p>
 	</form>
