@@ -82,7 +82,9 @@ class NewsController extends BackController
     //$form = $this->processForm($request);
   
     //$this->page->addVar('title', 'Ajout d\'une news');
+    //$form2 = $this->page->addVar('form', $form->createView());
 
+    //return $this->render('BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'form' => $form2, 'News' => $news]);
     return $this->render('BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news]);
   }
  

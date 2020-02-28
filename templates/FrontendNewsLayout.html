@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>
-        <?= isset($title) ? $title : 'Mon super site' ?>
+        {{ title??"Mon Super Site" }}
     </title>
 
   <!-- Custom fonts for this theme Blog\app\Frontend\Templates -->
