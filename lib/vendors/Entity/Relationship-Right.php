@@ -17,8 +17,7 @@ class Relationship-Right extends Entity
   {
     return !(empty($this->right_id) || empty($this->role_id));
   }
- 
- 
+  
   // SETTERS //
   public function setRightId($user_id)
   {

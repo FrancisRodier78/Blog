@@ -16,8 +16,7 @@ class Rights extends Entity
     return !(empty($this->description));
   }
  
- 
-  // SETTERS //
+   // SETTERS //
   public function setDescription($description)
   {
     if (!is_string($description) || empty($description)) {

@@ -16,16 +16,12 @@ class NewsController extends BackController
     $nombreNews = $this->app->config()->get('nombre_news');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
  
-    // On ajoute une définition pour le titre.
-    //$this->page->addVar('title', 'Liste des '.$nombreNews.' dernières news///');
- 
     // On récupère le manager des news.
     $manager = $this->managers->getManagerOf('News');
  
     $listeNews = $manager->getList(0, $nombreNews);
  
-    foreach ($listeNews as $news)
-    {
+    foreach ($listeNews as $news) {
       if (strlen($news->content()) > $nombreCaracteres) {
         $debut = substr($news->content(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
@@ -34,10 +30,7 @@ class NewsController extends BackController
       }
     }
  
-    // On ajoute la variable $listeNews à la vue.
-    //$this->page->addVar('listeNews', $listeNews);
-
-    return $this->render('FrontendNewsIndex.html', ['title' => 'Liste des '.$nombreNews.' dernières news///', 'listeNews' => $listeNews]);
+    return $this->render('frontend/FrontendNewsIndex.html', ['title' => 'Liste des '.$nombreNews.' dernières news///', 'listeNews' => $listeNews]);
   }
  
   public function executeShow(HTTPRequest $request)
@@ -48,11 +41,7 @@ class NewsController extends BackController
       $this->app->httpResponse()->redirect404();
     }
  
-    //$this->page->addVar('title', $news->titre());
-    //$this->page->addVar('news', $news);
-    //$this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
-
-    return $this->render('FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id())]);
+    return $this->render('frontend/FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id())]);
   }
  
   public function executeInsertComment(HTTPRequest $request)
@@ -68,24 +57,6 @@ class NewsController extends BackController
       $comment = new Comment;
     }
  
-    //$formBuilder = new CommentFormBuilder($comment);
-    //$formBuilder->build();
- 
-    //$form = $formBuilder->form();
- 
-    //$formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
- 
-    //if ($formHandler->process()) {
-      //$this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
- 
-      //$this->app->httpResponse()->redirect('news-'.$request->getData('news').'.html');
-    //}
- 
-    //$this->page->addVar('comment', $comment);
-    //$this->page->addVar('form', $form->createView());
-    //$this->page->addVar('title', 'Ajout d\'un commentaire');
-
-    //return $this->render('FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'form' => $form->createView(), 'comment' => $comment]);
-    return $this->render('FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment]);
+    return $this->render('frontend/FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment]);
   }
 }

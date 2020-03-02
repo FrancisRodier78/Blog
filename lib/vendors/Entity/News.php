@@ -23,8 +23,7 @@ class News extends Entity
   {
     return !(empty($this->user_id) || empty($this->titre) || empty($this->content) || empty($this->chapo));
   }
- 
- 
+  
   // SETTERS //
   public function setUser_id($user_id)
   {
