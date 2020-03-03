@@ -48,6 +48,15 @@ class NewsController extends BackController
     return $this->render('backend/BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news]);
   }
  
+  /**/ 
+  public function executeSave(HTTPRequest $request)
+  {
+    //var_dump($news); die();
+    $this->managers->getManagerOf('News')->save($request->getData('news'));
+
+    $this->app->httpResponse()->redirect('.');
+  }
+
   public function executeUpdate(HTTPRequest $request)
   {
     $news = $this->processForm($request); 
