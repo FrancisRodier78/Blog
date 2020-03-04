@@ -2,7 +2,7 @@
 
 {% block content %}
 	<h2>Modifier une news</h2>
-	<form action="" method="post">
+	<form action="update" method="post">
 	  <p>
 	  	<label>Auteur</label>
 	  	<input type="text" name="user_id" value="{{ News.user_id }}" maxlength="11" /><br />
@@ -14,9 +14,11 @@
 	  	<textarea name="chapo" cols="60" rows="2">{{ News.chapo }}</textarea><br />
 
 	  	<label>Content</label>
-	  	<textarea name="content" cols="60" rows="8">{{ News.contenu }}</textarea><br />
+	  	<textarea name="content" cols="60" rows="8">{{ News.content }}</textarea><br />
 
 	    <input type="submit" value="Modifier" />
+
+	  	<input type="hidden" name="id" value="{{ News.id }}" maxlength="11" /><br />
 	  </p>
 	</form>
 {% endblock %}

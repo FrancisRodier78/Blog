@@ -51,8 +51,18 @@ class NewsController extends BackController
   /**/ 
   public function executeSave(HTTPRequest $request)
   {
-    //var_dump($news); die();
-    $this->managers->getManagerOf('News')->save($request->getData('news'));
+    $news = new News; 
+    //$this->managers->getManagerOf('News')->save($request->getData('news'));
+    $news->setUser_id($_POST['user_id']);
+    $news->setTitre($_POST['titre']);
+    $news->setChapo($_POST['chapo']);
+    $news->setContent($_POST['content']);
+
+    if (isset($_POST['id'])) {
+      $news->setId($_POST['id']);
+    }
+
+    $this->managers->getManagerOf('News')->save($news);
 
     $this->app->httpResponse()->redirect('.');
   }
