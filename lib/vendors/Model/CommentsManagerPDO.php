@@ -9,12 +9,12 @@ class CommentsManagerPDO extends CommentsManager
 {
   protected function add(Comment $comment)
   {
-    $q = $this->dao->prepare('INSERT INTO comments SET user_id = :user_id, new_id = :new_id, content = :content, etat = :etat, date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO comments SET user_id = :user_id, new_id = :new_id, content = :content, etat = :etat, dateCreation = NOW()');
  
     $q->bindValue(':user_id', $comment->user_id(), \PDO::PARAM_INT);
     $q->bindValue(':new_id', $comment->new_id(), \PDO::PARAM_INT);
     $q->bindValue(':content', $comment->content());
-    $q->bindValue(':etat', $comment->etat());
+    $q->bindValue(':etat', 'Refuse');
  
     $q->execute();
  

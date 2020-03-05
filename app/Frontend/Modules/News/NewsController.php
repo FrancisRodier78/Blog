@@ -57,6 +57,18 @@ class NewsController extends BackController
       $comment = new Comment;
     }
  
-    return $this->render('frontend/FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment]);
+    return $this->render('frontend/FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment, 'newId' => $request->getData('news')]);
+  }
+ 
+  public function executeSave(HTTPRequest $request)
+  {
+    $comment = new Comment; 
+    $comment->setnew_id($request->postData('new_id'));
+    $comment->setUser_id($request->postData('user_id'));
+    $comment->setContent($request->postData('content'));
+
+    $this->managers->getManagerOf('Comments')->save($comment);
+
+    $this->app->httpResponse()->redirect('.');
   }
 }

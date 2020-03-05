@@ -31,7 +31,8 @@ class NewsController extends BackController
  
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
  
-    $this->app->httpResponse()->redirect('.');
+    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
+
   }
  
   public function executeIndex(HTTPRequest $request)
@@ -52,14 +53,13 @@ class NewsController extends BackController
   public function executeSave(HTTPRequest $request)
   {
     $news = new News; 
-    //$this->managers->getManagerOf('News')->save($request->getData('news'));
-    $news->setUser_id($_POST['user_id']);
-    $news->setTitre($_POST['titre']);
-    $news->setChapo($_POST['chapo']);
-    $news->setContent($_POST['content']);
+    $news->setUser_id($request->postData('user_id'));
+    $news->setTitre($request->postData('titre'));
+    $news->setChapo($request->postData('chapo'));
+    $news->setContent($request->postData('content'));
 
-    if (isset($_POST['id'])) {
-      $news->setId($_POST['id']);
+    if ($request->postExists('id')) {
+      $news->setId($request->postData('id'));
     }
 
     $this->managers->getManagerOf('News')->save($news);
@@ -86,9 +86,26 @@ class NewsController extends BackController
       $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
     }
  
-    return $this->render('backend/BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'Comment' => $comment]);
+    return $this->render('backend/BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'Comment' => $comment, 'Id' => $request->getData('id')]);
   }
  
+  public function executeCommentSave(HTTPRequest $request)
+  {
+    $comment = new Comment; 
+    $comment->setId($request->postData('comment_id'));
+    $comment->setNew_id($request->postData('new_id'));
+    $comment->setUser_id($request->postData('user_id'));
+    $comment->setContent($request->postData('content'));
+    $comment->setEtat($request->postData('etat'));
+    //$comment->setDateCreation($request->postData('dateCreation'));
+
+    //var_dump($comment);die();
+
+    $this->managers->getManagerOf('Comments')->save($comment);
+
+    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
+  }
+
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST') {

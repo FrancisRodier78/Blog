@@ -2,7 +2,7 @@
 
 {% block content %}
 	<h2>Modifier un commentaire</h2>
-	<form action="" method="post">
+	<form action="commentSave" method="post">
 	  <p>
 		<label>Auteur</label>
 		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" /><br />
@@ -10,7 +10,14 @@
 		<label>Content</label>
 		<textarea name="content" cols="50" rows="7">{{ Comment.content }}</textarea><br />	 
 
+		<label>Etat</label>
+   	  	<input type="text" name="etat" value="{{ Comment.etat }}" maxlength="50" /><br />
+
 	    <input type="submit" value="Modifier" />
+
+   	  	<input type="hidden" name="comment_id" value="{{ Id }}" maxlength="11" /><br />
+   	  	<input type="hidden" name="new_id" value="{{ Comment.new_id }}" maxlength="11" /><br />
+   	  	<input type="hidden" name="dateCreation" value="{{ Comment.dateCreation }}" maxlength="11" /><br />
 	  </p>
 	</form>
 {% endblock %}

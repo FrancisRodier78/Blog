@@ -19,7 +19,7 @@
 	{% for comment in comments %}
 		<fieldset>
 		  <legend>
-		    Posté par <strong>{{ comment.user_id }}</strong> le {{ comment.dateCreation|date("d/m/Y") }} ?>
+		    Posté par <strong>{{ comment.user_id }}</strong> le {{ comment.dateCreation|date("d/m/Y") }}
             {% if (user.isAuthenticated) %} 
 		      <a class="blog-a" href="admin/comment-update-{{ comment.id }}.html">Modifier</a> |
 		      <a class="blog-a" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
