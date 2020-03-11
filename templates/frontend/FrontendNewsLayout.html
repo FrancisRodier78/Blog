@@ -49,7 +49,9 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Admin</a>
                     </li>
-
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="#connexion">Connexion/Inscription</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -241,6 +243,99 @@
             <div id="success"></div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Envoi</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connexion Section -->
+  <section class="page-section bg-primary text-white mb-0" id="connexion">
+    <div class="container">
+      <!-- Connexion Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-white mb-0">Connexion/Inscription</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- Connexion Section Form -->
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <h4 class="text-center text-white mb-0">Connectez Vous</h4>
+
+          <form name="connexion" id="connexionForm" novalidate="novalidate" action="connexion" method="post">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Pseudo</label>
+                <input class="form-control" id="pseudo" type="text" placeholder="Pseudo" required="required" data-validation-required-message="Entrez votre Pseudo.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Mot de passe</label>
+                <input class="form-control" id="password" type="password" placeholder="Mot de passe" required="required" data-validation-required-message="Entrez votre Mot de passe.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br>
+
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary btn-xl" id="sendMessageButton">Envoi</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-6 mx-auto">
+          <h4 class="text-center text-white mb-0">Inscrivez Vous</h4>
+
+          <form name="inscription" id="inscriptionForm" novalidate="novalidate" action="inscription" method="post">
+            <div class="control-group">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Pseudo</label>
+                <input class="form-control" id="pseudo" type="text" placeholder="Pseudo" required="required" data-validation-required-message="Entrez votre Pseudo.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Mot de passe</label>
+                <input class="form-control" id="password" type="password" placeholder="Mot de passe" required="required" data-validation-required-message="Entrez votre Mot de passe.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Confirmer mot de passe</label>
+                <input class="form-control" id="password2" type="password" placeholder="Confirmez mot de passe" required="required" data-validation-required-message="Confirmez votre Mot de passe.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Email</label>
+                <input class="form-control" id="email" type="email" placeholder="Entrez email" required="required" data-validation-required-message="Entrez Confirmer votre Mot de passe.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary btn-xl" id="sendMessageButton">Envoi</button>
             </div>
           </form>
         </div>
