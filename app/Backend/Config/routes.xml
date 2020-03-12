@@ -9,4 +9,6 @@
   <route url="/admin/comment-delete-([0-9]+)\.html" module="News" action="deleteComment" vars="id" />
   <route url="/admin/newsSave" module="News" action="save" />
   <route url="/admin/commentSave" module="News" action="commentSave" />
+  <route url="/admin/connexion" module="Users" action="connexion" />
+  <route url="/admin/inscription" module="Users" action="inscription" />
 </routes>

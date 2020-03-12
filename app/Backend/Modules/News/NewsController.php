@@ -37,6 +37,7 @@ class NewsController extends BackController
  
   public function executeIndex(HTTPRequest $request)
   {
+    //var_dump('Index');die();
     $manager = $this->managers->getManagerOf('News');
  
     return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count()]);
@@ -49,8 +50,7 @@ class NewsController extends BackController
     return $this->render('backend/BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news]);
   }
  
-  /**/ 
-  public function executeSave(HTTPRequest $request)
+ public function executeSave(HTTPRequest $request)
   {
     $news = new News; 
     $news->setUser_id($request->postData('user_id'));
@@ -98,8 +98,6 @@ class NewsController extends BackController
     $comment->setContent($request->postData('content'));
     $comment->setEtat($request->postData('etat'));
     //$comment->setDateCreation($request->postData('dateCreation'));
-
-    //var_dump($comment);die();
 
     $this->managers->getManagerOf('Comments')->save($comment);
 

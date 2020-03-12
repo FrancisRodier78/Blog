@@ -1,0 +1,29 @@
+{% extends 'backend/BackendNewsLayout.html' %}
+
+{% block content %}
+  <h4 class="text-center text-white mb-0">Connectez Vous</h4>
+
+  <form name="connexion" id="connexionForm" novalidate="novalidate" action="connexion" method="post">
+    <div class="control-group">
+      <div class="form-group floating-label-form-group controls mb-0 pb-2">
+        <label>Pseudo</label>
+        <input class="form-control" id="pseudo" type="text" placeholder="Pseudo" required="required" data-validation-required-message="Entrez votre Pseudo.">
+        <p class="help-block text-danger"></p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="form-group floating-label-form-group controls mb-0 pb-2">
+        <label>Mot de passe</label>
+        <input class="form-control" id="password" type="password" placeholder="Mot de passe" required="required" data-validation-required-message="Entrez votre Mot de passe.">
+        <p class="help-block text-danger"></p>
+      </div>
+    </div>
+    <br>
+
+    <div id="success"></div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-secondary btn-xl" id="sendMessageButton">Envoi</button>
+    </div>
+  </form>
+{% endblock %}

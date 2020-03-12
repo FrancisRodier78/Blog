@@ -11,14 +11,14 @@ class UsersManagerPDO extends UsersManager
   {
     $requete = $this->dao->prepare('INSERT INTO user SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip, dateRegistration = : NOW()');
 
-    $requete->bindValue(':role_id', $users->role_id());
+    $requete->bindValue(':role_id', 'Visiteur');
     $requete->bindValue(':name', $users->name());
     $requete->bindValue(':firstname', $users->firstname());
     $requete->bindValue(':loggin', $users->loggin());
     $requete->bindValue(':password', $users->password());
     $requete->bindValue(':email', $users->email());
-    $requete->bindValue(':picture', $users->picture());
-    $requete->bindValue(':grip', $users->grip());
+    $requete->bindValue(':picture', ' ');
+    $requete->bindValue(':grip', ' ');
  
     $requete->execute();
   }
@@ -73,6 +73,24 @@ class UsersManagerPDO extends UsersManager
     return null;
   }
  
+  public function exist($loggin, $password)
+  {
+    $requete = $this->dao->prepare('SELECT id, role_id, name, firstname, loggin, password, email, picture, grip, dateRegistration FROM users WHERE loggin = :loggin AND password = :password');
+    $requete->bindValue(':loggin', $loggin, \PDO::PARAM_INT);
+    $requete->bindValue(':password', $password, \PDO::PARAM_INT);
+    $requete->execute();
+ 
+    $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
+ 
+    if ($users = $requete->fetch()) {
+      $users->setdateCreation(new \DateTime($users->dateRegistration()));
+ 
+      return $users;
+    }
+ 
+    return null;
+  }
+ 
   protected function modify(Users $users)
   {
     $requete = $this->dao->prepare('UPDATE users SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip WHERE id = :id');
@@ -84,8 +102,8 @@ class UsersManagerPDO extends UsersManager
     $requete->bindValue(':loggin', $users->loggin());
     $requete->bindValue(':password', $users->password());
     $requete->bindValue(':email', $users->email());
-    $requete->bindValue(':picture', $users->picture());
-    $requete->bindValue(':grip', $users->grip());
+    $requete->bindValue(':picture', ' ');
+    $requete->bindValue(':grip', ' ');
  
     $requete->execute();
   }
