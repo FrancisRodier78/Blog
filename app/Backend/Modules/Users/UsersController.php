@@ -1,5 +1,6 @@
 <?php
 // UsersController.php
+// A supprimer
 
 namespace App\Backend\Modules\Users;
  
@@ -49,6 +50,7 @@ class UsersController extends BackController
  
   public function executeConnexion(HTTPRequest $request)
   {
+    var_dump('Connexion'); die();
     if ($request->postExists('login') and $request->postExists('password')) {
       if ($this->app->user()->exist($request->postData('login'), $request->postData('password'))) {
         $this->app->user()->setAuthenticated(true);

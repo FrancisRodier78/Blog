@@ -27,8 +27,7 @@ abstract class Application
  
     $xml = new \DOMDocument;
     $xml->load(__DIR__.'/../../App/'.$this->name.'/Config/routes.xml');
-    //var_dump($this->name);die();
- 
+
     $routes = $xml->getElementsByTagName('route');
  
     // On parcourt les routes du fichier XML.
@@ -49,7 +48,6 @@ abstract class Application
       $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
     }
     catch (\RuntimeException $e) {
-      //var_dump($this->name);die();
       if ($e->getCode() == Router::NO_ROUTE) {
         // Si aucune route ne correspond, c'est que la page demandée n'existe pas.
         $this->httpResponse->redirect404();
