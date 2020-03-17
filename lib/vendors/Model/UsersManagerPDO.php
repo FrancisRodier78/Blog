@@ -48,7 +48,7 @@ class UsersManagerPDO extends UsersManager
  
     foreach ($listeUsers as $users)
     {
-      $users->setDateCreation(new \DateTime($users->dateRegistration()));
+      $users->setDateRegistration(new \DateTime($users->dateRegistration()));
     }
  
     $requete->closeCursor();
@@ -65,7 +65,7 @@ class UsersManagerPDO extends UsersManager
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
  
     if ($users = $requete->fetch()) {
-      $users->setdateCreation(new \DateTime($users->dateRegistration()));
+      $users->setdateRegistration(new \DateTime($users->dateRegistration()));
  
       return $users;
     }
@@ -76,19 +76,18 @@ class UsersManagerPDO extends UsersManager
   public function exist($loggin, $password)
   {
     $requete = $this->dao->prepare('SELECT id, role_id, name, firstname, loggin, password, email, picture, grip, dateRegistration FROM users WHERE loggin = :loggin AND password = :password');
-    $requete->bindValue(':loggin', $loggin, \PDO::PARAM_INT);
-    $requete->bindValue(':password', $password, \PDO::PARAM_INT);
+    $requete->bindValue(':loggin', $loggin, \PDO::PARAM_STR);
+    $requete->bindValue(':password', $password, \PDO::PARAM_STR);
     $requete->execute();
  
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
  
     if ($users = $requete->fetch()) {
-      $users->setdateCreation(new \DateTime($users->dateRegistration()));
- 
+      $users->setdateRegistration(new \DateTime($users->dateRegistration()));
       return $users;
     }
- 
-    return null;
+
+    return false;
   }
  
   protected function modify(Users $users)

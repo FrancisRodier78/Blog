@@ -22,7 +22,8 @@
 		    Posté par <strong>{{ comment.user_id }}</strong> le {{ comment.dateCreation|date("d/m/Y") }}
             {% if (user.isAuthenticated) %} 
 		      <a class="blog-a" href="admin/comment-update-{{ comment.id }}.html">Modifier</a> |
-		      <a class="blog-a" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
+			  <a class="blog-a" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
+		      <!-- a class="blog-a" href="admin/comment-delete-{{ comment.id }}-{{ comment.new_id }}.html">Supprimer</a -->
 		    {% endif %}
 		  </legend>
 		  <p>{{ comment.content|nl2br }}</p>

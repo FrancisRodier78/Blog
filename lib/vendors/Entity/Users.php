@@ -7,8 +7,8 @@ use \OCFram\Entity;
  
 class Users extends Entity
 {
-  protected $role_id,
-            $name,
+  public $role_id;
+  protected $name,
             $firstName,
             $loggin,
             $passWord,
@@ -105,7 +105,7 @@ class Users extends Entity
  
   public function name()
   {
-    return $this->name_id;
+    return $this->name;
   }
  
   public function firstName()
@@ -115,7 +115,7 @@ class Users extends Entity
  
   public function loggin()
   {
-    return $this->loggin_id;
+    return $this->loggin;
   }
  
   public function passWord()

@@ -30,14 +30,16 @@ class NewsController extends BackController
     $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
  
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
- 
-    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
 
+    var_dump($request->getData('id'));
+    var_dump('/news-' . $request->getData('new_id') . '.html');
+    var_dump($request->postData('new_id'));
+    die();
+    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
   }
  
   public function executeIndex(HTTPRequest $request)
   {
-    //var_dump('Index');die();
     $manager = $this->managers->getManagerOf('News');
  
     return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count()]);
