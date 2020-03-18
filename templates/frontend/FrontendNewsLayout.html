@@ -46,9 +46,23 @@
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Connexion</a>
-                    </li>
+                    {% if not (user.isAuthenticated) %}
+                      <li class="nav-item mx-0 mx-lg-1">
+                          <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Connexion</a>
+                      </li>
+                      <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/users-inscription">Inscription</a>
+                      </li>
+                    {% else %}
+                      <li class="nav-item mx-0 mx-lg-1">
+                        <p class="blog-b">Bonjour {{ user.isRoleId}}</p>
+                      </li>
+                    {% endif %}
+                    {% if ((user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
+                      <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Espace admin</a>
+                      </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -161,11 +175,14 @@
        
             <nav>
               <ul>
-                <a class="blog-a" href="/">Accueil</a>
+                <li><a class="blog-a" href="/">Accueil</a></li>
 
-                {% if (user.isAuthenticated) %} 
-                   <li><a class="blog-a" href="/admin/news-insert.html">Ajouter une news</a></li>
-                   <li><a class="blog-a" href="/admin/logout">Deconnexion</a></li>
+                {% if ((user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
+                  <li><a class="blog-a" href="/admin/news-insert.html">Ajouter une news</a></li>
+                {% endif %}
+
+                {% if (user.isAuthenticated) %}
+                  <li><a class="blog-a" href="/admin/logout">Deconnexion</a></li>
                 {% endif %}
               </ul>
             </nav>

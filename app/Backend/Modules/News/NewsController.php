@@ -7,6 +7,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\News;
 use \Entity\Comment;
+use \Entity\Users;
 use \FormBuilder\CommentFormBuilder;
 use \FormBuilder\NewsFormBuilder;
 use \OCFram\FormHandler;
@@ -41,8 +42,9 @@ class NewsController extends BackController
   public function executeIndex(HTTPRequest $request)
   {
     $manager = $this->managers->getManagerOf('News');
- 
-    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count()]);
+    $manager2 = $this->managers->getManagerOf('Users');
+
+    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count()]);
   }
  
   public function executeInsert(HTTPRequest $request)

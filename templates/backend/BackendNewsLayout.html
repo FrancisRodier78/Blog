@@ -37,9 +37,13 @@
             <nav>
               <ul>
                 <li><a class="blog-a" href="/">Accueil</a></li>
-                {% if (user.isAuthenticated) %} 
-                   <li><a class="blog-a" href="/admin/news-insert.html">Ajouter une news</a></li>
-                   <li><a class="blog-a" href="/admin/logout">Deconnexion</a></li>
+
+                {% if ((user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
+                  <li><a class="blog-a" href="/admin/news-insert.html">Ajouter une news</a></li>
+                {% endif %}
+
+                {% if (user.isAuthenticated) %}
+                  <li><a class="blog-a" href="/admin/logout">Deconnexion</a></li>
                 {% endif %}
               </ul>
             </nav>
@@ -48,7 +52,7 @@
               <section id="main">
                 {% if (user.hasFlash) %} 
                 	<p style="text-align: center;"> {{ user.getFlash }} </p>
-				        {% endif %}       
+                {% endif %}
 
                 {% block content %}
                 {%endblock %}

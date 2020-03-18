@@ -14,24 +14,13 @@ class UsersController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
   {
-    $UsersId = $request->getData('id');
+    $usersId = $request->getData('id');
  
-    $this->managers->getManagerOf('Users')->delete($UsersId);
-    $this->managers->getManagerOf('Comments')->deleteFromUsers($UsersId);
- 
-    $this->app->user()->setFlash('La Users a bien été supprimée !');
+    $this->managers->getManagerOf('Users')->delete($usersId);
+
+    $this->app->user()->setFlash('Le User a bien été supprimé !');
  
     $this->app->httpResponse()->redirect('.');
-  }
- 
-  public function executeDeleteComment(HTTPRequest $request)
-  {
-    $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
- 
-    $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
- 
-    $this->app->httpResponse()->redirect('/Users-' . $request->postData('new_id') . '.html');
-
   }
  
   public function executeIndex(HTTPRequest $request)
@@ -43,26 +32,11 @@ class UsersController extends BackController
  
   public function executeInsert(HTTPRequest $request)
   {
-    $Users = $this->processForm($request); 
+    $users = $this->processForm($request);
 
-    return $this->render('backend/BackendUsersInsert.html', ['title' => 'Ajout d\'une Users', 'Users' => $Users]);
+    return $this->render('backend/BackendUsersInsert.html', ['title' => 'Ajout d\'une User', 'Users' => $users]);
   }
  
-  public function executeConnexion(HTTPRequest $request)
-  {
-    var_dump('Connexion'); die();
-    if ($request->postExists('login') and $request->postExists('password')) {
-      if ($this->app->user()->exist($request->postData('login'), $request->postData('password'))) {
-        $this->app->user()->setAuthenticated(true);
-        $this->app->httpResponse()->redirect('.');
-      } else {
-        $this->app->user()->setFlash('Le pseudo ou le mot de passe est incorrect.');
-      }
-    }
-
-    return $this->render('ConnexionUtilisateurIndex.html', ['title' => 'Connexion utilisateur']);
-  }
-
   public function executeInscription(HTTPRequest $request)
   {
     var_dump('Inscription');die();
@@ -117,36 +91,6 @@ class UsersController extends BackController
     return $this->render('backend/BackendUsersUpdate.html', ['title' => 'Modification d\'une Users', 'Users' => $Users]);
   }
  
-  public function executeUpdateComment(HTTPRequest $request)
-  {
-    if ($request->method() == 'POST') {
-      $comment = new Comment([
-        'id' => $request->getData('id'),
-        'auteur' => $request->postData('auteur'),
-        'contenu' => $request->postData('contenu')
-      ]);
-    } else {
-      $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
-    }
- 
-    return $this->render('backend/BackendUsersUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'Comment' => $comment, 'Id' => $request->getData('id')]);
-  }
- 
-  public function executeCommentSave(HTTPRequest $request)
-  {
-    $comment = new Comment; 
-    $comment->setId($request->postData('comment_id'));
-    $comment->setNew_id($request->postData('new_id'));
-    $comment->setUser_id($request->postData('user_id'));
-    $comment->setContent($request->postData('content'));
-    $comment->setEtat($request->postData('etat'));
-    //$comment->setDateCreation($request->postData('dateCreation'));
-
-    $this->managers->getManagerOf('Comments')->save($comment);
-
-    $this->app->httpResponse()->redirect('/Users-' . $request->postData('new_id') . '.html');
-  }
-
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST') {
@@ -160,7 +104,7 @@ class UsersController extends BackController
         $Users->setId($request->getData('id'));
       }
     } else {
-      // L'identifiant de la Users est transmis si on veut la modifier
+      // L'identifiant du User est transmis si on veut le modifier
       if ($request->getExists('id')) {
         $Users = $this->managers->getManagerOf('Users')->getUnique($request->getData('id'));
       } else {

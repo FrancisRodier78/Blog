@@ -29,7 +29,12 @@ class User
   {
     return isset($_SESSION['auth']) && $_SESSION['auth'] === true;
   }
- 
+
+  public function isRoleId()
+  {
+    return $_SESSION['role_id'];
+  }
+
   public function setAttribute($attr, $value)
   {
     $_SESSION[$attr] = $value;

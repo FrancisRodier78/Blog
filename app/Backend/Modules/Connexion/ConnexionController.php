@@ -10,12 +10,11 @@ class ConnexionController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-      //var_dump('Index');die();
+      var_dump('Index');die();
     if ($request->postExists('login')) {
       $loggin = $request->postData('login');
       $password = $request->postData('password');
  
-//    if ($loggin == $this->app->config()->get('login') && $password == $this->app->config()->get('pass')) {
       if ($users = $this->managers->getManagerOf('Users')->exist($loggin, $password))  {
           $this->app->user()->setAuthenticated(true);
 
@@ -23,7 +22,6 @@ class ConnexionController extends BackController
           if (($_SESSION['role_id'] == 'Administrateur') OR ($_SESSION['role_id'] == 'Super-Administrateur')) {
             $this->app->httpResponse()->redirect('.');
           } else {
-              //var_dump($_SESSION['role_id']);die();
             $this->app->httpResponse()->redirect('/');
           }
       } else {
@@ -37,6 +35,7 @@ class ConnexionController extends BackController
   public function executeLogout(HTTPRequest $request)
   {
     $this->app->user()->setAuthenticated(false);
+    $_SESSION['role_id'] = ' ';
     $this->app->httpResponse()->redirect('/');
   }
 }
