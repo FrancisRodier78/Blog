@@ -1,0 +1,30 @@
+{% extends 'backend/BackendNewsLayout.html' %}
+
+{% block content %}
+<h2>Modifier un user</h2>
+<form action="users-save" method="post">
+    <p>
+        <label>Role_id</label>
+        <input type="text" name="role_id" value="{{ Users.role_id }}" maxlength="11" /><br />
+
+        <label>Nom</label>
+        <input type="text" name="Name" value="{{ Users.name }}" maxlength="100" /><br />
+
+        <label>Prénom</label>
+        <input type="text" name="Firstname" value="{{ Users.firstname }}" maxlength="100" /><br />
+
+        <label>Loggin</label>
+        <input type="text" name="Loggin" value="{{ Users.loggin }}" maxlength="100" /><br />
+
+        <label>Mot de passe</label>
+        <input type="password" name="password" value="{{ Users.password }}" maxlength="100" /><br />
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ Users.email }}" maxlength="100" /><br />
+
+        <input type="submit" value="Modifier" />
+
+        <input type="hidden" name="id" value="{{ Users.id }}" maxlength="11" /><br />
+    </p>
+</form>
+{% endblock %}

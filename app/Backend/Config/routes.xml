@@ -10,6 +10,7 @@
   <route url="/admin/users-inscription" module="Users" action="inscription" />
   <route url="/admin/users-update-([0-9]+)\.html" module="Users" action="update" vars="id" />
   <route url="/admin/users-delete-([0-9]+)\.html" module="Users" action="delete" vars="id" />
+  <route url="/admin/users-save" module="Users" action="save" vars="id" />
   <route url="/admin/newsSave" module="News" action="save" />
   <route url="/admin/commentSave" module="News" action="commentSave" />
 </routes>

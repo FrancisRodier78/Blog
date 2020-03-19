@@ -10,7 +10,6 @@ class ConnexionController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-      var_dump('Index');die();
     if ($request->postExists('login')) {
       $loggin = $request->postData('login');
       $password = $request->postData('password');
@@ -35,7 +34,7 @@ class ConnexionController extends BackController
   public function executeLogout(HTTPRequest $request)
   {
     $this->app->user()->setAuthenticated(false);
-    $_SESSION['role_id'] = ' ';
+    $_SESSION['role_id'] = 'Inconnu';
     $this->app->httpResponse()->redirect('/');
   }
 }

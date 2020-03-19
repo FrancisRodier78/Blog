@@ -7,11 +7,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\News;
 use \Entity\Comment;
-use \Entity\Users;
-use \FormBuilder\CommentFormBuilder;
-use \FormBuilder\NewsFormBuilder;
-use \OCFram\FormHandler;
- 
+
 class NewsController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
@@ -56,7 +52,8 @@ class NewsController extends BackController
  
  public function executeSave(HTTPRequest $request)
   {
-    $news = new News; 
+      var_dump('Save');die();
+    $news = new News;
     $news->setUser_id($request->postData('user_id'));
     $news->setTitre($request->postData('titre'));
     $news->setChapo($request->postData('chapo'));
@@ -95,6 +92,7 @@ class NewsController extends BackController
  
   public function executeCommentSave(HTTPRequest $request)
   {
+      var_dump('CommentSave');die();
     $comment = new Comment; 
     $comment->setId($request->postData('comment_id'));
     $comment->setNew_id($request->postData('new_id'));

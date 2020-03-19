@@ -32,7 +32,8 @@ class User
 
   public function isRoleId()
   {
-    return $_SESSION['role_id'];
+    return isset($_SESSION['role_id']) ? $_SESSION['role_id'] : 'Inconnu';
+
   }
 
   public function setAttribute($attr, $value)

@@ -6,10 +6,7 @@ namespace App\Backend\Modules\Users;
  
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
-//use \Entity\News;
-//use \Entity\Comment;
-use \OCFram\FormHandler;
- 
+
 class UsersController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
@@ -69,49 +66,50 @@ class UsersController extends BackController
 
   public function executeSave(HTTPRequest $request)
   {
-    $Users = new Users; 
-    $Users->setUser_id($request->postData('user_id'));
-    $Users->setTitre($request->postData('titre'));
-    $Users->setChapo($request->postData('chapo'));
-    $Users->setContent($request->postData('content'));
+      var_dump('executeSave');die();
+    $users = new Users;
+    $users->setUser_id($request->postData('user_id'));
+    $users->setTitre($request->postData('titre'));
+    $users->setChapo($request->postData('chapo'));
+    $users->setContent($request->postData('content'));
 
     if ($request->postExists('id')) {
-      $Users->setId($request->postData('id'));
+      $users->setId($request->postData('id'));
     }
 
-    $this->managers->getManagerOf('Users')->save($Users);
+    $this->managers->getManagerOf('Users')->save($users);
 
     $this->app->httpResponse()->redirect('.');
   }
 
   public function executeUpdate(HTTPRequest $request)
   {
-    $Users = $this->processForm($request); 
+    $users = $this->processForm($request);
  
-    return $this->render('backend/BackendUsersUpdate.html', ['title' => 'Modification d\'une Users', 'Users' => $Users]);
+    return $this->render('backend/BackendUsersUpdate.html', ['title' => 'Modification d\'un User', 'Users' => $users]);
   }
  
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST') {
-      $Users = new Users([
+      $users = new Users([
         'auteur' => $request->postData('auteur'),
         'titre' => $request->postData('titre'),
         'contenu' => $request->postData('contenu')
       ]);
  
       if ($request->getExists('id')) {
-        $Users->setId($request->getData('id'));
+        $users->setId($request->getData('id'));
       }
     } else {
       // L'identifiant du User est transmis si on veut le modifier
       if ($request->getExists('id')) {
-        $Users = $this->managers->getManagerOf('Users')->getUnique($request->getData('id'));
+        $users = $this->managers->getManagerOf('Users')->getUnique($request->getData('id'));
       } else {
-        $Users = new Users;
+        $users = new Users;
       }
     }
 
-    return $Users;
+    return $users;
   }
 }
