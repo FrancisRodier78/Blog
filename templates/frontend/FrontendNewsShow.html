@@ -1,7 +1,7 @@
 {% extends 'frontend/FrontendNewsLayout.html' %}
 
 {% block content %}
-	<p>Par <em>{{ new.userId }}</em>, le {{ new.dateCreation|date("d/m/Y") }}</p>
+	<p>Par <em>{{ new.user_id }}</em>, le {{ new.dateCreation|date("d/m/Y") }}</p>
 	<h2>{{ new.titre }}</h2>
 	<p>{{ new.chapo|nl2br }}</p>
 	<p>{{ new.content|nl2br }}</p>
@@ -25,7 +25,7 @@
             {% if ((user.isAuthenticated) and (user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
 		      <a class="blog-a" href="admin/comment-update-{{ comment.id }}.html">Modifier</a> |
 			  <a class="blog-a" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
-		      <!-- a class="blog-a" href="admin/comment-delete-{{ comment.id }}-{{ comment.new_id }}.html">Supprimer</a -->
+			  <!-- a class="blog-a" href="admin/comment-delete-{{ comment.id }}-{{ new.id }}.html">Supprimer</a -->
 		    {% endif %}
 		  </legend>
 		  <p>{{ comment.content|nl2br }}</p>

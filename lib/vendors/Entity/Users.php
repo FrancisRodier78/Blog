@@ -9,7 +9,7 @@ class Users extends Entity
 {
   public $role_id;
   protected $name,
-            $firstName,
+            $firstname,
             $loggin,
             $passWord,
             $dateRegistration,
@@ -26,7 +26,7 @@ class Users extends Entity
    
   public function isValid()
   {
-    return !(empty($this->name) || empty($this->firstName) || empty($this->loggin) || empty($this->passWord) || empty($this->email));
+    return !(empty($this->name) || empty($this->firstname) || empty($this->loggin) || empty($this->passWord) || empty($this->email));
   }
  
   public function setRoleId($role_id)
@@ -47,13 +47,13 @@ class Users extends Entity
     $this->name_id = $name_id;
   }
  
-  public function setFirstName($firstName)
+  public function setFirstname($firstname)
   {
-    if (!is_string($firstName) || empty($firstName)) {
+    if (!is_string($firstname) || empty($firstname)) {
       $this->erreurs[] = self::FIRSTNAME_INVALIDE;
     }
  
-    $this->firstName = $firstName;
+    $this->firstname = $firstname;
   }
  
   public function setLoggin($loggin)
@@ -108,9 +108,9 @@ class Users extends Entity
     return $this->name;
   }
  
-  public function firstName()
+  public function firstname()
   {
-    return $this->firstName;
+    return $this->firstname;
   }
  
   public function loggin()

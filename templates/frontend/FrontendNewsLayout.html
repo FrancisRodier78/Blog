@@ -51,7 +51,7 @@
                           <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Connexion</a>
                       </li>
                       <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/users-inscription">Inscription</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="#inscription">Inscription</a>
                       </li>
                     {% else %}
                       <li class="nav-item mx-0 mx-lg-1">
@@ -264,9 +264,9 @@
     </div>
   </section>
 
-    <!-- Connexion Section -->
+    <!-- Inscription  Section -->
     {% if not (user.isAuthenticated) %}
-      <section class="page-section bg-primary text-white mb-0" id="connexion">
+      <section class="page-section bg-primary text-white mb-0" id="inscription">
         <div class="container">
           <!-- Connexion Section Heading -->
           <h2 class="page-section-heading text-center text-uppercase text-white mb-0">Inscription</h2>

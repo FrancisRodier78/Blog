@@ -24,15 +24,14 @@ class NewsController extends BackController
  
   public function executeDeleteComment(HTTPRequest $request)
   {
+    $comment =  $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+
     $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
  
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
 
-    var_dump($request->getData('id'));
-    var_dump('/news-' . $request->getData('new_id') . '.html');
-    var_dump($request->postData('new_id'));
-    die();
-    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
+    $this->app->httpResponse()->redirect('/news-' . $comment->new_id() . '.html');
+
   }
  
   public function executeIndex(HTTPRequest $request)
@@ -92,14 +91,12 @@ class NewsController extends BackController
  
   public function executeCommentSave(HTTPRequest $request)
   {
-      var_dump('CommentSave');die();
-    $comment = new Comment; 
+    $comment = new Comment;
     $comment->setId($request->postData('comment_id'));
     $comment->setNew_id($request->postData('new_id'));
     $comment->setUser_id($request->postData('user_id'));
     $comment->setContent($request->postData('content'));
     $comment->setEtat($request->postData('etat'));
-    //$comment->setDateCreation($request->postData('dateCreation'));
 
     $this->managers->getManagerOf('Comments')->save($comment);
 

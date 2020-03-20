@@ -10,6 +10,7 @@ class ConnexionController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
+      var_dump('executeIndex');die();
     if ($request->postExists('login')) {
       $loggin = $request->postData('login');
       $password = $request->postData('password');
