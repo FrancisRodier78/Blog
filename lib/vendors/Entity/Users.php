@@ -38,13 +38,13 @@ class Users extends Entity
     $this->role_id = $role_id;
   }
  
-  public function setName($name_id)
+  public function setName($name)
   {
-    if (!is_string($name_id) || empty($name_id)) {
+    if (!is_string($name) || empty($name)) {
       $this->erreurs[] = self::NAME_INVALIDE;
     }
  
-    $this->name_id = $name_id;
+    $this->name = $name;
   }
  
   public function setFirstname($firstname)
@@ -62,7 +62,7 @@ class Users extends Entity
       $this->erreurs[] = self::LOGGIN_INVALIDE;
     }
 
-    $this->loggin_id = $loggin_id;
+    $this->loggin = $loggin;
   }
  
   public function setPassWord($passWord)

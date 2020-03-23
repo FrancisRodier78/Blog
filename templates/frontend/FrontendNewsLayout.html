@@ -286,11 +286,26 @@
               <h4 class="text-center text-white mb-0">Inscrivez Vous</h4>
 
               <form name="inscription" id="inscriptionForm" novalidate="novalidate" action="inscription" method="post">
-                <div class="control-group">
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                      <label>Nom</label>
+                      <input class="form-control" id="name" type="text" name="name" placeholder="Nom" required="required" data-validation-required-message="Entrez votre Nom.">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                      <label>Prénom</label>
+                      <input class="form-control" id="prenom" type="text" name="firstname" placeholder="Prenom" required="required" data-validation-required-message="Entrez votre prénom.">
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
                       <label>Pseudo</label>
-                      <input class="form-control" id="pseudo" type="text" placeholder="Pseudo" required="required" data-validation-required-message="Entrez votre Pseudo.">
+                      <input class="form-control" id="pseudo" type="text" name="loggin" placeholder="Pseudo" required="required" data-validation-required-message="Entrez votre Pseudo.">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>
@@ -298,7 +313,7 @@
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
                       <label>Mot de passe</label>
-                      <input class="form-control" id="password" type="password" placeholder="Mot de passe" required="required" data-validation-required-message="Entrez votre Mot de passe.">
+                      <input class="form-control" id="password" type="password" name="password" placeholder="Mot de passe" required="required" data-validation-required-message="Entrez votre Mot de passe.">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>
@@ -306,7 +321,7 @@
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
                       <label>Confirmer mot de passe</label>
-                      <input class="form-control" id="password2" type="password" placeholder="Confirmez mot de passe" required="required" data-validation-required-message="Confirmez votre Mot de passe.">
+                      <input class="form-control" id="password2" type="password" name="password2" placeholder="Confirmez mot de passe" required="required" data-validation-required-message="Confirmez votre Mot de passe.">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>
@@ -314,7 +329,7 @@
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
                       <label>Email</label>
-                      <input class="form-control" id="email" type="email" placeholder="Entrez email" required="required" data-validation-required-message="Entrez Confirmer votre Mot de passe.">
+                      <input class="form-control" id="email" type="email" name="email" placeholder="Entrez email" required="required" data-validation-required-message="Entrez Confirmer votre Mot de passe.">
                       <p class="help-block text-danger"></p>
                     </div>
                   </div>

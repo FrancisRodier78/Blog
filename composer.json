@@ -14,7 +14,6 @@
             "App\\": "app",
             "Model\\": "lib/vendors/Model",
             "Entity\\": "lib/vendors/Entity",
-            "FormBuilder\\": "lib/vendors/FormBuilder"
         }
     },
     "require": {

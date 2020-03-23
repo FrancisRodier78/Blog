@@ -9,7 +9,7 @@ class UsersManagerPDO extends UsersManager
 {
   protected function add(Users $users)
   {
-    $requete = $this->dao->prepare('INSERT INTO user SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip, dateRegistration = : NOW()');
+    $requete = $this->dao->prepare('INSERT INTO users SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip, dateRegistration = NOW()');
 
     $requete->bindValue(':role_id', 'Visiteur');
     $requete->bindValue(':name', $users->name());
@@ -89,8 +89,24 @@ class UsersManagerPDO extends UsersManager
 
     return false;
   }
- 
-  protected function modify(Users $users)
+
+    public function existLoggin($loggin)
+    {
+        $requete = $this->dao->prepare('SELECT id, role_id, name, firstname, loggin, password, email, picture, grip, dateRegistration FROM users WHERE loggin = :loggin');
+        $requete->bindValue(':loggin', $loggin, \PDO::PARAM_STR);
+        $requete->execute();
+
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
+
+        if ($users = $requete->fetch()) {
+            $users->setdateRegistration(new \DateTime($users->dateRegistration()));
+            return $users;
+        }
+
+        return false;
+    }
+
+    protected function modify(Users $users)
   {
     $requete = $this->dao->prepare('UPDATE users SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip WHERE id = :id');
                                                     

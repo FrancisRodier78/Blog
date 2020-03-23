@@ -10,12 +10,14 @@ class ConnexionController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-      var_dump('executeIndex');die();
     if ($request->postExists('login')) {
       $loggin = $request->postData('login');
-      $password = $request->postData('password');
- 
-      if ($users = $this->managers->getManagerOf('Users')->exist($loggin, $password))  {
+
+        $password = $request->postData('password');
+        $password = $password.'Je suis une brute';
+        $password = sha1($password);
+
+       if ($users = $this->managers->getManagerOf('Users')->exist($loggin, $password))  {
           $this->app->user()->setAuthenticated(true);
 
           $_SESSION['role_id'] = $users->role_id;
