@@ -108,14 +108,14 @@ class UsersManagerPDO extends UsersManager
 
     protected function modify(Users $users)
   {
-    $requete = $this->dao->prepare('UPDATE users SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, password = :password, email = :email, picture = :picture, grip = :grip WHERE id = :id');
-                                                    
- 
-    $requete->bindValue(':role_id', $users->role_id());
+    $requete = $this->dao->prepare('UPDATE users SET role_id = :role_id, name = :name, firstname = :firstname, loggin = :loggin, email = :email, picture = :picture, grip = :grip WHERE id = :id');
+
+    $requete->bindValue(':id', $users->id());
+    $requete->bindValue(':role_id', $users->roleId());
     $requete->bindValue(':name', $users->name());
     $requete->bindValue(':firstname', $users->firstname());
     $requete->bindValue(':loggin', $users->loggin());
-    $requete->bindValue(':password', $users->password());
+    //$requete->bindValue(':password', $users->password());
     $requete->bindValue(':email', $users->email());
     $requete->bindValue(':picture', ' ');
     $requete->bindValue(':grip', ' ');

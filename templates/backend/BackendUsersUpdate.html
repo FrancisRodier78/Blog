@@ -4,20 +4,43 @@
 <h2>Modifier un user</h2>
 <form action="users-save" method="post">
     <p>
-        <label>Role_id</label>
-        <input type="text" name="role_id" value="{{ Users.role_id }}" maxlength="11" /><br />
+    <div>
+        <label  id="label_RoleId" for="roleId" >Role_id</label>
+        <select id="roleId" name="roleId">
+            {% if Users.roleId == "Visiteur" %}
+                <option value="Visiteur" selected>Visiteur</option>
+            {% else %}
+                <option value="Visiteur">Visiteur</option>
+            {% endif %}
+
+            {% if Users.roleId == "Membre" %}
+                <option value="Membre" selected>Membre</option>
+            {% else %}
+                <option value="Membre">Membre</option>
+            {% endif %}
+
+            {% if Users.roleId == "Administrateur" %}
+                <option value="Administrateur" selected>Administrateur</option>
+            {% else %}
+                <option value="Administrateur">Administrateur</option>
+            {% endif %}
+
+            {% if Users.roleId == "Super-Administrateur" %}
+                <option value="Super-Administrateur" selected>Super-Administrateur</option>
+            {% else %}
+                <option value="Super-Administrateur">Super-Administrateur</option>
+            {% endif %}
+        </select>
+    </div>
 
         <label>Nom</label>
-        <input type="text" name="Name" value="{{ Users.name }}" maxlength="100" /><br />
+        <input type="text" name="name" value="{{ Users.name }}" maxlength="100" /><br />
 
         <label>Prénom</label>
-        <input type="text" name="Firstname" value="{{ Users.firstname }}" maxlength="100" /><br />
+        <input type="text" name="firstname" value="{{ Users.firstname }}" maxlength="100" /><br />
 
         <label>Loggin</label>
-        <input type="text" name="Loggin" value="{{ Users.loggin }}" maxlength="100" /><br />
-
-        <label>Mot de passe</label>
-        <input type="password" name="password" value="{{ Users.password }}" maxlength="100" /><br />
+        <input type="text" name="loggin" value="{{ Users.loggin }}" maxlength="100" /><br />
 
         <label>Email</label>
         <input type="email" name="email" value="{{ Users.email }}" maxlength="100" /><br />

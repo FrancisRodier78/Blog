@@ -4,20 +4,40 @@
 	<h2>Modifier un commentaire</h2>
 	<form action="commentSave" method="post">
 	  <p>
+	  <div>
 		<label>Auteur</label>
 		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" /><br />
+      </div>
 
+	  <div>
 		<label>Content</label>
-		<textarea name="content" cols="50" rows="7">{{ Comment.content }}</textarea><br />	 
+		<textarea name="content" cols="50" rows="7">{{ Comment.content }}</textarea><br />
+	  </div>
 
-		<label>Etat</label>
-   	  	<input type="text" name="etat" value="{{ Comment.etat }}" maxlength="50" /><br />
+	  <div>
+		<label  id="label_etat" for="etat" >Etat</label>
+		<select id="etat" name="etat">
+		  {% if Comment.etat == "Refusé" %}
+			<option value="Refusé" selected>Refusé</option>
+		  {% else %}
+ 		    <option value="Refusé">Refusé</option>
+		  {% endif %}
 
+		  {% if Comment.etat == "Validé" %}
+		    <option value="Validé" selected>Validé</option>
+		  {% else %}
+			<option value="Validé">Validé</option>
+		  {% endif %}
+		</select>
+	  </div>
+
+	  <div>
 	    <input type="submit" value="Modifier" />
 
    	  	<input type="hidden" name="comment_id" value="{{ Id }}" maxlength="11" /><br />
    	  	<input type="hidden" name="new_id" value="{{ Comment.new_id }}" maxlength="11" /><br />
    	  	<input type="hidden" name="dateCreation" value="{{ Comment.dateCreation }}" maxlength="11" /><br />
+	  </div>
 	  </p>
 	</form>
 {% endblock %}

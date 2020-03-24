@@ -6,6 +6,7 @@ namespace App\Backend\Modules\Users;
  
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
+use \Entity\Users;
 
 class UsersController extends BackController
 {
@@ -40,18 +41,18 @@ class UsersController extends BackController
 
     if ($request->postExists('login') and $request->postExists('password') and $request->postExists('password2') and $request->postExists('email')) {
       if ($request->postData('password') == $request->postData('password2')) {
-        $Users = new Users; 
+        $users = new Users;
 
-        $Users->setRole_id($request->postData('role_id'));
-        $Users->setName($request->postData('name'));
-        $Users->setFirstname($request->postData('firstname'));
-        $Users->setLoggin($request->postData('loggin'));
-        $Users->setPassword($request->postData('password'));
-        $Users->setEmail($request->postData('email'));
-        $Users->setPicture($request->postData('picture'));
-        $Users->setGrip($request->postData('grip'));
+        $users->setRoleId($request->postData('role_id'));
+        $users->setName($request->postData('name'));
+        $users->setFirstname($request->postData('firstname'));
+        $users->setLoggin($request->postData('loggin'));
+        $users->setPassword($request->postData('password'));
+        $users->setEmail($request->postData('email'));
+        $users->setPicture($request->postData('picture'));
+        $users->setGrip($request->postData('grip'));
 
-        $this->managers->getManagerOf('Users')->save($Users);
+        $this->managers->getManagerOf('Users')->save($users);
 
         $this->app->httpResponse()->redirect('.');
       } else {
@@ -66,12 +67,14 @@ class UsersController extends BackController
 
   public function executeSave(HTTPRequest $request)
   {
-      var_dump('executeSave');die();
     $users = new Users;
-    $users->setUser_id($request->postData('user_id'));
-    $users->setTitre($request->postData('titre'));
-    $users->setChapo($request->postData('chapo'));
-    $users->setContent($request->postData('content'));
+    $users->setRoleId($request->postData('roleId'));
+    $users->setName($request->postData('name'));
+    $users->setFirstname($request->postData('firstname'));
+    $users->setLoggin($request->postData('loggin'));
+    $users->setEmail($request->postData('email'));
+    $users->setPicture($request->postData('picture'));
+    $users->setGrip($request->postData('grip'));
 
     if ($request->postExists('id')) {
       $users->setId($request->postData('id'));

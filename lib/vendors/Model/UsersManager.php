@@ -25,7 +25,7 @@ abstract class UsersManager extends Manager
   public function save(Users $users)
   {
     if ($users->isValid()) {
-      $users->isNew() ? $this->add($users) : $this->modify($users);
+        $users->isNew() ? $this->add($users) : $this->modify($users);
     } else {
       throw new \RuntimeException('La users doit être validée pour être enregistrée');
     }

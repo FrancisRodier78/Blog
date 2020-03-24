@@ -7,8 +7,8 @@ use \OCFram\Entity;
  
 class Users extends Entity
 {
-  public $role_id;
-  protected $name,
+    protected $role_id,
+            $name,
             $firstname,
             $loggin,
             $passWord,
@@ -26,7 +26,7 @@ class Users extends Entity
    
   public function isValid()
   {
-    return !(empty($this->name) || empty($this->firstname) || empty($this->loggin) || empty($this->passWord) || empty($this->email));
+    return !(empty($this->name) || empty($this->firstname) || empty($this->loggin)|| empty($this->email));
   }
  
   public function setRoleId($role_id)

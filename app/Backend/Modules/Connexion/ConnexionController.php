@@ -20,7 +20,9 @@ class ConnexionController extends BackController
        if ($users = $this->managers->getManagerOf('Users')->exist($loggin, $password))  {
           $this->app->user()->setAuthenticated(true);
 
-          $_SESSION['role_id'] = $users->role_id;
+          $_SESSION['utilisateur-id'] = $users->id();
+
+          $_SESSION['role_id'] = $users->roleId();
           if (($_SESSION['role_id'] == 'Administrateur') OR ($_SESSION['role_id'] == 'Super-Administrateur')) {
             $this->app->httpResponse()->redirect('.');
           } else {

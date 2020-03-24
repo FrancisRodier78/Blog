@@ -38,20 +38,21 @@ class NewsController extends BackController
   {
     $manager = $this->managers->getManagerOf('News');
     $manager2 = $this->managers->getManagerOf('Users');
+    $manager3 = $this->managers->getManagerOf('Users');
 
-    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count()]);
+    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count(), 'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id'])]);
   }
  
   public function executeInsert(HTTPRequest $request)
   {
-    $news = $this->processForm($request); 
+    $news = $this->processForm($request);
+    $user_id = $_SESSION['utilisateur-id'];
 
-    return $this->render('backend/BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news]);
+    return $this->render('backend/BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news, 'User_id' => $user_id]);
   }
  
  public function executeSave(HTTPRequest $request)
   {
-      var_dump('Save');die();
     $news = new News;
     $news->setUser_id($request->postData('user_id'));
     $news->setTitre($request->postData('titre'));

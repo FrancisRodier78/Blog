@@ -4,22 +4,36 @@
 	<p>Il y a actuellement {{ nombreNews }} news/posts. En voici la liste :</p>
 	 
 	<table>
-	  <tr><th>Auteur</th><th>Titre</th><th>Date de création</th><th>Dernière modification</th><th>Action</th></tr>
+	  <tr><th>Auteur Id</th><th>Auteur</th><th>Titre</th><th>Date de création</th><th>Dernière modification</th><th>Action</th></tr>
 
       {% for new in listeNews %}
- 	    <tr><td> {{ new.user_id }} </td><td> {{ new.titre }} </td><td> {{ new.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> {{ new.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> <a href="news-update-{{ new.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-{{ new.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td>
+		<tr><td> {{ new.user_id }} </td>
+			<td> {% for user in listeUsers %}
+				{% if new.user_id == user.id %}
+				{{ user.name }}
+				{% endif %}
+				{% endfor %}</td>
+			<td> {{ new.titre }} </td><td> {{ new.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> {{ new.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> <a href="news-update-{{ new.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-{{ new.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>
       {% endfor %}
 	</table>
 
 	<p></p>
 
-	<p>Il y a actuellement {{ nombreUsers }} utilisateurs. En voici la liste :</p>
+	<p>Il y a actuellement {{ nombreUsers }} utilisateurs. En voici la liste : </p>
 
-	<table>
-		<tr><th>Role</th><th>Nom</th><th>Prénom</th><th>Loggin</th><th>Email</th><th>Action</th></tr>
-		{% for user in listeUsers %}
-		<?php echo $user ; ?>
-			<tr><td> {{ user.role_id }} </td><td> {{ user.name }} </td><td> {{ user.firstName}} </td><td> {{ user.loggin }} </td><td> {{ user.email }} </td><td> <a href="users-update-{{ user.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="users-delete-{{ user.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td>
-		{% endfor %}
-	</table>
+	{% if utilisateur.roleId == 'Super-Administrateur' %}
+		<table>
+			<tr><th>Role</th><th>Nom</th><th>Prénom</th><th>Loggin</th><th>Email</th><th>Action</th></tr>
+			{% for user in listeUsers %}
+				<tr><td> {{ user.roleId }} </td><td> {{ user.name }} </td><td> {{ user.firstName}} </td><td> {{ user.loggin }} </td><td> {{ user.email }} </td><td> <a href="users-update-{{ user.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="users-delete-{{ user.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<table>
+			<tr><th>Role</th><th>Nom</th><th>Prénom</th><th>Loggin</th><th>Email</th></tr>
+			{% for user in listeUsers %}
+				<tr><td> {{ user.roleId }} </td><td> {{ user.name }} </td><td> {{ user.firstName}} </td><td> {{ user.loggin }} </td><td> {{ user.email }} </td></tr>
+			{% endfor %}
+		</table>
+	{% endif %}
 {% endblock %}
