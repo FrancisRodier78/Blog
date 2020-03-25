@@ -4,7 +4,8 @@
 namespace Model;
  
 use \Entity\News;
- 
+use \Entity\User;
+
 class NewsManagerPDO extends NewsManager
 {
   protected function add(News $news)
@@ -70,8 +71,23 @@ class NewsManagerPDO extends NewsManager
  
     return null;
   }
- 
-  protected function modify(News $news)
+
+    public function getLoggin($id)
+    {
+        $requete = $this->dao->prepare('SELECT loggin FROM users WHERE id = :id');
+        $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+        $requete->execute();
+
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
+
+        if ($loggin = $requete->fetch()) {
+            return $loggin->loggin();
+        }
+
+        return null;
+    }
+
+    protected function modify(News $news)
   {
     $requete = $this->dao->prepare('UPDATE news SET user_id = :user_id, titre = :titre, dateModif = NOW(), chapo = :chapo, content = :content WHERE id = :id');
  

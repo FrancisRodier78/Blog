@@ -39,8 +39,11 @@ class NewsController extends BackController
     $manager = $this->managers->getManagerOf('News');
     $manager2 = $this->managers->getManagerOf('Users');
     $manager3 = $this->managers->getManagerOf('Users');
+    $manager4 = $this->managers->getManagerOf('Comments');
 
-    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count(), 'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id'])]);
+    $comments = $manager4->getList();
+
+    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count(), 'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id']), 'ListComments' => $manager4->getList()]);
   }
  
   public function executeInsert(HTTPRequest $request)
@@ -70,9 +73,10 @@ class NewsController extends BackController
 
   public function executeUpdate(HTTPRequest $request)
   {
-    $news = $this->processForm($request); 
- 
-    return $this->render('backend/BackendNewsUpdate.html', ['title' => 'Modification d\'une news', 'News' => $news]);
+    $news = $this->processForm($request);
+    $user_id = $_SESSION['utilisateur-id'];
+
+    return $this->render('backend/BackendNewsUpdate.html', ['title' => 'Modification d\'une news', 'News' => $news, 'User_id' => $user_id]);
   }
  
   public function executeUpdateComment(HTTPRequest $request)

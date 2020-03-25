@@ -1,6 +1,7 @@
 {% extends 'backend/BackendNewsLayout.html' %}
 
 {% block content %}
+	<p>------------------------------------------------------------------------</p>
 	<p>Il y a actuellement {{ nombreNews }} news/posts. En voici la liste :</p>
 	 
 	<table>
@@ -17,8 +18,7 @@
       {% endfor %}
 	</table>
 
-	<p></p>
-
+	<p>------------------------------------------------------------------------</p>
 	<p>Il y a actuellement {{ nombreUsers }} utilisateurs. En voici la liste : </p>
 
 	{% if utilisateur.roleId == 'Super-Administrateur' %}
@@ -36,4 +36,15 @@
 			{% endfor %}
 		</table>
 	{% endif %}
+
+	<p>------------------------------------------------------------------------</p>
+	<p>Voici la liste des commentaires en attente, à validé ou refusé: </p>
+
+	<table>
+		<!-- id, user_id, new_id, content, etat, dateCreation -->
+		<tr><th>Contenu</th><th>Action</th></tr>
+		{% for comment in ListComments %}
+			<tr><td> {{ comment.content }} </td><td> <a class="blog-a" href="comment-update-{{ comment.id }}.html"><img src="/images/update.png" alt="Modifier" /></a></td></tr>
+		{% endfor %}
+	</table>
 {% endblock %}

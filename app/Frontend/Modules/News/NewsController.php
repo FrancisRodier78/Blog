@@ -34,12 +34,21 @@ class NewsController extends BackController
   public function executeShow(HTTPRequest $request)
   {
     $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
- 
+
     if (empty($news)) {
       $this->app->httpResponse()->redirect404();
     }
- 
-    return $this->render('frontend/FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id())]);
+
+      // Recherche du loggin ayant écrit la new
+      $logginNew = $this->managers->getManagerOf('News')->getLoggin($news->user_id());
+
+      // Recherche des loggins ayant écrit les commentaires se rapportant à la new
+      $comments = $this->managers->getManagerOf('Comments')->getListOf($news->id());
+      foreach ($comments as $comment) {
+        $logginTab[] = $this->managers->getManagerOf('News')->getLoggin($comment->user_id());
+      }
+
+    return $this->render('frontend/FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'logginNew' => $logginNew, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id()), 'logginTab' => $logginTab]);
   }
  
   public function executeInsertComment(HTTPRequest $request)
@@ -54,8 +63,9 @@ class NewsController extends BackController
     } else {
       $comment = new Comment;
     }
- 
-    return $this->render('frontend/FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment, 'newId' => $request->getData('news')]);
+
+      $user_id = $_SESSION['utilisateur-id'];
+      return $this->render('frontend/FrontendCommentInsert.html', ['title' => 'Ajout d\'un commentaire', 'comment' => $comment, 'newId' => $request->getData('news'), 'User_id' => $user_id]);
   }
  
   public function executeSave(HTTPRequest $request)

@@ -14,7 +14,7 @@ class CommentsManagerPDO extends CommentsManager
     $q->bindValue(':user_id', $comment->user_id(), \PDO::PARAM_INT);
     $q->bindValue(':new_id', $comment->new_id(), \PDO::PARAM_INT);
     $q->bindValue(':content', $comment->content());
-    $q->bindValue(':etat', 'Refuse');
+    $q->bindValue(':etat', 'en attente');
  
     $q->execute();
  
@@ -37,7 +37,7 @@ class CommentsManagerPDO extends CommentsManager
       throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
     }
  
-    $q = $this->dao->prepare('SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE new_id = :new_id');
+    $q = $this->dao->prepare('SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE new_id = :new_id AND etat = \'Validé\'');
     $q->bindValue(':new_id', $new_id, \PDO::PARAM_INT);
     $q->execute();
  
@@ -75,4 +75,29 @@ class CommentsManagerPDO extends CommentsManager
  
     return $q->fetch();
   }
+
+    public function getList($debut = -1, $limite = -1)
+    {
+        // Ne lit que les Comments en attente.
+        $sql = 'SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE etat = \'en attente\' ORDER BY id DESC';
+
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+        }
+
+        $requete = $this->dao->query($sql);
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+
+        $listeComments = $requete->fetchAll();
+
+        foreach ($listeComments as $Comments)
+        {
+            $Comments->setDateCreation(new \DateTime($Comments->dateCreation()));
+        }
+
+        $requete->closeCursor();
+
+        return $listeComments;
+    }
+
 }
