@@ -7,13 +7,13 @@
 		<input type="hidden" name="user_id" value="{{ User_id }}" maxlength="11" />
 
 	  	<label>Titre</label>
-	  	<input type="text" name="titre" value="{{ News.titre }}" maxlength="100" /><br />
+	  	<input type="text" name="titre" value="{{ News.titre }}" maxlength="100" required /><br />
 
 	  	<label>Chapo</label>
-	  	<textarea name="chapo" cols="60" rows="2">{{ News.chapo }}</textarea><br />
+	  	<textarea name="chapo" cols="60" rows="2" required>{{ News.chapo }}</textarea><br />
 
 	  	<label>Content</label>
-	  	<textarea name="content" cols="60" rows="8">{{ News.content }}</textarea><br />
+	  	<textarea name="content" cols="60" rows="8" required>{{ News.content }}</textarea><br />
 
 	    <input type="submit" value="Modifier" />
 

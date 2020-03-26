@@ -6,7 +6,7 @@
     <p>
     <div>
         <label  id="label_RoleId" for="roleId" >Role_id</label>
-        <select id="roleId" name="roleId">
+        <select id="roleId" name="roleId" required>
             {% if Users.roleId == "Visiteur" %}
                 <option value="Visiteur" selected>Visiteur</option>
             {% else %}
@@ -34,16 +34,16 @@
     </div>
 
         <label>Nom</label>
-        <input type="text" name="name" value="{{ Users.name }}" maxlength="100" /><br />
+        <input type="text" name="name" value="{{ Users.name }}" maxlength="100" required /><br />
 
         <label>Prénom</label>
-        <input type="text" name="firstname" value="{{ Users.firstname }}" maxlength="100" /><br />
+        <input type="text" name="firstname" value="{{ Users.firstname }}" maxlength="100" required /><br />
 
         <label>Loggin</label>
-        <input type="text" name="loggin" value="{{ Users.loggin }}" maxlength="100" /><br />
+        <input type="text" name="loggin" value="{{ Users.loggin }}" maxlength="100" required /><br />
 
         <label>Email</label>
-        <input type="email" name="email" value="{{ Users.email }}" maxlength="100" /><br />
+        <input type="email" name="email" value="{{ Users.email }}" maxlength="100" required /><br />
 
         <input type="submit" value="Modifier" />
 

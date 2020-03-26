@@ -6,17 +6,17 @@
 	  <p>
 	  <div>
 		<label>Auteur</label>
-		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" /><br />
+		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" required /><br />
       </div>
 
 	  <div>
 		<label>Content</label>
-		<textarea name="content" cols="50" rows="7">{{ Comment.content }}</textarea><br />
+		<textarea name="content" cols="50" rows="7" required>{{ Comment.content }}</textarea><br />
 	  </div>
 
 	  <div>
 		<label  id="label_etat" for="etat" >Etat</label>
-		<select id="etat" name="etat">
+		<select id="etat" name="etat" required>
 		  {% if Comment.etat == "Refusé" %}
 			<option value="Refusé" selected>Refusé</option>
 		  {% else %}
