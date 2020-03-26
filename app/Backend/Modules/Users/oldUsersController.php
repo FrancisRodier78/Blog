@@ -1,5 +1,5 @@
 <?php
-// UsersController.php
+// oldUsersController.php
 // A supprimer
 
 namespace App\Backend\Modules\Users;
@@ -8,7 +8,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Users;
 
-class UsersController extends BackController
+class oldUsersController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
   {

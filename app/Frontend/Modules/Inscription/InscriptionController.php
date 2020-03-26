@@ -1,5 +1,5 @@
 <?php
-// ConnexionController.php
+// InscriptionController.php
 
 namespace App\Frontend\Modules\Inscription;
 

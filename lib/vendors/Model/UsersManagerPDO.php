@@ -115,7 +115,8 @@ class UsersManagerPDO extends UsersManager
     $requete->bindValue(':name', $users->name());
     $requete->bindValue(':firstname', $users->firstname());
     $requete->bindValue(':loggin', $users->loggin());
-    //$requete->bindValue(':password', $users->password());
+    // Les password ne sont modifiables que sous phpMyAdmin
+    // $requete->bindValue(':password', $users->password());
     $requete->bindValue(':email', $users->email());
     $requete->bindValue(':picture', ' ');
     $requete->bindValue(':grip', ' ');
