@@ -224,7 +224,7 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-          <form name="sentMessage" id="contactForm" novalidate="novalidate">
+          <form name="sentMessage" id="contactForm">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label>Nom</label>
@@ -268,7 +268,7 @@
     {% if not (user.isAuthenticated) %}
       <section class="page-section bg-primary text-white mb-0" id="inscription">
         <div class="container">
-          <!-- Connexion Section Heading -->
+          <!-- Inscription Section Heading -->
           <h2 class="page-section-heading text-center text-uppercase text-white mb-0">Inscription</h2>
 
           <!-- Icon Divider -->
@@ -280,12 +280,10 @@
             <div class="divider-custom-line"></div>
           </div>
 
-          <!-- Connexion Section Form -->
+          <!-- Inscription Section Form -->
           <div class="row">
             <div class="col-lg-12 mx-auto">
-              <h4 class="text-center text-white mb-0">Inscrivez Vous</h4>
-
-              <form name="inscription" id="inscriptionForm" novalidate="novalidate" action="inscription" method="post">
+              <form name="inscription" id="inscriptionForm" action="inscription" method="post">
                   <div class="control-group">
                     <div class="form-group floating-label-form-group controls mb-0 pb-2">
                       <label for="name">Nom</label>

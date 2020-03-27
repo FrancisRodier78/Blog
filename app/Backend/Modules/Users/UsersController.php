@@ -1,5 +1,5 @@
 <?php
-// oldUsersController.php
+// UsersController.php
 // A supprimer
 
 namespace App\Backend\Modules\Users;
@@ -8,7 +8,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Users;
 
-class oldUsersController extends BackController
+class usersController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
   {
@@ -62,7 +62,7 @@ class oldUsersController extends BackController
       $this->app->user()->setFlash('Un renseignement est faux.');
     }
 
-    return $this->render('InscriptionUtilisateurIndex.html', ['title' => 'Inscription utilisateur']);
+    return $this->render('oldInscriptionUtilisateurIndex.html', ['title' => 'Inscription utilisateur']);
   }
 
   public function executeSave(HTTPRequest $request)
