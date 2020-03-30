@@ -9861,3 +9861,15 @@ form .row:first-child .floating-label-form-group {
   text-decoration: none;
   background-color: transparent;
 }
+
+.blog-c {
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+  font-size: medium;
+}
+
+.btn-x2 {
+  padding: 0rem 0.75rem;
+  font-size: 1rem;
+}

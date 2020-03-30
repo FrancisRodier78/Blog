@@ -43,8 +43,19 @@
 	<table>
 		<!-- id, user_id, new_id, content, etat, dateCreation -->
 		<tr><th>Contenu</th><th>Action</th></tr>
-		{% for comment in ListComments %}
-			<tr><td> {{ comment.content }} </td><td> <a class="blog-a" href="comment-update-{{ comment.id }}.html"><img src="/images/update.png" alt="Modifier" /></a></td></tr>
+		{% for comment in ListCommentsEnAtt %}
+			<tr><td> {{ comment.content }} </td><td> <a class="blog-a" href="comment-update-{{ comment.id }}.html"><img src="/images/update.png" alt="Modifier" /></a><a href="comment-delete-{{ comment.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>
+		{% endfor %}
+	</table>
+
+	<p>------------------------------------------------------------------------</p>
+	<p>Voici la liste des commentaires refusé: </p>
+
+	<table>
+		<!-- id, user_id, new_id, content, etat, dateCreation -->
+		<tr><th>Contenu</th><th>Action</th></tr>
+		{% for comment in ListCommentsRefuse %}
+			<tr><td> {{ comment.content }} </td><td> <a class="blog-a" href="comment-update-{{ comment.id }}.html"><img src="/images/update.png" alt="Modifier" /></a><a href="comment-delete-{{ comment.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>
 		{% endfor %}
 	</table>
 {% endblock %}

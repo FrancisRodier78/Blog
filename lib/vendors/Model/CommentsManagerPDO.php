@@ -100,4 +100,27 @@ class CommentsManagerPDO extends CommentsManager
         return $listeComments;
     }
 
+    public function getListRefuse($debut = -1, $limite = -1)
+    {
+        // Ne lit que les Comments en attente.
+        $sql = 'SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE etat = \'refusé\' ORDER BY id DESC';
+
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+        }
+
+        $requete = $this->dao->query($sql);
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+
+        $listeComments = $requete->fetchAll();
+
+        foreach ($listeComments as $Comments)
+        {
+            $Comments->setDateCreation(new \DateTime($Comments->dateCreation()));
+        }
+
+        $requete->closeCursor();
+
+        return $listeComments;
+    }
 }

@@ -25,8 +25,8 @@
 		    Posté par <strong>{{ logginTab[i] }}</strong> le {{ comment.dateCreation|date("d/m/Y") }}
 			{% set i = i + 1 %}
             {% if ((user.isAuthenticated) and (user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
-		      <a class="blog-a" href="admin/comment-update-{{ comment.id }}.html">Modifier</a> |
-			  <a class="blog-a" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
+		      <a class="btn btn-secondary btn-x2" href="admin/comment-update-{{ comment.id }}.html">Modifier</a> |
+			  <a class="btn btn-secondary btn-x2" href="admin/comment-delete-{{ comment.id }}.html">Supprimer</a>
 		    {% endif %}
 		  </legend>
 		  <p>{{ comment.content|nl2br }}</p>

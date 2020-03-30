@@ -72,6 +72,7 @@ class usersController extends BackController
     $users->setName($request->postData('name'));
     $users->setFirstname($request->postData('firstname'));
     $users->setLoggin($request->postData('loggin'));
+    $users->setPassword($request->postData('password'));
     $users->setEmail($request->postData('email'));
     $users->setPicture($request->postData('picture'));
     $users->setGrip($request->postData('grip'));
@@ -94,23 +95,11 @@ class usersController extends BackController
  
   public function processForm(HTTPRequest $request)
   {
-    if ($request->method() == 'POST') {
-      $users = new Users([
-        'auteur' => $request->postData('auteur'),
-        'titre' => $request->postData('titre'),
-        'contenu' => $request->postData('contenu')
-      ]);
- 
-      if ($request->getExists('id')) {
-        $users->setId($request->getData('id'));
-      }
+    // L'identifiant du User est transmis si on veut le modifier
+    if ($request->getExists('id')) {
+    $users = $this->managers->getManagerOf('Users')->getUnique($request->getData('id'));
     } else {
-      // L'identifiant du User est transmis si on veut le modifier
-      if ($request->getExists('id')) {
-        $users = $this->managers->getManagerOf('Users')->getUnique($request->getData('id'));
-      } else {
-        $users = new Users;
-      }
+    $users = new Users;
     }
 
     return $users;

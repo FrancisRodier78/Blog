@@ -36,14 +36,21 @@ class NewsController extends BackController
  
   public function executeIndex(HTTPRequest $request)
   {
+    $_SESSION['precedent'] = 'admin';
+
     $manager = $this->managers->getManagerOf('News');
     $manager2 = $this->managers->getManagerOf('Users');
     $manager3 = $this->managers->getManagerOf('Users');
     $manager4 = $this->managers->getManagerOf('Comments');
 
-    $comments = $manager4->getList();
-
-    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news', 'listeNews' => $manager->getList(), 'nombreNews' => $manager->count(), 'listeUsers' => $manager2->getList(), 'nombreUsers' => $manager2->count(), 'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id']), 'ListComments' => $manager4->getList()]);
+    return $this->render('backend/BackendNewsIndex.html', ['title' => 'Gestion des news',
+                                                                    'listeNews' => $manager->getList(),
+                                                                    'nombreNews' => $manager->count(),
+                                                                    'listeUsers' => $manager2->getList(),
+                                                                    'nombreUsers' => $manager2->count(),
+                                                                    'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id']),
+                                                                    'ListCommentsEnAtt' => $manager4->getList(),
+                                                                    'ListCommentsRefuse' => $manager4->getListRefuse()]);
   }
  
   public function executeInsert(HTTPRequest $request)
@@ -68,7 +75,11 @@ class NewsController extends BackController
 
     $this->managers->getManagerOf('News')->save($news);
 
-    $this->app->httpResponse()->redirect('.');
+    if ($news->isNew()) {
+        $this->app->httpResponse()->redirect('/');
+    } else {
+        $this->app->httpResponse()->redirect('.');
+    }
   }
 
   public function executeUpdate(HTTPRequest $request)
@@ -81,16 +92,8 @@ class NewsController extends BackController
  
   public function executeUpdateComment(HTTPRequest $request)
   {
-    if ($request->method() == 'POST') {
-      $comment = new Comment([
-        'id' => $request->getData('id'),
-        'auteur' => $request->postData('auteur'),
-        'contenu' => $request->postData('contenu')
-      ]);
-    } else {
-      $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
-    }
- 
+    $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+
     return $this->render('backend/BackendNewsUpdateComment.html', ['title' => 'Modification d\'un commentaire', 'Comment' => $comment, 'Id' => $request->getData('id')]);
   }
  
@@ -105,28 +108,23 @@ class NewsController extends BackController
 
     $this->managers->getManagerOf('Comments')->save($comment);
 
-    $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
+    if ($_SESSION['precedent'] == 'show') {
+        // Cela veut dire que la modification vient de Frontend NewsController executeShow
+        $this->app->httpResponse()->redirect('/news-' . $request->postData('new_id') . '.html');
+    } else {
+        // $_SESSION['precedent'] == 'admin')
+        // Cela veut dire que la modification vient de backend NewsController executeUpdateComment
+        $this->app->httpResponse()->redirect('.');
+    }
   }
 
   public function processForm(HTTPRequest $request)
   {
-    if ($request->method() == 'POST') {
-      $news = new News([
-        'auteur' => $request->postData('auteur'),
-        'titre' => $request->postData('titre'),
-        'contenu' => $request->postData('contenu')
-      ]);
- 
-      if ($request->getExists('id')) {
-        $news->setId($request->getData('id'));
-      }
+    // L'identifiant de la news est transmis si on veut la modifier
+    if ($request->getExists('id')) {
+    $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
     } else {
-      // L'identifiant de la news est transmis si on veut la modifier
-      if ($request->getExists('id')) {
-        $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
-      } else {
-        $news = new News;
-      }
+    $news = new News;
     }
 
     return $news;

@@ -5,8 +5,7 @@
 	<form action="commentSave" method="post">
 	  <p>
 	  <div>
-		<label>Auteur</label>
-		<input type="text" name="user_id" value="{{ Comment.user_id  }}" maxlength="50" required /><br />
+		<input type="hidden" name="user_id" value="{{ Comment.user_id }}" maxlength="11" />
       </div>
 
 	  <div>
