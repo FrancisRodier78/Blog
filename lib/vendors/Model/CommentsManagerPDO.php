@@ -76,7 +76,7 @@ class CommentsManagerPDO extends CommentsManager
     return $q->fetch();
   }
 
-    public function getList($debut = -1, $limite = -1)
+    public function getListAtt($debut = -1, $limite = -1)
     {
         // Ne lit que les Comments en attente.
         $sql = 'SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE etat = \'en attente\' ORDER BY id DESC';
@@ -102,7 +102,7 @@ class CommentsManagerPDO extends CommentsManager
 
     public function getListRefuse($debut = -1, $limite = -1)
     {
-        // Ne lit que les Comments en attente.
+        // Ne lit que les Comments refusé.
         $sql = 'SELECT id, user_id, new_id, content, etat, dateCreation FROM comments WHERE etat = \'refusé\' ORDER BY id DESC';
 
         if ($debut != -1 || $limite != -1) {

@@ -49,7 +49,7 @@ class NewsController extends BackController
                                                                     'listeUsers' => $manager2->getList(),
                                                                     'nombreUsers' => $manager2->count(),
                                                                     'utilisateur' => $manager3->getUnique($_SESSION['utilisateur-id']),
-                                                                    'ListCommentsEnAtt' => $manager4->getList(),
+                                                                    'ListCommentsEnAtt' => $manager4->getListAtt(),
                                                                     'ListCommentsRefuse' => $manager4->getListRefuse()]);
   }
  
@@ -61,7 +61,7 @@ class NewsController extends BackController
     return $this->render('backend/BackendNewsInsert.html', ['title' => 'Ajout d\'une news', 'News' => $news, 'User_id' => $user_id]);
   }
  
- public function executeSave(HTTPRequest $request)
+  public function executeSave(HTTPRequest $request)
   {
     $news = new News;
     $news->setUser_id($request->postData('user_id'));
