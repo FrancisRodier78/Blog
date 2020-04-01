@@ -18,14 +18,14 @@ class NewsController extends BackController
     $manager = $this->managers->getManagerOf('News');
  
     $listeNews = $manager->getList(0, $nombreNews);
- 
+
     foreach ($listeNews as $news) {
-      if (strlen($news->content()) > $nombreCaracteres) {
-        $debut = substr($news->content(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
- 
-        $news->setContent($debut);
-      }
+        if (strlen($news->content()) > $nombreCaracteres) {
+            $debut = substr($news->content(), 0, $nombreCaracteres);
+            $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+
+            $news->setContent($debut);
+        }
     }
  
     return $this->render('frontend/FrontendNewsIndex.html', ['title' => 'Liste des '.$nombreNews.' dernières news///', 'listeNews' => $listeNews]);

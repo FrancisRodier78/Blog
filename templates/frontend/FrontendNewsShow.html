@@ -7,7 +7,7 @@
 	<p>{{ new.content|nl2br }}</p>
 	 
 	{% if (new.dateCreation != new.dateModif) %}
-	  <p style="text-align: right;"><small><em>Modifiée le {{ new.dateModif|date("d/m/Y") }}</em></small></p>
+	  <p><small><em>Modifiée le {{ new.dateModif|date("d/m/Y") }}</em></small></p>
 	{% endif %}
 
     {% if ((user.isAuthenticated) and (user.isRoleId == 'Membre') or (user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}

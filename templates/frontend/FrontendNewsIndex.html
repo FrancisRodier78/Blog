@@ -3,6 +3,7 @@
 {% block content %}
 	{% for new in listeNews %}
 	  <h2><a class="blog-a" href="news-{{ new.id }}.html">{{ new.titre }}</a></h2>
+	  <p>Posté le {{ new.dateModif|date("d/m/Y") }}</p>
 	  <p>{{ new.chapo }}</p>  
 	{% endfor %}
 {% endblock %}
