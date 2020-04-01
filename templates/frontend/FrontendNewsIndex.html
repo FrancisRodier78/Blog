@@ -6,4 +6,11 @@
 	  <p>Posté le {{ new.dateModif|date("d/m/Y") }}</p>
 	  <p>{{ new.chapo }}</p>  
 	{% endfor %}
+
+	<p>{% if (num - nombreNews) >= 0 %}
+			<a class="btn btn-secondary btn-x2" href="/{{ num - nombreNews }}">Précédent</a>
+		{% endif %}
+		{% if (num + nombreNews) < countNews %}
+			<a class="btn btn-secondary btn-x2" href="/{{ num + nombreNews }}">Suivant</a>
+		{% endif %}</p>
 {% endblock %}

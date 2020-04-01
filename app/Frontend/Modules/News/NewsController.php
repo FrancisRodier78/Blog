@@ -17,7 +17,8 @@ class NewsController extends BackController
     // On récupère le manager des news.
     $manager = $this->managers->getManagerOf('News');
  
-    $listeNews = $manager->getList(0, $nombreNews);
+    $listeNews = $manager->getList($request->getData('num'), $nombreNews);
+    //var_dump($numberNews);die();
 
     foreach ($listeNews as $news) {
         if (strlen($news->content()) > $nombreCaracteres) {
@@ -28,7 +29,11 @@ class NewsController extends BackController
         }
     }
  
-    return $this->render('frontend/FrontendNewsIndex.html', ['title' => 'Liste des '.$nombreNews.' dernières news///', 'listeNews' => $listeNews]);
+    return $this->render('frontend/FrontendNewsIndex.html', ['title' => 'Liste des '.$nombreNews.' dernières news///',
+                                                                        'listeNews' => $listeNews,
+                                                                        'nombreNews' => $nombreNews,
+                                                                        'num' => $request->getData('num'),
+                                                                        'countNews' => $manager->count()]);
   }
  
   public function executeShow(HTTPRequest $request)
