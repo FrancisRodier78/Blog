@@ -35,36 +35,6 @@ class usersController extends BackController
     return $this->render('backend/BackendUsersInsert.html', ['title' => 'Ajout d\'une User', 'Users' => $users]);
   }
  
-  public function executeInscription(HTTPRequest $request)
-  {
-    var_dump('Inscription');die();
-
-    if ($request->postExists('login') and $request->postExists('password') and $request->postExists('password2') and $request->postExists('email')) {
-      if ($request->postData('password') == $request->postData('password2')) {
-        $users = new Users;
-
-        $users->setRoleId($request->postData('role_id'));
-        $users->setName($request->postData('name'));
-        $users->setFirstname($request->postData('firstname'));
-        $users->setLoggin($request->postData('loggin'));
-        $users->setPassword($request->postData('password'));
-        $users->setEmail($request->postData('email'));
-        $users->setPicture($request->postData('picture'));
-        $users->setGrip($request->postData('grip'));
-
-        $this->managers->getManagerOf('Users')->save($users);
-
-        $this->app->httpResponse()->redirect('.');
-      } else {
-        $this->app->user()->setFlash('Les mots de passe ne sont pas égaux.');
-      }
-    } else {
-      $this->app->user()->setFlash('Un renseignement est faux.');
-    }
-
-    return $this->render('oldInscriptionUtilisateurIndex.html', ['title' => 'Inscription utilisateur']);
-  }
-
   public function executeSave(HTTPRequest $request)
   {
     $users = new Users;
