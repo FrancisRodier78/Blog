@@ -11,7 +11,7 @@
 	{% endif %}
 
     {% if ((user.isAuthenticated) and (user.isRoleId == 'Membre') or (user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
-      <p><a class="blog-a" href="commenter-{{ new.id }}.html">Ajouter un commentaire</a></p>
+      <p><a class="btn btn-secondary btn-x2" href="commenter-{{ new.id }}.html">Ajouter un commentaire</a></p>
     {% endif %}
 	 
 	{% if (comments is empty) %}
@@ -34,7 +34,7 @@
 	{% endfor %}
 
 	{% if ((user.isAuthenticated) and (user.isRoleId == 'Membre') or (user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
-    	<p><a class="blog-a" href="commenter-{{ new.id }}.html">Ajouter un commentaire</a></p>
+    	<p><a class="btn btn-secondary btn-x2" href="commenter-{{ new.id }}.html">Ajouter un commentaire</a></p>
 	{% endif %}
 {% endblock %}
 

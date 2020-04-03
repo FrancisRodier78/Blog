@@ -53,10 +53,10 @@
                       <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="#inscription">Inscription</a>
                       </li>
-                    {% else %}
-                      <li class="nav-item mx-0 mx-lg-1">
+                    {# % else % #}
+                      <!-- li class="nav-item mx-0 mx-lg-1">
                         <p class="blog-b">Bonjour {{ user.isRoleId}}</p>
-                      </li>
+                      </li -->
                     {% endif %}
                     {% if ((user.isRoleId == 'Administrateur') or (user.isRoleId == 'Super-Administrateur')) %}
                       <li class="nav-item mx-0 mx-lg-1">
@@ -210,7 +210,7 @@
   <section class="page-section" id="contact">
     <div class="container">
       <!-- Contact Section Heading -->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contacter Moi</h2>
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactez Moi</h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom">

@@ -30,7 +30,9 @@ class UsersManagerPDO extends UsersManager
  
   public function delete($id)
   {
-    $this->dao->exec('DELETE FROM users WHERE id = '.(int) $id);
+    $requete = $this->dao->prepare('DELETE FROM users WHERE id = :id');
+    $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $requete->execute();
   }
  
   public function getList($debut = -1, $limite = -1)
