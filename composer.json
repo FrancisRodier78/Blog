@@ -13,7 +13,7 @@
         	"OCFram\\": "lib/OCFram",
             "App\\": "app",
             "Model\\": "lib/vendors/Model",
-            "Entity\\": "lib/vendors/Entity",
+            "Entity\\": "lib/vendors/Entity"
         }
     },
     "require": {
