@@ -8,7 +8,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Users;
 
-class usersController extends BackController
+class UsersController extends BackController
 {
   public function executeDelete(HTTPRequest $request)
   {
