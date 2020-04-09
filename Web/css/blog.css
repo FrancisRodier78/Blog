@@ -1,0 +1,70 @@
+/*
+* CSS for Blog
+*/
+
+.blog-a {
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.blog-b {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.blog-c {
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: medium;
+}
+
+.btn-x2 {
+    padding: 0rem 0.75rem;
+    font-size: 1rem;
+}
+
+.form-elem {
+    display: flex;
+    width: 95%;
+    margin: 5px;
+}
+
+.form-elem label {
+    width: 30%;
+}
+
+.form-elem input,
+.form-elem textarea {
+    width: 70%;
+}
+
+@media (min-width: 576px) {
+    .form-elem {
+        width: 90%;
+        background-color: #007bff;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-elem {
+        width: 90%;
+        background-color: #6c757d;
+    }
+}
+
+@media (min-width: 992px) {
+    .form-elem {
+        width: 70%;
+        background-color: #dc3545;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-elem {
+        width: 60%;
+        background-color: #28a745;
+    }
+}

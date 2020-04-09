@@ -20,6 +20,7 @@
 
   <!-- Theme CSS -->
   <link href="css/freelancer.css" rel="stylesheet">
+  <link href="css/blog.css" rel="stylesheet">
 
 </head>
 
@@ -48,10 +49,10 @@
                     </li>
                     {% if not (user.isAuthenticated) %}
                       <li class="nav-item mx-0 mx-lg-1">
-                          <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Connexion</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="#inscription">Inscription</a>
                       </li>
                       <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="#inscription">Inscription</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger blog-a" href="/admin/">Connexion</a>
                       </li>
                     {# % else % #}
                       <!-- li class="nav-item mx-0 mx-lg-1">

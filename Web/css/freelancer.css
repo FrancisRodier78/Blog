@@ -9852,29 +9852,3 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
-
-
-
-.blog-a {
-  color: #000000;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-.blog-b {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-.blog-c {
-  color: #000000;
-  text-decoration: none;
-  background-color: transparent;
-  font-size: medium;
-}
-
-.btn-x2 {
-  padding: 0rem 0.75rem;
-  font-size: 1rem;
-}

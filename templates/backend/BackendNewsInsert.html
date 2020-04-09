@@ -2,20 +2,24 @@
 
 {% block content %}
 	<h2>Insérer une news</h2>
-	<form action="newsSave" method="post">
-	  <p>
-	    <input type="hidden" name="user_id" value="{{ User_id }}" maxlength="11" />
+	<form action="newsSave" method="post" class="form-save">
+        <input type="hidden" name="user_id" value="{{ User_id }}" maxlength="11" />
 
-	  	<label>Titre</label>
-	  	<input type="text" name="titre" value="{{ News.titre }}" maxlength="100" required /><br />
+        <div class="form-elem">
+            <label>Titre</label>
+            <input type="text" name="titre" value="{{ News.titre }}" maxlength="100" required /><br />
+        </div>
 
-	  	<label>Chapo</label>
-	  	<textarea name="chapo" cols="60" rows="2" required>{{ News.chapo }}</textarea><br />
+        <div class="form-elem">
+            <label>Chapo</label>
+            <textarea name="chapo" cols="60" rows="2" required>{{ News.chapo }}</textarea><br />
+        </div>
 
-	  	<label>Content</label>
-	  	<textarea name="content" cols="60" rows="8" required>{{ News.content }}</textarea><br />
+        <div class="form-elem">
+            <label>Content</label>
+            <textarea name="content" cols="60" rows="8" required>{{ News.content }}</textarea><br />
+        </div>
 
-	    <input class="btn btn-secondary btn-x2" type="submit" value="Ajouter" />
-	  </p>
+        <input class="btn btn-secondary btn-x2" type="submit" value="Ajouter" />
 	</form>
 {% endblock %}
