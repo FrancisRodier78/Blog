@@ -3,8 +3,7 @@
 {% block content %}
 <h2>Modifier un user</h2>
 <form action="users-save" method="post">
-    <p>
-    <div>
+    <div class="form-elem">
         <label  id="label_RoleId" for="roleId" >Role_id</label>
         <select id="roleId" name="roleId" required>
             {% if Users.roleId == "Visiteur" %}
@@ -33,24 +32,33 @@
         </select>
     </div>
 
+    <div class="form-elem">
         <label>Nom</label>
         <input type="text" name="name" value="{{ Users.name }}" maxlength="100" required /><br />
+    </div>
 
+    <div class="form-elem">
         <label>Prénom</label>
         <input type="text" name="firstname" value="{{ Users.firstname }}" maxlength="100" required /><br />
+    </div>
 
+    <div class="form-elem">
         <label>Loggin</label>
         <input type="text" name="loggin" value="{{ Users.loggin }}" maxlength="100" required /><br />
+    </div>
 
+    <div class="form-elem">
         <label>Mot de passe</label>
         <input type="password" name="password" value="" /><br />
+    </div>
 
+    <div class="form-elem">
         <label>Email</label>
         <input type="email" name="email" value="{{ Users.email }}" maxlength="100" required /><br />
+    </div>
 
-        <input class="btn btn-secondary btn-x2" type="submit" value="Modifier" />
+    <input class="btn btn-secondary btn-x2" type="submit" value="Modifier" />
 
-        <input type="hidden" name="id" value="{{ Users.id }}" maxlength="11" /><br />
-    </p>
+    <input type="hidden" name="id" value="{{ Users.id }}" maxlength="11" /><br />
 </form>
 {% endblock %}

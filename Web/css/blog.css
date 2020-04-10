@@ -37,34 +37,31 @@
 }
 
 .form-elem input,
-.form-elem textarea {
+.form-elem textarea,
+.form-elem select {
     width: 70%;
 }
 
 @media (min-width: 576px) {
     .form-elem {
         width: 90%;
-        background-color: #007bff;
     }
 }
 
 @media (min-width: 768px) {
     .form-elem {
         width: 90%;
-        background-color: #6c757d;
     }
 }
 
 @media (min-width: 992px) {
     .form-elem {
         width: 70%;
-        background-color: #dc3545;
     }
 }
 
 @media (min-width: 1200px) {
     .form-elem {
         width: 60%;
-        background-color: #28a745;
     }
 }

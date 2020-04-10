@@ -4,12 +4,16 @@
 	<h2>Connexion</h2>
 	 
 	<form action="" method="post">
-	  <label>Pseudo</label>
-	  <input type="text" name="login" required /><br />
+		<div class="form-elem">
+			<label>Pseudo</label>
+			<input type="text" name="login" required /><br />
+		</div>
+
+		<div class="form-elem">
+			<label>Mot de passe</label>
+			<input type="password" name="password" required /><br /><br />
+		</div>
 	 
-	  <label>Mot de passe</label>
-	  <input type="password" name="password" required /><br /><br />
-	 
-	  <input class="btn btn-secondary btn-x2" type="submit" value="Connexion" />
+	    <input class="btn btn-secondary btn-x2" type="submit" value="Connexion" />
 	</form>
 {% endblock %}

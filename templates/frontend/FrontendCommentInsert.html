@@ -3,15 +3,15 @@
 {% block content %}
 	<h2>Ajouter un commentaire</h2>
 	<form action="commentSave" method="post">
-	  <p>
 		<input type="hidden" name="user_id" value="{{ User_id }}" maxlength="11" />
 
-		<label>Content</label>
-		<textarea name="content" cols="50" rows="7" required></textarea><br />
-		
+		<div class="form-elem">
+			<label>Content</label>
+			<textarea name="content" cols="50" rows="7" required></textarea><br />
+		</div>
+
 	    <input class="btn btn-secondary btn-x2" type="submit" value="Ajouter" />
 
    	  	<input type="hidden" name="new_id" value="{{ newId }}" maxlength="11" /><br />
-	  </p>
 	</form>
 {% endblock %}
