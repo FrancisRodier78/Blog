@@ -10,16 +10,16 @@
       {% for new in listeNews %}
 		<tr><td> {{ new.user_id }} </td>
 			<td> {% for user in listeUsers %}
-				{% if new.user_id == user.id %}
-				{{ user.name }}
-				{% endif %}
-				{% endfor %}
+					{% if new.user_id == user.id %}
+						{{ user.name }}
+					{% endif %}
+				  {% endfor %}
 			</td>
 			<td> {% for user in listeUsers %}
-				{% if new.user_id == user.id %}
-				{{ user.loggin }}
-				{% endif %}
-				{% endfor %}
+					{% if new.user_id == user.id %}
+						{{ user.loggin }}
+					{% endif %}
+	   			 {% endfor %}
 			</td>
 			<td> {{ new.titre }} </td><td> {{ new.dateCreation|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> {{ new.dateModif|date('d/m/Y H:i', timezone="Europe/Paris") }} </td><td> <a href="news-update-{{ new.id }}.html"><img src="/images/update.png" alt="Modifier" /></a> <a href="news-delete-{{ new.id }}.html"><img src="/images/delete.png" alt="Supprimer" /></a></td></tr>
       {% endfor %}
