@@ -46,12 +46,20 @@ class NewsController extends BackController
     }
 
       // Recherche du loggin ayant écrit la new
-      $logginNew = $this->managers->getManagerOf('News')->getLoggin($news->user_id());
+      if (empty($this->managers->getManagerOf('News')->getLoggin($news->user_id()))) {
+          $logginNew = 1;
+      } else {
+          $logginNew = $this->managers->getManagerOf('News')->getLoggin($news->user_id());
+      }
 
       // Recherche des loggins ayant écrit les commentaires se rapportant à la new
-      $comments = $this->managers->getManagerOf('Comments')->getListOf($news->id());
-      foreach ($comments as $comment) {
-        $logginTab[] = $this->managers->getManagerOf('News')->getLoggin($comment->user_id());
+      if (empty($this->managers->getManagerOf('Comments')->getListOf($news->id()))) {
+          $logginTab[] = 1;
+      } else {
+          $comments = $this->managers->getManagerOf('Comments')->getListOf($news->id());
+          foreach ($comments as $comment) {
+              $logginTab[] = $this->managers->getManagerOf('News')->getLoggin($comment->user_id());
+          }
       }
 
     return $this->render('frontend/FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'logginNew' => $logginNew, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id()), 'logginTab' => $logginTab]);
@@ -84,11 +92,15 @@ class NewsController extends BackController
     // Recherche du loggin ayant écrit la new
     $logginNew = $this->managers->getManagerOf('News')->getLoggin($news->user_id());
 
-    // Recherche des loggins ayant écrit les commentaires se rapportant à la new
-    $comments = $this->managers->getManagerOf('Comments')->getListOf($news->id());
-    foreach ($comments as $comment) {
-      $logginTab[] = $this->managers->getManagerOf('News')->getLoggin($comment->user_id());
-    }
+      // Recherche des loggins ayant écrit les commentaires se rapportant à la new
+      if (empty($this->managers->getManagerOf('Comments')->getListOf($news->id()))) {
+          $logginTab[] = 1;
+      } else {
+          $comments = $this->managers->getManagerOf('Comments')->getListOf($news->id());
+          foreach ($comments as $comment) {
+              $logginTab[] = $this->managers->getManagerOf('News')->getLoggin($comment->user_id());
+          }
+      }
 
     return $this->render('frontend/FrontendNewsShow.html', ['title' => $news->titre(), 'new' => $news, 'logginNew' => $logginNew, 'comments' => $this->managers->getManagerOf('Comments')->getListOf($news->id()), 'logginTab' => $logginTab]);
   }

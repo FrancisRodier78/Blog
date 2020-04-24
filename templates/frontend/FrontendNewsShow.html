@@ -3,7 +3,7 @@
 {% block content %}
 	<p>Par <em>{{ logginNew }}</em>, le {{ new.dateCreation|date("d/m/Y") }}</p>
 	<h2>{{ new.titre }}</h2>
-	<p>{{ new.chapo|nl2br }}</p>
+	<h4>{{ new.chapo|nl2br }}</h4>
 	<p>{{ new.content|nl2br }}</p>
 	 
 	{% if (new.dateCreation != new.dateModif) %}
