@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^$ Web/     [QSA,L]
+RewriteRule (.*) Web/   [QSA,L]
